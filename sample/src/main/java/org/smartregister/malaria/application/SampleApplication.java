@@ -6,9 +6,12 @@ import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
+import org.smartregister.malaria.BuildConfig;
+import org.smartregister.chw.malaria.MalariaLibrary;
 import org.smartregister.malaria.repository.SampleRepository;
-import org.smartregister.malaria.util.DBConstants;
+import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.malaria.utils.SampleConstants;
+import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.view.activity.DrishtiApplication;
@@ -35,7 +38,9 @@ public class SampleApplication extends DrishtiApplication {
         //Initialize Modules
         CoreLibrary.init(context);
         ConfigurableViewsLibrary.init(context, getRepository());
+        MalariaLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
+        SyncStatusBroadcastReceiver.init(this);
 
         //Auto login by default
         String password = "pwd";
