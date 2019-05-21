@@ -14,7 +14,7 @@ import java.util.Set;
 public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements MalariaRegisterFragmentContract.View {
     @Override
     public void initializeAdapter(Set<View> visibleColumns) {
-        MalariaRegisterProvider malariaRegisterProvider = new MalariaRegisterProvider(getActivity(), commonRepository(), visibleColumns, registerActionHandler, paginationViewHandler);
+        MalariaRegisterProvider malariaRegisterProvider = new MalariaRegisterProvider(getActivity(), visibleColumns, paginationViewHandler);
         clientAdapter = new RecyclerViewPaginatedAdapter(null, malariaRegisterProvider, context().commonrepository(this.tablename));
         clientAdapter.setCurrentlimit(20);
         clientsView.setAdapter(clientAdapter);

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewProvider;
 import org.smartregister.malaria.R;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -25,26 +24,28 @@ import java.util.Set;
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
 
     private final LayoutInflater inflater;
+    private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     private View.OnClickListener paginationClickListener;
 
     private Context context;
 
-    public MalariaRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener) {
+    public MalariaRegisterProvider(Context context, Set visibleColumns, View.OnClickListener paginationClickListener) {
+//        TODO add onClickListener and commonRepository to constructor
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        Set<org.smartregister.configurableviews.model.View> visibleColumns1 = visibleColumns;
+        this.visibleColumns = visibleColumns;
 
-//        View.OnClickListener onClickListener1 = onClickListener;
         this.paginationClickListener = paginationClickListener;
 
         this.context = context;
-//        CommonRepository commonRepository1 = commonRepository;
     }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
-//        implement
+        if (visibleColumns.isEmpty()) {
+//            implement
+        }
     }
 
     @Override
@@ -123,4 +124,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             pageInfoView = view.findViewById(org.smartregister.R.id.txt_page_info);
         }
     }
+
+
 }
