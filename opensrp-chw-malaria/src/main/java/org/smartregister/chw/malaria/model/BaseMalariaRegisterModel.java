@@ -8,16 +8,19 @@ import java.util.List;
 public class BaseMalariaRegisterModel implements MalariaRegisterContract.Model  {
     @Override
     public void registerViewConfigurations(List<String> viewIdentifiers) {
+//        implement
 
     }
 
     @Override
     public void unregisterViewConfiguration(List<String> viewIdentifiers) {
+//        implement
 
     }
 
     @Override
     public void saveLanguage(String language) {
+//        implement
 
     }
 

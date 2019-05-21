@@ -1,12 +1,12 @@
 package org.smartregister.chw.malaria.presenter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
+import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
-import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
-import org.smartregister.chw.malaria.util.DBConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -33,7 +33,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void updateSortAndFilter(List<Field> filterList, Field sortField) {
-
+//        implement
     }
 
     @Override
@@ -86,11 +86,13 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void startSync() {
+//        implement
 
     }
 
     @Override
     public void searchGlobally(String s) {
+//        implement
 
     }
 }

@@ -113,7 +113,6 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
      */
     @Override
     protected void registerBottomNavigation() {
-
         bottomNavigationHelper = new BottomNavigationHelper();
         bottomNavigationView = findViewById(org.smartregister.R.id.bottom_navigation);
 

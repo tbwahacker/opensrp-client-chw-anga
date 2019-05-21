@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewProvider;
 import org.smartregister.malaria.R;
 import org.smartregister.view.contract.SmartRegisterClient;
@@ -20,34 +19,27 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.text.MessageFormat;
-import java.util.Set;
 
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
 
     private final LayoutInflater inflater;
-    private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
-    private View.OnClickListener onClickListener;
     private View.OnClickListener paginationClickListener;
 
     private Context context;
-    private CommonRepository commonRepository;
 
-    public MalariaRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener) {
+    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener) {
+//        TODO add onClickListener and commonRepository to constructor
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.visibleColumns = visibleColumns;
-
-        this.onClickListener = onClickListener;
         this.paginationClickListener = paginationClickListener;
 
         this.context = context;
-        this.commonRepository = commonRepository;
     }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
-
+//        checkout how family module is implemented
     }
 
     @Override
@@ -71,6 +63,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
+//        implement
 
     }
 
@@ -125,4 +118,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             pageInfoView = view.findViewById(org.smartregister.R.id.txt_page_info);
         }
     }
+
+
 }
