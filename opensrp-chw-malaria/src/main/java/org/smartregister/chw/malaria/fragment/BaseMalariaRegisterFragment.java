@@ -62,7 +62,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     protected void onViewClicked(android.view.View view) {
-
+//        implement onclick actions
     }
 
     @Override

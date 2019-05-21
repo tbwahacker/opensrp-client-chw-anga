@@ -25,29 +25,26 @@ import java.util.Set;
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
 
     private final LayoutInflater inflater;
-    private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
-    private View.OnClickListener onClickListener;
     private View.OnClickListener paginationClickListener;
 
     private Context context;
-    private CommonRepository commonRepository;
 
     public MalariaRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener) {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.visibleColumns = visibleColumns;
+        Set<org.smartregister.configurableviews.model.View> visibleColumns1 = visibleColumns;
 
-        this.onClickListener = onClickListener;
+        View.OnClickListener onClickListener1 = onClickListener;
         this.paginationClickListener = paginationClickListener;
 
         this.context = context;
-        this.commonRepository = commonRepository;
+        CommonRepository commonRepository1 = commonRepository;
     }
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
-
+//        implement
     }
 
     @Override
@@ -71,6 +68,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
+//        implement
 
     }
 

@@ -33,7 +33,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void updateSortAndFilter(List<Field> filterList, Field sortField) {
-
+//        implement
     }
 
     @Override
@@ -86,11 +86,13 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void startSync() {
+//        implement
 
     }
 
     @Override
     public void searchGlobally(String s) {
+//        implement
 
     }
 }

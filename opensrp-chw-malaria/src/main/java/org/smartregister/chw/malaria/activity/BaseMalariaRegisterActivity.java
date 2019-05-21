@@ -107,6 +107,7 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
      */
     @Override
     protected void registerBottomNavigation() {
+//        implement BottomNavigation
     }
 
     @Override
