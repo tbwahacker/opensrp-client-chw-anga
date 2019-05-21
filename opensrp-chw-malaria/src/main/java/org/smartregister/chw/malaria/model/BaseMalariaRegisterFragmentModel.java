@@ -4,6 +4,9 @@ import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
+import org.smartregister.chw.malaria.MalariaLibrary;
+import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
+import org.smartregister.chw.malaria.util.ConfigHelper;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
@@ -12,9 +15,6 @@ import org.smartregister.configurableviews.model.ViewConfiguration;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.ResponseStatus;
-import org.smartregister.chw.malaria.MalariaLibrary;
-import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
-import org.smartregister.chw.malaria.util.ConfigHelper;
 
 import java.util.ArrayList;
 import java.util.List;

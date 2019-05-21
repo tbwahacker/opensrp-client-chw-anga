@@ -10,12 +10,12 @@ import com.vijay.jsonwizard.domain.Form;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.Context;
-import org.smartregister.malaria.R;
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
 import org.smartregister.chw.malaria.fragment.BaseMalariaRegisterFragment;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterPresenter;
 import org.smartregister.chw.malaria.util.Constants;
+import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
