@@ -1,11 +1,11 @@
 package org.smartregister.chw.malaria.fragment;
 
-import org.smartregister.configurableviews.model.View;
-import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.chw.malaria.provider.MalariaRegisterProvider;
+import org.smartregister.configurableviews.model.View;
+import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.HashMap;
@@ -42,7 +42,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
-
+//        implement search here
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     protected void startRegistration() {
-
+//        start forms here if the module requires registration
     }
 
     @Override
@@ -67,6 +67,6 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     public void showNotFoundPopup(String s) {
-
+//        implement dialog
     }
 }
