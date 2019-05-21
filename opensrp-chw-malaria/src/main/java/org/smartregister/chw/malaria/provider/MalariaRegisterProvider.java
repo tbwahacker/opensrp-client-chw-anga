@@ -24,18 +24,15 @@ import java.util.Set;
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
 
     private final LayoutInflater inflater;
-    private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     private View.OnClickListener paginationClickListener;
 
     private Context context;
 
-    public MalariaRegisterProvider(Context context, Set visibleColumns, View.OnClickListener paginationClickListener) {
+    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener) {
 //        TODO add onClickListener and commonRepository to constructor
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.visibleColumns = visibleColumns;
-
         this.paginationClickListener = paginationClickListener;
 
         this.context = context;
@@ -43,9 +40,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
-        if (visibleColumns.isEmpty()) {
-//            implement
-        }
+//        checkout how family module is implemented
     }
 
     @Override
