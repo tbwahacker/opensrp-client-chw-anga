@@ -31,18 +31,31 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
 
     public static JSONArray malariaFormFields(JSONObject jsonForm) {
         try {
-            JSONObject step1 = jsonForm.has(STEP_ONE) ? jsonForm.getJSONObject(STEP_ONE) : null;
-            if (step1 != null) {
-                JSONArray fieldsOne = step1.has(FIELDS) ? step1.getJSONArray(FIELDS) : null;
-                JSONObject step2 = jsonForm.has(STEP_TWO) ? jsonForm.getJSONObject(STEP_TWO) : null;
-                if (step2 != null) {
-                    JSONArray fieldsTwo = step2.has(FIELDS) ? step2.getJSONArray(FIELDS) : null;
-                    for (int i = 0; i < fieldsTwo.length(); i++) {
-                        fieldsOne.put(fieldsTwo.get(i));
-                    }
+            JSONArray fieldsOne = fields(jsonForm, STEP_ONE);
+            JSONArray fieldsTwo = fields(jsonForm, STEP_TWO);
+            if (fieldsTwo != null) {
+                for (int i = 0; i < fieldsTwo.length(); i++) {
+                    fieldsOne.put(fieldsTwo.get(i));
                 }
-                return fieldsOne;
             }
+            return fieldsOne;
+
+        } catch (JSONException e) {
+            Log.e(TAG, "", e);
+        }
+        return null;
+    }
+
+    public static JSONArray fields(JSONObject jsonForm, String step) {
+        try {
+
+            JSONObject step1 = jsonForm.has(step) ? jsonForm.getJSONObject(step) : null;
+            if (step1 == null) {
+                return null;
+            }
+
+            return step1.has(FIELDS) ? step1.getJSONArray(FIELDS) : null;
+
         } catch (JSONException e) {
             Log.e(TAG, "", e);
         }
