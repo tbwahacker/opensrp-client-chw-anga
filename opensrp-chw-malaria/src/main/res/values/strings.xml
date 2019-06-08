@@ -10,6 +10,7 @@
     <string name="add_family">Add family</string>
     <string name="scan_qr">Scan QR</string>
     <string name="job_aids">Job Aids</string>
+    <string name="saving_dialog_title">Saving</string>
 
 
 </resources>

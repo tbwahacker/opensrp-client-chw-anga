@@ -2,7 +2,7 @@ package org.smartregister.chw.malaria.presenter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
-import org.smartregister.chw.malaria.util.DBConstants;
+import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
@@ -65,7 +65,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public void initializeQueries(String mainCondition) {
-        String tableName = DBConstants.TABLE_NAME.MALARIA_TABLE;
+        String tableName = Constants.TABLES.MALARIA_CONFIRMATION;
 
         String countSelect = model.countSelect(tableName, mainCondition);
         String mainSelect = model.mainSelect(tableName, mainCondition);
@@ -94,5 +94,10 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
     public void searchGlobally(String s) {
 //        implement
 
+    }
+
+    @Override
+    public String getMainTable() {
+        return Constants.TABLES.MALARIA_CONFIRMATION;
     }
 }

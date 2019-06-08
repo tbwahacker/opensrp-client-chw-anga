@@ -51,7 +51,7 @@ public interface MalariaRegisterContract {
 
         void getNextUniqueId(Triple<String, String, String> triple, InteractorCallBack callBack);
 
-        void saveRegistration(final InteractorCallBack callBack);
+        void saveRegistration(String jsonString, boolean isEditMode, final InteractorCallBack callBack);
 
         void removeFamilyFromRegister(String closeFormJsonString, String providerId);
 
