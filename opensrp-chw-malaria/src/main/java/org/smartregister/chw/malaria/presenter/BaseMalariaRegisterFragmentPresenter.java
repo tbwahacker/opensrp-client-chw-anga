@@ -70,11 +70,14 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
         String countSelect = model.countSelect(tableName, mainCondition);
         String mainSelect = model.mainSelect(tableName, mainCondition);
 
-        getView().initializeQueryParams(tableName, countSelect, mainSelect);
-        getView().initializeAdapter(visibleColumns);
+        if (getView() != null) {
 
-        getView().countExecute();
-        getView().filterandSortInInitializeQueries();
+            getView().initializeQueryParams(tableName, countSelect, mainSelect);
+            getView().initializeAdapter(visibleColumns);
+
+            getView().countExecute();
+            getView().filterandSortInInitializeQueries();
+        }
     }
 
     protected MalariaRegisterFragmentContract.View getView() {

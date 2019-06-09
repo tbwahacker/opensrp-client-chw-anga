@@ -11,6 +11,10 @@
     <string name="scan_qr">Scan QR</string>
     <string name="job_aids">Job Aids</string>
     <string name="saving_dialog_title">Saving</string>
+    <string name="interpunct" translatable="false">\u00b7</string>
+    <string name="home_visit">FOLLOWUP\nVisit</string>
+
+
 
 
 </resources>
