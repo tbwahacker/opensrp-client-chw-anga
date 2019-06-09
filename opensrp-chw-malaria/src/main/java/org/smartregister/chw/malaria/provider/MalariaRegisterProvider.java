@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -86,7 +84,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             CommonPersonObject commonPersonObject = commonRepository.findByBaseEntityId(pc.entityId());
             if (commonPersonObject != null) {
                 viewHolder.dueButton.setVisibility(View.VISIBLE);
-                viewHolder.dueButton.setText(R.string.home_visit);
+                viewHolder.dueButton.setText(R.string.malaria_followup_visit);
                 viewHolder.dueButton.setAllCaps(true);
             } else {
                 viewHolder.dueButton.setVisibility(View.GONE);
