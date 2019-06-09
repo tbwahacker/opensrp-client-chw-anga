@@ -54,8 +54,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/profile_dot_separator_margin"
-                android:layout_marginRight="@dimen/profile_dot_separator_margin"
+                android:layout_marginLeft="@dimen/register_dot_separator_margin"
                 android:text="@string/interpunct"
                 android:textColor="@android:color/black" />
 
@@ -64,7 +63,6 @@
                 style="@style/CustomFontTextViewStyle.ClientList.Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
                 android:text="Male"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black"

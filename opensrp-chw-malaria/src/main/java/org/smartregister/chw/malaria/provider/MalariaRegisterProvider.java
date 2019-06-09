@@ -43,7 +43,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, Set visibleColumns, CommonRepository commonRepository) {
-//        TODO add onClickListener and commonRepository to constructor
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.paginationClickListener = paginationClickListener;
@@ -63,8 +62,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             return;
         }
 
-
-//        checkout how family module is implemented
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, SmartRegisterClient client, final RegisterViewHolder viewHolder) {
@@ -149,7 +146,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         return FooterViewHolder.class.isInstance(viewHolder);
     }
 
-    // implement place holder view
     public class RegisterViewHolder extends RecyclerView.ViewHolder {
         public TextView patientName;
         public TextView textViewVillage;
@@ -176,7 +172,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         }
     }
 
-    // implement footer view
     public class FooterViewHolder extends RecyclerView.ViewHolder {
         public TextView pageInfoView;
         public Button nextPageView;
