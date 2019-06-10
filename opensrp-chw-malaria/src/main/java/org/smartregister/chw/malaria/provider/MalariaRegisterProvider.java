@@ -54,7 +54,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         if (visibleColumns.isEmpty()) {
-            populatePatientColumn(pc, smartRegisterClient, registerViewHolder);
+            populatePatientColumn(pc, registerViewHolder);
             populateLastColumn(pc, registerViewHolder);
 
             return;
@@ -62,7 +62,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     }
 
-    private void populatePatientColumn(CommonPersonObjectClient pc, SmartRegisterClient client, final RegisterViewHolder viewHolder) {
+    private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
 
         String fname = getName(
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
