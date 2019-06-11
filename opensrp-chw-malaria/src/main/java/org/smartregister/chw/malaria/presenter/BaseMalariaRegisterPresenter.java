@@ -1,13 +1,17 @@
 package org.smartregister.chw.malaria.presenter;
 
+import android.util.Log;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.json.JSONObject;
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
-import org.smartregister.chw.malaria.interactor.BaseMalariaRegisterInteractor;
+import org.smartregister.malaria.R;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Presenter, MalariaRegisterContract.InteractorCallBack  {
+public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Presenter, MalariaRegisterContract.InteractorCallBack {
 
     public static final String TAG = BaseMalariaRegisterPresenter.class.getName();
 
@@ -15,9 +19,9 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
     protected MalariaRegisterContract.Interactor interactor;
     protected MalariaRegisterContract.Model model;
 
-    public BaseMalariaRegisterPresenter(MalariaRegisterContract.View view, MalariaRegisterContract.Model model) {
+    public BaseMalariaRegisterPresenter(MalariaRegisterContract.View view, MalariaRegisterContract.Model model, MalariaRegisterContract.Interactor interactor) {
         viewReference = new WeakReference<>(view);
-        interactor = new BaseMalariaRegisterInteractor();
+        this.interactor = interactor;
         this.model = model;
     }
 
@@ -28,12 +32,22 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
 
     @Override
     public void startForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
-//        implement
+        if (StringUtils.isBlank(entityId)) {
+            return;
+        }
+
+        JSONObject form = model.getFormAsJson(formName, entityId, currentLocationId);
+        getView().startFormActivity(form);
     }
 
     @Override
     public void saveForm(String jsonString, boolean isEditMode) {
-//        implement
+        try {
+            getView().showProgressDialog(R.string.saving_dialog_title);
+            interactor.saveRegistration(jsonString, isEditMode, this);
+        } catch (Exception e) {
+            Log.e(TAG, Log.getStackTraceString(e));
+        }
     }
 
     @Override
@@ -53,7 +67,7 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
 
     @Override
     public void onRegistrationSaved(boolean isEdit) {
-//        implement
+        getView().hideProgressDialog();
     }
 
     @Override
@@ -74,5 +88,12 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
     @Override
     public void updateInitials() {
 //        implement
+    }
+
+    private MalariaRegisterContract.View getView() {
+        if (viewReference != null)
+            return viewReference.get();
+        else
+            return null;
     }
 }

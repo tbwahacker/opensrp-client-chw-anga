@@ -29,6 +29,8 @@ public interface MalariaRegisterFragmentContract {
 
         String getDefaultSortQuery();
 
+        String getMainTable();
+
     }
 
     interface Model {

@@ -34,4 +34,6 @@
     <dimen name="register_due_status_size">10dp</dimen>
     <dimen name="register_due_status_top_margin">5dp</dimen>
     <dimen name="register_last_visit_top_margin">5dp</dimen>
+
+    <dimen name="register_dot_separator_margin">5dp</dimen>
 </resources>
