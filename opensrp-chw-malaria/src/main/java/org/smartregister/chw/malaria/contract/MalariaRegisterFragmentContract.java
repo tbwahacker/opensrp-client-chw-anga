@@ -31,6 +31,7 @@ public interface MalariaRegisterFragmentContract {
 
         String getMainTable();
 
+        String getDueFilterCondition();
     }
 
     interface Model {

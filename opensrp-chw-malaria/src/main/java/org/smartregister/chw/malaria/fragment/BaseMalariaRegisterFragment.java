@@ -1,5 +1,6 @@
 package org.smartregister.chw.malaria.fragment;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -7,14 +8,20 @@ import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.chw.malaria.provider.MalariaRegisterProvider;
+import org.smartregister.chw.malaria.util.Constants;
+import org.smartregister.chw.malaria.util.QueryBuilder;
+import org.smartregister.commonregistry.CommonFtsObject;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.malaria.R;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.customcontrols.FontVariant;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements MalariaRegisterFragmentContract.View {
@@ -25,6 +32,12 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
         clientAdapter.setCurrentlimit(20);
         clientsView.setAdapter(clientAdapter);
     }
+
+    private android.view.View view;
+    private android.view.View dueOnlyLayout;
+
+    private boolean dueFilterActive = false;
+    private static final String DUE_FILTER_TAG = "PRESSED";
 
     @Override
     public void setupViews(android.view.View view) {
@@ -88,6 +101,97 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
     @Override
     public void setAdvancedSearchFormData(HashMap<String, String> hashMap) {
 //        implement search here
+    }
+
+    private void toggleFilterSelection(android.view.View dueOnlyLayout) {
+        if (dueOnlyLayout != null) {
+            if (dueOnlyLayout.getTag() == null) {
+                dueFilterActive = true;
+                dueFilter(dueOnlyLayout);
+            } else if (dueOnlyLayout.getTag().toString().equals(DUE_FILTER_TAG)) {
+                dueFilterActive = false;
+                normalFilter(dueOnlyLayout);
+            }
+        }
+    }
+
+    private void dueFilter(android.view.View dueOnlyLayout) {
+        //dueFilter(presenter().getDueFilterCondition());
+        dueOnlyLayout.setTag(DUE_FILTER_TAG);
+        switchViews(dueOnlyLayout, true);
+    }
+
+    private void normalFilter(android.view.View dueOnlyLayout) {
+        filter(searchText(), "", presenter().getMainCondition(), false);
+        dueOnlyLayout.setTag(null);
+        switchViews(dueOnlyLayout, false);
+    }
+
+    private String searchText() {
+        return (getSearchView() == null) ? "" : getSearchView().getText().toString();
+    }
+
+    private void switchViews(android.view.View dueOnlyLayout, boolean isPress) {
+        TextView dueOnlyTextView = dueOnlyLayout.findViewById(R.id.due_only_text_view);
+        if (isPress) {
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_on, 0);
+        } else {
+            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_off, 0);
+
+        }
+    }
+
+    private String dueFilterAndSortQuery() {
+        SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql = sqb
+                        .searchQueryFts(tablename, joinTable, mainCondition, filters, Sortqueries,
+                                clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset());
+                sql = sql.replace(CommonFtsObject.idColumn, CommonFtsObject.relationalIdColumn);
+                sql = sql.replace(CommonFtsObject.searchTableName(Constants.TABLES.MALARIA_CONFIRMATION), CommonFtsObject.searchTableName(Constants.TABLES.MALARIA_CONFIRMATION));
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
+    }
+
+    private String defaultFilterAndSortQuery() {
+        SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
+
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+
+                String myquery = QueryBuilder.getQuery(joinTables, mainCondition, tablename, filters, clientAdapter, Sortqueries);
+                List<String> ids = commonRepository().findSearchIds(myquery);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(filters);
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
+
+            }
+        } catch (Exception e) {
+            Log.e(getClass().getName(), e.toString(), e);
+        }
+
+        return query;
     }
 
     @Override

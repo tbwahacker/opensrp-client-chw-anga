@@ -3,6 +3,7 @@ package org.smartregister.chw.malaria.presenter;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
 import org.smartregister.chw.malaria.util.Constants;
+import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.configurableviews.model.Field;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
@@ -102,5 +103,15 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
     @Override
     public String getMainTable() {
         return Constants.TABLES.MALARIA_CONFIRMATION;
+    }
+
+    @Override
+    public String getDueFilterCondition() {
+        return "(( " +
+                "IFNULL(SUBSTR("+ DBConstants.KEY.MALARIA_TEST_DATE + ",7,4) || SUBSTR(" + DBConstants.KEY.MALARIA_TEST_DATE + ",4,2) || SUBSTR(" + DBConstants.KEY.MALARIA_TEST_DATE + ",1,2) || '000000',0) " +
+                "< STRFTIME('%Y%m%d%H%M%S', datetime('now','start of month')) " +
+                "AND IFNULL(STRFTIME('%Y%m%d%H%M%S', datetime((" + DBConstants.KEY.MALARIA_TEST_DATE + ")/1000,'unixepoch')),0) " +
+                "< STRFTIME('%Y%m%d%H%M%S', datetime('now','start of month')) " +
+                " ))";
     }
 }
