@@ -35,15 +35,17 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     private final LayoutInflater inflater;
 
     private View.OnClickListener paginationClickListener;
+    private View.OnClickListener onClickListener;
     private CommonRepository commonRepository;
 
     private Context context;
     private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
-    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, Set visibleColumns, CommonRepository commonRepository) {
+    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener, Set visibleColumns, CommonRepository commonRepository) {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.paginationClickListener = paginationClickListener;
+        this.onClickListener = onClickListener;
         this.visibleColumns = visibleColumns;
         this.context = context;
         this.commonRepository = commonRepository;
@@ -75,7 +77,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         viewHolder.patientName.setText(patientName + ", " + age);
         viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
         viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
-
+        viewHolder.dueButton.setOnClickListener(onClickListener);
 
     }
 

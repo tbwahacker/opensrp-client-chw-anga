@@ -7,6 +7,8 @@ import android.support.annotation.MenuRes;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -148,10 +150,10 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
 
         if (bottomNavigationView != null) {
             bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-            bottomNavigationView.getMenu().removeItem(R.id.action_clients);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
             bottomNavigationView.getMenu().removeItem(R.id.action_register);
-            bottomNavigationView.getMenu().removeItem(R.id.action_search);
-            bottomNavigationView.getMenu().removeItem(R.id.action_library);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
+            bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
 
             bottomNavigationView.inflateMenu(getMenuResource());
             bottomNavigationHelper.disableShiftMode(bottomNavigationView);
@@ -161,6 +163,16 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
 
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        menu.findItem(R.id.action_profile);
+        inflater.inflate(R.menu.profile_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 
     @MenuRes
     public int getMenuResource() {
