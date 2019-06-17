@@ -2,13 +2,13 @@ package org.smartregister.chw.malaria.contract;
 
 import android.content.Context;
 import android.content.Intent;
-import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 public interface MalariaProfileContract {
     interface View {
         Context getContext();
         MalariaProfileContract.View getView();
-        void getProfileData(CommonPersonObject client);
+        void getProfileData(CommonPersonObjectClient client);
 
     }
 

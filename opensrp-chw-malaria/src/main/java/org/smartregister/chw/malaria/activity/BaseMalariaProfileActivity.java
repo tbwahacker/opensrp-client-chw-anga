@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.commonregistry.CommonPersonObject;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
@@ -12,6 +13,7 @@ import java.lang.ref.WeakReference;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
     private Context context;
+    private CommonPersonObjectClient client;
     private WeakReference<MalariaProfileContract.View> view;
 
     @Override
@@ -35,7 +37,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     }
 
     @Override
-    public void getProfileData(CommonPersonObject client) {
+    public void getProfileData(CommonPersonObjectClient client) {
         //feed the view with the processed data
     }
 
@@ -52,12 +54,14 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void fetchProfileData(Intent intent) {
         //process profile data from the intent
+        this.client = (CommonPersonObjectClient) intent.getSerializableExtra("client");
+        getProfileData(this.client);
     }
 
 
     @Override
     protected void initializePresenter() {
-
+        //initialize presenter
     }
 
     @Override
