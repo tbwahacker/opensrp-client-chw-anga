@@ -164,15 +164,6 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        menu.findItem(R.id.action_profile);
-        inflater.inflate(R.menu.profile_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
 
     @MenuRes
     public int getMenuResource() {
