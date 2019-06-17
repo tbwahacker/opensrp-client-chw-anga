@@ -3,8 +3,8 @@ package org.smartregister.chw.malaria.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
@@ -12,6 +12,7 @@ import org.smartregister.view.activity.BaseProfileActivity;
 import java.lang.ref.WeakReference;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
+    private final String TAG = getClass().getCanonicalName();
     private Context context;
     private CommonPersonObjectClient client;
     private WeakReference<MalariaProfileContract.View> view;
@@ -39,6 +40,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void getProfileData(CommonPersonObjectClient client) {
         //feed the view with the processed data
+        Log.v(TAG, client + "");
     }
 
     @Override
