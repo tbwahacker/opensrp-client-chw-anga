@@ -14,7 +14,6 @@ import java.lang.ref.WeakReference;
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
     private final String TAG = getClass().getCanonicalName();
     private Context context;
-    private CommonPersonObjectClient client;
     private WeakReference<MalariaProfileContract.View> view;
 
     @Override
@@ -56,8 +55,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void fetchProfileData(Intent intent) {
         //process profile data from the intent
-        this.client = (CommonPersonObjectClient) intent.getSerializableExtra("client");
-        getProfileData(this.client);
+        CommonPersonObjectClient client = (CommonPersonObjectClient) intent.getSerializableExtra("client");
+        getProfileData(client);
     }
 
 
@@ -73,6 +72,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     protected void fetchProfileData() {
-
+        //fetch profile data
     }
 }
