@@ -113,7 +113,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
     protected void onViewClicked(android.view.View view) {
 //        implement onclick actions
         if(view.getTag() instanceof CommonPersonObjectClient && view.getId() == R.id.due_button) {
-            goToClient((CommonPersonObjectClient) client);
+            goToClient((CommonPersonObjectClient) view.getTag());
         }
     }
 
