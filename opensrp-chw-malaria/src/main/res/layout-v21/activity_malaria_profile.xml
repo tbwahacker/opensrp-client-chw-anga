@@ -20,6 +20,10 @@
                     android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentInsetStart="0dp"
+                    android:contentInsetLeft="0dp"
+                    android:contentInsetEnd="0dp"
+                    android:contentInsetRight="0dp"
                     android:theme="@style/MalariaTheme.AppBarOverlay.Light"
                     app:contentInsetEnd="0dp"
                     app:contentInsetLeft="0dp"
@@ -38,7 +42,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/return_to_profile"
                         android:textColor="@color/customAppThemeBlue"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"/>
             </android.support.v7.widget.Toolbar>
 
             <LinearLayout
@@ -133,6 +137,7 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:paddingStart="0dp"
+                            android:paddingEnd="0dp"
                             android:text="@string/id"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@android:color/black"

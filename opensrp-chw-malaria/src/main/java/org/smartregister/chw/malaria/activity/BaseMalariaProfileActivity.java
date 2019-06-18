@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.widget.Toast;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.helper.ImageRenderHelper;
@@ -22,7 +23,7 @@ import timber.log.Timber;
 import java.lang.ref.WeakReference;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
-    private final String TAG = getClass().getCanonicalName();
+    private final String TAG = getClass().getSimpleName();
     private Context context;
     private static CommonPersonObjectClient client;
     private WeakReference<MalariaProfileContract.View> view;
@@ -33,7 +34,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     protected void onCreation() {
-        this.setContentView(R.layout.activity_malaria_profile);
+        setContentView(R.layout.activity_malaria_profile);
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
 
@@ -50,13 +51,12 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
                 BaseMalariaProfileActivity.this.finish();
             }
         });
-        this.appBarLayout = (AppBarLayout)this.findViewById(R.id.collapsing_toolbar_appbarlayout);
+        appBarLayout = (AppBarLayout)this.findViewById(R.id.collapsing_toolbar_appbarlayout);
         if (Build.VERSION.SDK_INT >= 21) {
-            this.appBarLayout.setOutlineProvider((ViewOutlineProvider)null);
+            appBarLayout.setOutlineProvider((ViewOutlineProvider)null);
         }
 
-        this.imageRenderHelper = new ImageRenderHelper(this);
-        setContentView(R.layout.activity_malaria_profile);
+        imageRenderHelper = new ImageRenderHelper(this);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == android.R.id.home) {
+        if(view.getId() == R.id.title_layout) {
             onBackPressed();
         }
     }
