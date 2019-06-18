@@ -42,7 +42,7 @@
                         android:paddingLeft="0dp"
                         android:text="@string/return_to_profile"
                         android:textColor="@color/customAppThemeBlue"
-                        android:textSize="17sp"/>
+                        android:textSize="17sp" />
             </android.support.v7.widget.Toolbar>
 
             <LinearLayout
@@ -71,8 +71,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="0dp"
-                        android:text="Patient Name, Age"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/patient_name_age"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/register_member_name_size"/>
 
