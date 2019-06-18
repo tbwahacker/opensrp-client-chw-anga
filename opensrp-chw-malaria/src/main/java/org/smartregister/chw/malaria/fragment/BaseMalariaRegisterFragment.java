@@ -123,10 +123,6 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
         BaseMalariaProfileActivity.startProfileActivity(intent);
     }
 
-    private MalariaProfileContract.Presenter malariaProfilePresenter() {
-        return malariaProfilePresenter();
-    }
-
     @Override
     public void showNotFoundPopup(String s) {
 //        implement dialog
