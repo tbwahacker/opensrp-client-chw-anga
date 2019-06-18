@@ -120,7 +120,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
     protected void goToClient(CommonPersonObjectClient client) {
         Intent intent = new Intent(getActivity(), BaseMalariaProfileActivity.class);
         intent.putExtra("client", client);
-        malariaProfilePresenter().startProfileActivity(intent);
+        BaseMalariaProfileActivity.startProfileActivity(intent);
     }
 
     private MalariaProfileContract.Presenter malariaProfilePresenter() {

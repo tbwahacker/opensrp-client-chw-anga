@@ -15,8 +15,6 @@ public interface MalariaProfileContract {
     interface Presenter {
         MalariaProfileContract.Presenter presenter();
 
-        void startProfileActivity(Intent intent);
-
         void fetchProfileData(Intent intent);
     }
 }
