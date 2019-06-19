@@ -38,7 +38,7 @@
                         android:paddingEnd="0dp"
                         android:text="@string/return_to_profile"
                         android:textColor="@color/customAppThemeBlue"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"/>
             </android.support.v7.widget.Toolbar>
 
             <LinearLayout
@@ -133,6 +133,7 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:paddingStart="0dp"
+                            android:paddingEnd="0dp"
                             android:text="@string/id"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@android:color/black"
@@ -140,8 +141,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-
         </android.support.design.widget.CollapsingToolbarLayout>
+
 
         <View
                 android:layout_width="match_parent"
@@ -150,7 +151,8 @@
                 android:background="@color/light_grey"
                 android:visibility="visible"/>
 
-        <include android:id="@+id/record_visit_panel" layout="@layout/view_record_visit"/>
+        <include android:id="@+id/record_visit_malaria"
+                 layout="@layout/view_record_malaria"/>
 
     </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>

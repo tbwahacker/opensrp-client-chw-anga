@@ -1,16 +1,12 @@
 package org.smartregister.chw.malaria.fragment;
 
-import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
-import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.chw.malaria.provider.MalariaRegisterProvider;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.malaria.R;
@@ -111,16 +107,7 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     protected void onViewClicked(android.view.View view) {
-//        implement onclick actions
-        if(view.getTag() instanceof CommonPersonObjectClient && view.getId() == R.id.due_button) {
-            goToClient((CommonPersonObjectClient) view.getTag());
-        }
-    }
 
-    protected void goToClient(CommonPersonObjectClient client) {
-        Intent intent = new Intent(getActivity(), BaseMalariaProfileActivity.class);
-        intent.putExtra("client", client);
-        BaseMalariaProfileActivity.startProfileActivity(intent);
     }
 
     @Override
