@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.listener.MalariaOnClickListener;
+import org.smartregister.chw.malaria.model.MemberObject;
 import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -53,25 +54,18 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     }
 
-//    Make the CommonPersonObjectClient accessible
-    public static CommonPersonObjectClient getClient() {
-        return client;
-    }
-
     @Override
     public void getView(Cursor cursor, SmartRegisterClient smartRegisterClient, RegisterViewHolder registerViewHolder) {
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         if (visibleColumns.isEmpty()) {
             populatePatientColumn(pc, registerViewHolder);
             populateLastColumn(pc, registerViewHolder);
-
-            return;
         }
 
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
-        client = pc;
+        new MemberObject(pc);
         String fname = getName(
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));

@@ -7,11 +7,12 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.malaria.R;
 
 public class MalariaOnClickListener implements View.OnClickListener {
-    protected CommonPersonObjectClient client;
+    public CommonPersonObjectClient client;
 
     public MalariaOnClickListener(CommonPersonObjectClient client) {
         this.client = client;
     }
+
 
     @Override
     public void onClick(View v) {
