@@ -3,18 +3,18 @@ package org.smartregister.chw.malaria.contract;
 import android.content.Context;
 import android.content.Intent;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.view.contract.BaseProfileContract;
 
 public interface MalariaProfileContract {
     interface View {
         Context getContext();
+
         MalariaProfileContract.View getView();
-        void getProfileData(CommonPersonObjectClient client);
+
+        MalariaProfileContract.Presenter presenter();
 
     }
 
-    interface Presenter {
-        MalariaProfileContract.Presenter presenter();
-
-        void fetchProfileData(Intent intent);
+    interface Presenter extends BaseProfileContract.Presenter {
     }
 }

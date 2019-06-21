@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.smartregister.chw.malaria.listener.MalariaOnClickListener;
-import org.smartregister.chw.malaria.model.MemberObject;
+import org.smartregister.chw.malaria.fragment.BaseMalariaRegisterFragment;
 import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -65,7 +64,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
-        new MemberObject(pc);
         String fname = getName(
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
@@ -77,9 +75,33 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         viewHolder.patientName.setText(patientName + ", " + age);
         viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
         viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
+
+//        add onclick listener to patient column and tag it with the client object
+        viewHolder.patientColumn.setOnClickListener(onClickListener);
+        viewHolder.patientColumn.setTag(pc);
+        viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+
         viewHolder.dueButton.setOnClickListener(onClickListener);
+        viewHolder.dueButton.setTag(pc);
+        viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+        viewHolder.registerColumns.setOnClickListener(onClickListener);
+
+        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewHolder.patientColumn.performClick();
+            }
+        });
+
+        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewHolder.dueButton.performClick();
+            }
+        });
 
     }
+
 
     private void populateLastColumn(CommonPersonObjectClient pc, RegisterViewHolder viewHolder) {
         if (commonRepository != null) {

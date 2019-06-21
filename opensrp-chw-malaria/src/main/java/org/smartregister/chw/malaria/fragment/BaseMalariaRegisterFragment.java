@@ -3,13 +3,18 @@ package org.smartregister.chw.malaria.fragment;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
+import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.chw.malaria.provider.MalariaRegisterProvider;
+import org.smartregister.chw.malaria.util.DBConstants;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.configurableviews.model.View;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.malaria.R;
+import org.smartregister.util.Utils;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.customcontrols.FontVariant;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -18,6 +23,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements MalariaRegisterFragmentContract.View {
+    public static final String CLICK_VIEW_NORMAL = "click_view_normal";
     @Override
     public void initializeAdapter(Set<View> visibleColumns) {
         MalariaRegisterProvider malariaRegisterProvider = new MalariaRegisterProvider(getActivity(), paginationViewHandler,registerActionHandler, visibleColumns,commonRepository());
@@ -107,11 +113,23 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     protected void onViewClicked(android.view.View view) {
+        if (getActivity() == null) {
+            return;
+        }
 
+        if (view.getTag() instanceof CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) == CLICK_VIEW_NORMAL) {
+            openProfile((CommonPersonObjectClient) view.getTag());
+        }
+    }
+
+    protected void openProfile(CommonPersonObjectClient client) {
+        BaseMalariaProfileActivity.startProfileActivity(getActivity(), new MemberObject(client));
     }
 
     @Override
     public void showNotFoundPopup(String s) {
 //        implement dialog
     }
+
+
 }

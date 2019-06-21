@@ -37,4 +37,8 @@ public interface Constants {
         String MALARIA_CONFIRMATION = "malaria_confirmation";
     }
 
+    interface MALARIA_MEMBER_OBJECT {
+        String MEMBER_OBJECT = "memberObject";
+    }
+
 }
