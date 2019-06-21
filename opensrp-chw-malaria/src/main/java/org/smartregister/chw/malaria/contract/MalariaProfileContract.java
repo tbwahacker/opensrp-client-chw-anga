@@ -1,8 +1,6 @@
 package org.smartregister.chw.malaria.contract;
 
 import android.content.Context;
-import android.content.Intent;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.view.contract.BaseProfileContract;
 
 public interface MalariaProfileContract {

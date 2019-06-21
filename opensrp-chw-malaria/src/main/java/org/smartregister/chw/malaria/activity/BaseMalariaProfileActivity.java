@@ -19,7 +19,6 @@ import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
 import org.smartregister.chw.malaria.util.Constants;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
@@ -27,9 +26,7 @@ import org.smartregister.view.activity.BaseProfileActivity;
 import java.lang.ref.WeakReference;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
-    private final String TAG = getClass().getSimpleName();
     private Context context;
-    private static CommonPersonObjectClient client;
     protected MemberObject MEMBER_OBJECT;
     private WeakReference<MalariaProfileContract.View> view;
 
@@ -56,7 +53,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            public void onClick(android.view.View v) {
+            public void onClick(View v) {
                 BaseMalariaProfileActivity.this.finish();
             }
         });
@@ -74,7 +71,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         int age = new Period(new DateTime(MEMBER_OBJECT.getAge()), new DateTime()).getYears();
 
         TextView textViewName = findViewById(R.id.textview_name);
-        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirst_name(), MEMBER_OBJECT.getMiddle_name(), MEMBER_OBJECT.getLast_name(), age));
+        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
 
         TextView textViewGender = findViewById(R.id.textview_gender);
         textViewGender.setText(MEMBER_OBJECT.getGender());
@@ -83,7 +80,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewLocation.setText(MEMBER_OBJECT.getAddress());
 
         TextView textViewUniqueID = findViewById(R.id.textview_id);
-        textViewUniqueID.setText(MEMBER_OBJECT.getUnique_id());
+        textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
     }
 
     @Override
