@@ -13,13 +13,13 @@
     <string name="saving_dialog_title">Saving</string>
     <string name="interpunct" translatable="false">\u00b7</string>
     <string name="malaria_followup_visit">FOLLOWUP\nVisit</string>
-    <string name="return_to_profile">Return to profile</string>
     <string name="patient_name_age">Patient Name, Age</string>
     <string name="record_malaria">Record Malaria</string>
     <string name="gender">Male</string>
     <string name="address">Address #24</string>
     <string name="id">ID:123456</string>
-    <string name="collon">·</string>
+    <string name="collon">\u00b7</string>
+    <string name="return_to_profile">Return</string>
 
 
 </resources>
