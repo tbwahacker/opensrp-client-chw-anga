@@ -6,13 +6,15 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import java.io.Serializable;
 
 public class MemberObject implements Serializable {
-    protected String firstName;
-    protected String middleName;
-    protected String lastName;
-    protected String address;
-    protected String gender;
-    protected String uniqueId;
-    protected String age;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String address;
+    private String gender;
+    private String uniqueId;
+    private String age;
+    private String baseEntityId;
+    private String relationalId;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME);
@@ -22,6 +24,8 @@ public class MemberObject implements Serializable {
         gender = client.getColumnmaps().get(DBConstants.KEY.GENDER);
         uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
         age = client.getColumnmaps().get(DBConstants.KEY.DOB);
+        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID);
+        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
     }
     public String getFirstName() {
         return firstName;
@@ -77,6 +81,22 @@ public class MemberObject implements Serializable {
 
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
+    }
+
+    public String getBaseEntityId() {
+        return baseEntityId;
+    }
+
+    public void setBaseEntityId(String baseEntityId) {
+        this.baseEntityId = baseEntityId;
+    }
+
+    public String getRelationalId() {
+        return relationalId;
+    }
+
+    public void setRelationalId(String relationalId) {
+        this.relationalId = relationalId;
     }
 
 
