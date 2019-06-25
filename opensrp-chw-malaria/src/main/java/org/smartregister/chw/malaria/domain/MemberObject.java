@@ -17,15 +17,15 @@ public class MemberObject implements Serializable {
     private String relationalId;
 
     public MemberObject(CommonPersonObjectClient client) {
-        firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME);
-        middleName = client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME);
-        lastName = client.getColumnmaps().get(DBConstants.KEY.LAST_NAME);
-        address = client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN);
-        gender = client.getColumnmaps().get(DBConstants.KEY.GENDER);
-        uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
-        age = client.getColumnmaps().get(DBConstants.KEY.DOB);
-        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID);
-        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
+        firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
+        middleName = client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) : "";
+        lastName = client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) : "";
+        address = client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) != null ? client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) : "";
+        gender = client.getColumnmaps().get(DBConstants.KEY.GENDER) != null ? client.getColumnmaps().get(DBConstants.KEY.GENDER) : "";
+        uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID) : "";
+        age = client.getColumnmaps().get(DBConstants.KEY.DOB) != null ? client.getColumnmaps().get(DBConstants.KEY.DOB) : "";
+        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID) : "";
+        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID) : "";
     }
     public String getFirstName() {
         return firstName;

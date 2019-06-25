@@ -17,7 +17,7 @@ public interface Constants {
     }
 
     interface FORMS {
-        String MALARIA_REGISTRATION = "malaria_registration";
+        String MALARIA_REGISTRATION = "malaria_confirmation";
     }
 
     interface TABLES {
