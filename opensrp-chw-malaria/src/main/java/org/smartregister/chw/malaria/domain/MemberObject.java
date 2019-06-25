@@ -15,6 +15,24 @@ public class MemberObject implements Serializable {
     private String age;
     private String baseEntityId;
     private String relationalId;
+    private String primaryCareGiver;
+    private String familyHead;
+
+    public String getPrimaryCareGiver() {
+        return primaryCareGiver;
+    }
+
+    public void setPrimaryCareGiver(String primaryCareGiver) {
+        this.primaryCareGiver = primaryCareGiver;
+    }
+
+    public String getFamilyHead() {
+        return familyHead;
+    }
+
+    public void setFamilyHead(String familyHead) {
+        this.familyHead = familyHead;
+    }
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
@@ -22,10 +40,12 @@ public class MemberObject implements Serializable {
         lastName = client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) : "";
         address = client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) != null ? client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) : "";
         gender = client.getColumnmaps().get(DBConstants.KEY.GENDER) != null ? client.getColumnmaps().get(DBConstants.KEY.GENDER) : "";
-        uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID) : "";
         age = client.getColumnmaps().get(DBConstants.KEY.DOB) != null ? client.getColumnmaps().get(DBConstants.KEY.DOB) : "";
-        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID) : "";
-        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID) != null ? client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID) : "";
+        uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
+        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID);
+        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
+        primaryCareGiver = client.getColumnmaps().get(DBConstants.KEY.PRIMARY_CARE_GIVER);
+        familyHead = client.getColumnmaps().get(DBConstants.KEY.FAMILY_HEAD);
     }
     public String getFirstName() {
         return firstName;

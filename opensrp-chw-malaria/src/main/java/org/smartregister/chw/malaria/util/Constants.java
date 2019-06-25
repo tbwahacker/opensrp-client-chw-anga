@@ -14,6 +14,7 @@ public interface Constants {
 
     interface EVENT_TYPE {
         String MALARIA_CONFIRMATION = "Malaria Confirmation";
+        String UPDATE_MALARIA_CONFIRMATION  = "update malaria confirmation";
     }
 
     interface FORMS {

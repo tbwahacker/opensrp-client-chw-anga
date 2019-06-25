@@ -17,6 +17,8 @@ public class DBConstants {
         public static final String VILLAGE_TOWN = "village_town";
         public static final String DATE_REMOVED = "date_removed";
         public static final String GENDER = "gender";
-        public static final String RELATIONAL_ID = "relationalid";
+        public static final String RELATIONAL_ID = "relational_id";
+        public static final String FAMILY_HEAD = "family_head";
+        public static final String PRIMARY_CARE_GIVER = "primary_caregiver";
     }
 }
