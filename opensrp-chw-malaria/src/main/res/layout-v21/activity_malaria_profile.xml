@@ -69,7 +69,7 @@
                         android:layout_marginTop="5dp"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
-                        android:text="@string/patient_name_age"
+                        android:text="Patient Name, Age"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/register_member_name_size"/>
 
@@ -88,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="@string/gender"
+                            android:text="Gender"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/register_member_village_size"/>
@@ -110,7 +110,7 @@
                             android:gravity="center_horizontal"
                             android:paddingStart="0dp"
                             android:paddingEnd="0dp"
-                            android:text="@string/address"
+                            android:text="Address #24"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/register_member_village_size"/>
@@ -133,7 +133,7 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:paddingStart="0dp"
-                            android:text="@string/id"
+                            android:text="ID:123456"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/register_member_village_size"/>
