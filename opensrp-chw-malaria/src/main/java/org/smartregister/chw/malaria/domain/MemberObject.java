@@ -17,22 +17,7 @@ public class MemberObject implements Serializable {
     private String relationalId;
     private String primaryCareGiver;
     private String familyHead;
-
-    public String getPrimaryCareGiver() {
-        return primaryCareGiver;
-    }
-
-    public void setPrimaryCareGiver(String primaryCareGiver) {
-        this.primaryCareGiver = primaryCareGiver;
-    }
-
-    public String getFamilyHead() {
-        return familyHead;
-    }
-
-    public void setFamilyHead(String familyHead) {
-        this.familyHead = familyHead;
-    }
+    private String familyBaseEntityId;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
@@ -46,6 +31,7 @@ public class MemberObject implements Serializable {
         relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
         primaryCareGiver = client.getColumnmaps().get(DBConstants.KEY.PRIMARY_CARE_GIVER);
         familyHead = client.getColumnmaps().get(DBConstants.KEY.FAMILY_HEAD);
+        familyBaseEntityId = client.getColumnmaps().get(DBConstants.KEY.FAMILY_BASE_ENTITY_ID);
     }
     public String getFirstName() {
         return firstName;
@@ -117,6 +103,30 @@ public class MemberObject implements Serializable {
 
     public void setRelationalId(String relationalId) {
         this.relationalId = relationalId;
+    }
+
+    public String getFamilyBaseEntityId() {
+        return familyBaseEntityId;
+    }
+
+    public void setFamilyBaseEntityId(String familyBaseEntityId) {
+        this.familyBaseEntityId = familyBaseEntityId;
+    }
+
+    public String getPrimaryCareGiver() {
+        return primaryCareGiver;
+    }
+
+    public void setPrimaryCareGiver(String primaryCareGiver) {
+        this.primaryCareGiver = primaryCareGiver;
+    }
+
+    public String getFamilyHead() {
+        return familyHead;
+    }
+
+    public void setFamilyHead(String familyHead) {
+        this.familyHead = familyHead;
     }
 
 

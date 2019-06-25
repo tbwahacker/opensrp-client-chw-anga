@@ -10,6 +10,7 @@ public class DBConstants {
         public static final String MIDDLE_NAME = "middle_name";
         public static final String LAST_NAME = "last_name";
         public static final String BASE_ENTITY_ID = "base_entity_id";
+        public static final String FAMILY_BASE_ENTITY_ID = "family_base_entity_id";
         public static final String DOB = "dob";//Date Of Birth
         public static final String DOD = "dod";
         public static final String UNIQUE_ID = "unique_id";
