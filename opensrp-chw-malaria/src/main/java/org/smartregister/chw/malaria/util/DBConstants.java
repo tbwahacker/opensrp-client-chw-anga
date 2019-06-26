@@ -17,5 +17,19 @@ public class DBConstants {
         public static final String VILLAGE_TOWN = "village_town";
         public static final String DATE_REMOVED = "date_removed";
         public static final String GENDER = "gender";
+        public static final String RELATIONALID = "relationalid";
+        public static final String DETAILS = "details";
+        public static final String IS_CLOSED = "is_closed";
+        public static final String DATE_CHW_MALARIA_TEST = "date_chw_malaria_test";
+        public static final String FEVER_MALARIA_CHW = "fever_malaria_chw";
+        public static final String FEVER_DURATION = "fever_duration";
+        public static final String MALARIA_RESULTS = "malaria_results";
+        public static final String DATE_HF_MALARIA_TEST = "date_hf_malaria_test";
+        public static final String MALARIA_TEST_DATE = "malaria_test_date";
+        public static final String MALARIA_TREAT = "malaria_treat";
+        public static final String FAM_LLIN = "fam_llin";
+        public static final String LLIN_2DAYS = "llin_2days";
+        public static final String LLIN_CONDITION = "llin_condition";
+        public static final String MALARIA_EDU_CHW = "malaria_edu_chw";
     }
 }
