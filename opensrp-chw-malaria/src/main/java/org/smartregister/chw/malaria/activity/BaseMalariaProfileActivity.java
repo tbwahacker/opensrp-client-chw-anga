@@ -7,12 +7,14 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
@@ -24,10 +26,16 @@ import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.Presenter {
     private Context context;
-    protected MemberObject MEMBER_OBJECT;
+    private MemberObject MEMBER_OBJECT;
+    private View recordMalariaView;
+    private TextView textViewRecordMalaria;
     private WeakReference<MalariaProfileContract.View> view;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
@@ -43,6 +51,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         setSupportActionBar(toolbar);
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -69,6 +78,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     protected void setupViews() {
         int age = new Period(new DateTime(MEMBER_OBJECT.getAge()), new DateTime()).getYears();
+        recordMalariaView = findViewById(R.id.record_visit_malaria);
+        textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
 
         TextView textViewName = findViewById(R.id.textview_name);
         textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
@@ -81,6 +92,28 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         TextView textViewUniqueID = findViewById(R.id.textview_id);
         textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
+
+        recordMalariaButton(MEMBER_OBJECT.getMalariaTestDate());
+
+    }
+
+    private void recordMalariaButton(String malaria_test_date) {
+        try {
+            Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(malaria_test_date);
+            int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
+            if(malaria_test_date_processed >= 7 && malaria_test_date_processed < 10) {
+                //do nothing
+                //malaria follow up is overdue
+                textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(context, R.color.due_profile_blue));
+            } else if(malaria_test_date_processed >= 10) {
+                //malaria follow up is overdue
+                textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(context, R.color.visit_status_over_due));
+            } else {
+                recordMalariaView.setVisibility(View.GONE);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -120,8 +153,17 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.title_layout) {
+        int id = view.getId();
+        if (id == R.id.title_layout) {
             onBackPressed();
+        } else if (id == R.id.textview_record_malaria) {
+            try {
+                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
+                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
+                Toast.makeText(context, "Record Malaria" + malaria_test_date_processed, Toast.LENGTH_SHORT).show();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
