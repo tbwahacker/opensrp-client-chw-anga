@@ -6,13 +6,13 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import java.io.Serializable;
 
 public class MemberObject implements Serializable {
-    protected String firstName;
-    protected String middleName;
-    protected String lastName;
-    protected String address;
-    protected String gender;
-    protected String uniqueId;
-    protected String age;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String address;
+    private String gender;
+    private String uniqueId;
+    private String age;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME);
