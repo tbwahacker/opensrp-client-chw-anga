@@ -31,6 +31,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private BaseMalariaProfilePresenter profilePresenter;
     private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
     private View recordMalariaView;
+    private View.OnClickListener onClickListener;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -66,8 +67,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
-        textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         recordMalariaView = findViewById(R.id.record_visit_malaria);
+
+        textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
+        textViewRecordMalaria.setOnClickListener(onClickListener);
+
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
