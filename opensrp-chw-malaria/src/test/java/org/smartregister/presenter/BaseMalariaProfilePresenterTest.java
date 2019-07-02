@@ -40,16 +40,9 @@ public class BaseMalariaProfilePresenterTest {
 
     @Test
     public void malariaTestDatePeriodIsNotBetweenSevenAndTenAndNotGreaterThanTen() {
-        profilePresenter.recordMalariaButton(7, androidView, androidView2,  context);
+        profilePresenter.recordMalariaButton(4, androidView, androidView2,  context);
         verify(profilePresenter, never()).changeViewColor(androidView, context,
                 R.color.due_profile_blue);
     }
-
-//    @Test
-//    public void malariaTestDatePeriodIsBetweenSevenAndTenSevenInclusiveRecordMalariaButtonHasDueColor() {
-//        profilePresenter.recordMalariaButton(7, androidView, context);
-//        verify(profilePresenter).changeViewColor(androidView, context,
-//                R.color.due_profile_blue);
-//    }
 
 }
