@@ -20,11 +20,17 @@ import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View {
     protected MemberObject MEMBER_OBJECT;
     private BaseMalariaProfilePresenter profilePresenter;
-    private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID;
+    private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
+    private View recordMalariaView;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -60,6 +66,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
+        textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
+        recordMalariaView = findViewById(R.id.record_visit_malaria);
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
@@ -79,27 +87,17 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewLocation.setText(MEMBER_OBJECT.getAddress());
         textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
 
-        recordMalariaButton(MEMBER_OBJECT.getMalariaTestDate());
-
-    }
-
-    private void recordMalariaButton(String malaria_test_date) {
-        try {
-            Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(malaria_test_date);
-            int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-            if(malaria_test_date_processed >= 7 && malaria_test_date_processed < 10) {
-                //do nothing
-                //malaria follow up is overdue
-                textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(context, R.color.due_profile_blue));
-            } else if(malaria_test_date_processed >= 10) {
-                //malaria follow up is overdue
-                textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(context, R.color.visit_status_over_due));
-            } else {
-                recordMalariaView.setVisibility(View.GONE);
+        if (MEMBER_OBJECT.getMalariaTestDate() != null) {
+            try {
+                Date date =
+                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
+                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
+                profilePresenter.recordMalariaButton(malaria_test_date_processed, textViewRecordMalaria, this);
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
+
     }
 
 
@@ -124,13 +122,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         if (id == R.id.title_layout) {
             onBackPressed();
         } else if (id == R.id.textview_record_malaria) {
-            try {
-                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
-                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-                Toast.makeText(context, "Record Malaria" + malaria_test_date_processed, Toast.LENGTH_SHORT).show();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            profilePresenter.recordMalariaFollowUp(this);
         }
     }
 
