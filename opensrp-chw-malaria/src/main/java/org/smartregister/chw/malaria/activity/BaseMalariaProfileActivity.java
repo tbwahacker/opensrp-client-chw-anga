@@ -30,7 +30,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected MemberObject MEMBER_OBJECT;
     private BaseMalariaProfilePresenter profilePresenter;
     private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
-//    private View recordMalariaView;
+    private View recordMalariaView;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -67,7 +67,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
-//        recordMalariaView = findViewById(R.id.record_visit_malaria);
+        recordMalariaView = findViewById(R.id.record_visit_malaria);
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
@@ -92,7 +92,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
                 Date date =
                         new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
                 int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-                profilePresenter.recordMalariaButton(malaria_test_date_processed, textViewRecordMalaria, this);
+                profilePresenter.recordMalariaButton(malaria_test_date_processed,
+                        textViewRecordMalaria, recordMalariaView,this);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
