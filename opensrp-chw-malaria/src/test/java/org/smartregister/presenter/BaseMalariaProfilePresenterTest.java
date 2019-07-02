@@ -21,6 +21,7 @@ public class BaseMalariaProfilePresenterTest {
 
     @Mock
     private TextView androidView = Mockito.mock(TextView.class);
+    private TextView androidView2 = Mockito.mock(TextView.class);
 
     @Mock
     private BaseMalariaProfilePresenter profilePresenter = Mockito.mock(BaseMalariaProfilePresenter.class);
@@ -39,7 +40,7 @@ public class BaseMalariaProfilePresenterTest {
 
     @Test
     public void malariaTestDatePeriodIsNotBetweenSevenAndTenAndNotGreaterThanTen() {
-        profilePresenter.recordMalariaButton(7, androidView, context);
+        profilePresenter.recordMalariaButton(7, androidView, androidView2,  context);
         verify(profilePresenter, never()).changeViewColor(androidView, context,
                 R.color.due_profile_blue);
     }
