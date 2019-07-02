@@ -45,11 +45,4 @@ public class BaseMalariaProfilePresenterTest {
                 R.color.due_profile_blue);
     }
 
-//    @Test
-//    public void malariaTestDatePeriodIsBetweenSevenAndTenSevenInclusiveRecordMalariaButtonHasDueColor() {
-//        profilePresenter.recordMalariaButton(7, androidView, context);
-//        verify(profilePresenter).changeViewColor(androidView, context,
-//                R.color.due_profile_blue);
-//    }
-
 }
