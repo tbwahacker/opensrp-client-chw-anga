@@ -27,7 +27,7 @@ public class BaseMalariaProfilePresenter {
     }
 
     public void fillProfileData(MemberObject memberObject) {
-        if (memberObject != null || this.memberObject != null) {
+        if (memberObject != null) {
             view.setProfileViewWithData();
         }
     }
