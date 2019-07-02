@@ -12,7 +12,8 @@ import static org.mockito.Mockito.verify;
 
 public class BaseMalariaProfilePresenterTest {
     @Mock
-    private MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);
+    MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);
+
     @Mock
     BaseMalariaProfilePresenter profilePresenter = Mockito.mock(BaseMalariaProfilePresenter.class);
 
@@ -20,7 +21,7 @@ public class BaseMalariaProfilePresenterTest {
     MemberObject memberObject = Mockito.mock(MemberObject.class);
 
     @Test
-    public void fillProfileData_doesntCallsSetProfileViewWithDataIfMemberObjectEmpty() {
+    public void fillProfileDataDoesntCallsSetProfileViewWithDataIfMemberObjectEmpty() {
         profilePresenter.fillProfileData(memberObject);
         verify(view, never()).setProfileViewWithData();
     }
