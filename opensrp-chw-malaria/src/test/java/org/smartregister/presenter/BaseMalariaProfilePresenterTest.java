@@ -1,11 +1,16 @@
 package org.smartregister.presenter;
 
+import android.content.Context;
+import android.widget.TextView;
+
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
+import org.smartregister.malaria.R;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -13,15 +18,37 @@ import static org.mockito.Mockito.verify;
 public class BaseMalariaProfilePresenterTest {
     @Mock
     private MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);
-    @Mock
-    BaseMalariaProfilePresenter profilePresenter = Mockito.mock(BaseMalariaProfilePresenter.class);
 
     @Mock
-    MemberObject memberObject = Mockito.mock(MemberObject.class);
+    private TextView androidView = Mockito.mock(TextView.class);
+
+    @Mock
+    private BaseMalariaProfilePresenter profilePresenter = Mockito.mock(BaseMalariaProfilePresenter.class);
+
+    @Mock
+    private MemberObject memberObject = Mockito.mock(MemberObject.class);
+
+    @Mock
+    private Context context = Mockito.mock(Context.class);
 
     @Test
-    public void fillProfileData_doesntCallsSetProfileViewWithDataIfMemberObjectEmpty() {
+    public void fillProfileDataDoesntCallsSetProfileViewWithDataIfMemberObjectEmpty() {
         profilePresenter.fillProfileData(memberObject);
         verify(view, never()).setProfileViewWithData();
     }
+
+    @Test
+    public void malariaTestDatePeriodIsNotBetweenSevenAndTenAndNotGreaterThanTen() {
+        profilePresenter.recordMalariaButton(7, androidView, context);
+        verify(profilePresenter, never()).changeViewColor(androidView, context,
+                R.color.due_profile_blue);
+    }
+
+//    @Test
+//    public void malariaTestDatePeriodIsBetweenSevenAndTenSevenInclusiveRecordMalariaButtonHasDueColor() {
+//        profilePresenter.recordMalariaButton(7, androidView, context);
+//        verify(profilePresenter).changeViewColor(androidView, context,
+//                R.color.due_profile_blue);
+//    }
+
 }
