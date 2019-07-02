@@ -8,7 +8,7 @@ import org.smartregister.chw.malaria.domain.MemberObject;
 
 public class BaseMalariaProfilePresenter {
     protected MalariaProfileContract.View view;
-    private MemberObject memberObject;
+    protected MemberObject memberObject;
     protected Context context;
 
 
