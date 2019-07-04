@@ -20,11 +20,18 @@ import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View {
     protected MemberObject MEMBER_OBJECT;
     private BaseMalariaProfilePresenter profilePresenter;
-    private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID;
+    private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
+    private View recordMalariaView;
+    private View.OnClickListener onClickListener;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -60,6 +67,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
+        recordMalariaView = findViewById(R.id.record_visit_malaria);
+
+        textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
+        textViewRecordMalaria.setOnClickListener(onClickListener);
+
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
@@ -78,6 +90,19 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender.setText(MEMBER_OBJECT.getGender());
         textViewLocation.setText(MEMBER_OBJECT.getAddress());
         textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
+
+        if (MEMBER_OBJECT.getMalariaTestDate() != null) {
+            try {
+                Date date =
+                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
+                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
+                profilePresenter.recordMalariaButton(malaria_test_date_processed,
+                        textViewRecordMalaria, recordMalariaView,this);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
@@ -98,8 +123,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.title_layout) {
+        int id = view.getId();
+        if (id == R.id.title_layout) {
             onBackPressed();
+        } else if (id == R.id.textview_record_malaria) {
+            profilePresenter.recordMalariaFollowUp(this);
         }
     }
 
