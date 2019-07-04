@@ -16,7 +16,6 @@ import org.smartregister.malaria.R;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.customcontrols.FontVariant;
 import org.smartregister.view.fragment.BaseRegisterFragment;
-
 import java.util.HashMap;
 import java.util.Set;
 
@@ -128,6 +127,4 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
     public void showNotFoundPopup(String s) {
 //        implement dialog
     }
-
-
 }

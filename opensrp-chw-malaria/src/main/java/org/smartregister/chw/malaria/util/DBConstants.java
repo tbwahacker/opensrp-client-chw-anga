@@ -35,5 +35,8 @@ public class DBConstants {
         public static final String RELATIONAL_ID = "relational_id";
         public static final String FAMILY_HEAD = "family_head";
         public static final String PRIMARY_CARE_GIVER = "primary_caregiver";
+        public static final String LAST_HOME_VISIT = "last_home_visit";
+        public static final String VISIT_NOT_DONE = "visit_not_done";
+        public static final String MALARIA = "malaria";
     }
 }
