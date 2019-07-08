@@ -23,9 +23,6 @@ public class BaseMalariaProfilePresenterTest {
     private TextView androidView = Mockito.mock(TextView.class);
 
     @Mock
-    private View androidView2 = Mockito.mock(View.class);
-
-    @Mock
     private CommonPersonObjectClient commonPersonObjectClient = Mockito.mock(CommonPersonObjectClient.class);
 
     @Mock
