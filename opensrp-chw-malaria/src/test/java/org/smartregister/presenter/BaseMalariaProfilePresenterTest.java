@@ -62,7 +62,7 @@ public class BaseMalariaProfilePresenterTest {
     public void malariaTestDatePeriodIsNotBetweenSevenAndTenAndNotGreaterThanTen() {
         BaseMalariaProfilePresenter  baseMalariaProfilePresenter =
                 Mockito.mock(BaseMalariaProfilePresenter.class);
-        profilePresenter.recordMalariaButton(4, androidView, androidView2,  context);
+        profilePresenter.recordMalariaButton(4, androidView, context);
         verify(baseMalariaProfilePresenter, never()).changeViewColor(androidView, context,
                 R.color.due_profile_blue);
     }

@@ -36,17 +36,13 @@ public class BaseMalariaProfilePresenter {
         }
     }
 
-    public void recordMalariaButton(int days_from_malaria_test_date, View view,
-                                    View viewContainer, Context context) {
+    public void recordMalariaButton(int days_from_malaria_test_date, View view, Context context) {
         if(days_from_malaria_test_date >= 7 && days_from_malaria_test_date < 10)  {
             changeViewColor(view, context, R.color.due_profile_blue);
-            toggleViewVisibility(viewContainer, true);
 
         } else if (days_from_malaria_test_date >= 10){
             changeViewColor(view, context, R.color.visit_status_over_due);
-            toggleViewVisibility(viewContainer, true);
         }
-        toggleViewVisibility(viewContainer, false);
     }
 
 
@@ -58,15 +54,6 @@ public class BaseMalariaProfilePresenter {
     public void changeViewColor(View view, Context context, int color) {
         view.setBackgroundColor(ContextCompat.getColor(context,
                 color));
-
-    }
-
-    private void toggleViewVisibility(View view, Boolean show) {
-        if(show) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
 
     }
 

@@ -97,7 +97,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
                         new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
                 int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
                 profilePresenter.recordMalariaButton(malaria_test_date_processed,
-                        textViewRecordMalaria, recordMalariaView,this);
+                        textViewRecordMalaria,this);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
