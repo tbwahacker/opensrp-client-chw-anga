@@ -5,44 +5,37 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.malaria.R;
 
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class BaseMalariaProfilePresenterTest {
     @Mock
-    TextView androidView = Mockito.mock(TextView.class);
+    private TextView androidView = Mockito.mock(TextView.class);
 
     @Mock
-    View androidView2 = Mockito.mock(View.class);
+    private View androidView2 = Mockito.mock(View.class);
 
     @Mock
-    CommonPersonObjectClient commonPersonObjectClient = Mockito.mock(CommonPersonObjectClient.class);
+    private CommonPersonObjectClient commonPersonObjectClient = Mockito.mock(CommonPersonObjectClient.class);
 
     @Mock
-    MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);
+    private MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);
 
     @Mock
-    Context context = Mockito.mock(Context.class);
+    private Context context = Mockito.mock(Context.class);
 
     @Mock
-    MemberObject memberObject = new MemberObject(commonPersonObjectClient);
+    private MemberObject memberObject = new MemberObject(commonPersonObjectClient);
 
     private BaseMalariaProfilePresenter profilePresenter = new BaseMalariaProfilePresenter(view,
             memberObject);

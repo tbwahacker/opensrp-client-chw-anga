@@ -8,7 +8,7 @@ import org.smartregister.chw.malaria.util.Constants;
 
 public class BaseMalariaRegisterActivityTest {
     @Mock
-    BaseMalariaRegisterActivity baseMalariaRegisterActivity = new BaseMalariaRegisterActivity();
+    private BaseMalariaRegisterActivity baseMalariaRegisterActivity = new BaseMalariaRegisterActivity();
 
     @Test
     public void testGetRegistrationForm() {

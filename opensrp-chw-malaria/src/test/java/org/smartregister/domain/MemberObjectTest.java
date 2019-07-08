@@ -9,7 +9,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 public class MemberObjectTest {
     @Mock
-    CommonPersonObjectClient client = Mockito.mock(CommonPersonObjectClient.class);
+    private CommonPersonObjectClient client = Mockito.mock(CommonPersonObjectClient.class);
 
     private MemberObject memberObject = new MemberObject(client);
 
