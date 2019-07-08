@@ -27,10 +27,10 @@ import static org.mockito.Mockito.when;
 
 public class BaseMalariaProfilePresenterTest {
     @Mock
-    TextView androidView;
+    TextView androidView = Mockito.mock(TextView.class);
 
     @Mock
-    TextView androidView2;
+    View androidView2 = Mockito.mock(View.class);
 
     @Mock
     CommonPersonObjectClient commonPersonObjectClient = Mockito.mock(CommonPersonObjectClient.class);
@@ -67,8 +67,10 @@ public class BaseMalariaProfilePresenterTest {
 
     @Test
     public void malariaTestDatePeriodIsNotBetweenSevenAndTenAndNotGreaterThanTen() {
+        BaseMalariaProfilePresenter  baseMalariaProfilePresenter =
+                Mockito.mock(BaseMalariaProfilePresenter.class);
         profilePresenter.recordMalariaButton(4, androidView, androidView2,  context);
-        verify(profilePresenter, never()).changeViewColor(androidView, context,
+        verify(baseMalariaProfilePresenter, never()).changeViewColor(androidView, context,
                 R.color.due_profile_blue);
     }
 }
