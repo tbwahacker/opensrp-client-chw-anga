@@ -14,10 +14,11 @@ public interface Constants {
 
     interface EVENT_TYPE {
         String MALARIA_CONFIRMATION = "Malaria Confirmation";
+        String UPDATE_MALARIA_CONFIRMATION  = "update malaria confirmation";
     }
 
     interface FORMS {
-        String MALARIA_REGISTRATION = "malaria_registration";
+        String MALARIA_REGISTRATION = "malaria_confirmation";
     }
 
     interface TABLES {
@@ -35,6 +36,10 @@ public interface Constants {
 
     interface CONFIGURATION {
         String MALARIA_CONFIRMATION = "malaria_confirmation";
+    }
+
+    interface MALARIA_MEMBER_OBJECT {
+        String MEMBER_OBJECT = "memberObject";
     }
 
 }

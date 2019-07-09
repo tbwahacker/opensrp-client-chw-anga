@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
+import org.smartregister.chw.malaria.fragment.BaseMalariaRegisterFragment;
 import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -35,15 +36,17 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     private final LayoutInflater inflater;
 
     private View.OnClickListener paginationClickListener;
+    private View.OnClickListener onClickListener;
     private CommonRepository commonRepository;
-
+    protected static CommonPersonObjectClient client;
     private Context context;
     private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
-    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, Set visibleColumns, CommonRepository commonRepository) {
+    public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener, Set visibleColumns, CommonRepository commonRepository) {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.paginationClickListener = paginationClickListener;
+        this.onClickListener = onClickListener;
         this.visibleColumns = visibleColumns;
         this.context = context;
         this.commonRepository = commonRepository;
@@ -56,14 +59,11 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         if (visibleColumns.isEmpty()) {
             populatePatientColumn(pc, registerViewHolder);
             populateLastColumn(pc, registerViewHolder);
-
-            return;
         }
 
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
-
         String fname = getName(
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
                 Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
@@ -76,8 +76,32 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
         viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
 
+//        add onclick listener to patient column and tag it with the client object
+        viewHolder.patientColumn.setOnClickListener(onClickListener);
+        viewHolder.patientColumn.setTag(pc);
+        viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+
+        viewHolder.dueButton.setOnClickListener(onClickListener);
+        viewHolder.dueButton.setTag(pc);
+        viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+        viewHolder.registerColumns.setOnClickListener(onClickListener);
+
+        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewHolder.patientColumn.performClick();
+            }
+        });
+
+        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewHolder.dueButton.performClick();
+            }
+        });
 
     }
+
 
     private void populateLastColumn(CommonPersonObjectClient pc, RegisterViewHolder viewHolder) {
         if (commonRepository != null) {
@@ -183,6 +207,4 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             pageInfoView = view.findViewById(org.smartregister.R.id.txt_page_info);
         }
     }
-
-
 }
