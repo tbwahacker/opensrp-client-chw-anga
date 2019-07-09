@@ -68,6 +68,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
+        viewRecordMalaria = findViewById(R.id.record_visit_malaria);
 
 
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
