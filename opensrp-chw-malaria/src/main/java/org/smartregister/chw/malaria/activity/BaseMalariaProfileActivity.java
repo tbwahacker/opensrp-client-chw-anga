@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +31,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected MemberObject MEMBER_OBJECT;
     private BaseMalariaProfilePresenter profilePresenter;
     private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
+    private View viewRecordMalaria;
     private View.OnClickListener onClickListener;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
@@ -67,6 +69,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
 
+        viewRecordMalaria = findViewById(R.id.record_visit_malaria);
+        viewRecordMalaria.setOnClickListener(onClickListener);
+
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         textViewRecordMalaria.setOnClickListener(onClickListener);
 
@@ -94,13 +99,27 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
                 Date date =
                         new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
                 int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-                profilePresenter.recordMalariaButton(malaria_test_date_processed,
-                        textViewRecordMalaria,this);
+                profilePresenter.recordMalariaButton(malaria_test_date_processed);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
 
+    }
+
+    @Override
+    public void hideView() {
+        viewRecordMalaria.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setDueColor() {
+        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.due_profile_blue));
+    }
+
+    @Override
+    public void setOverDueColor() {
+        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.visit_status_over_due));
     }
 
 
