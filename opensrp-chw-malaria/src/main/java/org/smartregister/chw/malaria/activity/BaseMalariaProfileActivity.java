@@ -118,13 +118,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void setDueColor() {
         textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector));
-//        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.due_profile_blue));
     }
 
     @Override
     public void setOverDueColor() {
         textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector_overdue));
-//        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.visit_status_over_due));
     }
 
 
