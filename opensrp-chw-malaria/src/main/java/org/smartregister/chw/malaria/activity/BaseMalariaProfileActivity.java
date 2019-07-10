@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
@@ -95,10 +97,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         if (MEMBER_OBJECT.getMalariaTestDate() != null) {
             try {
-                Date date =
-                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
-                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-                profilePresenter.recordMalariaButton(malaria_test_date_processed);
+                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse("18-06-2019");
+                Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
+                profilePresenter.recordMalariaButton(days.getDays());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
