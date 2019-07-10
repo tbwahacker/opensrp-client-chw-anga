@@ -20,4 +20,5 @@ public class MalariaRegisterActivity extends BaseMalariaRegisterActivity {
             bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
         }
     }
+
 }
