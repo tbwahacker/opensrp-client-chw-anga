@@ -1,11 +1,11 @@
 package org.smartregister.chw.malaria.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -87,17 +87,20 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void setProfileViewWithData() {
         int age = new Period(new DateTime(MEMBER_OBJECT.getAge()), new DateTime()).getYears();
-        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
+        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(),
+                MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
         textViewGender.setText(MEMBER_OBJECT.getGender());
         textViewLocation.setText(MEMBER_OBJECT.getAddress());
         textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
 
         if (MEMBER_OBJECT.getMalariaTestDate() != null) {
             try {
-                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse("18-06-2019");
+                Date date =
+                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
                 Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
                 profilePresenter.recordMalariaButton(days.getDays());
             } catch (ParseException e) {
@@ -114,12 +117,14 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void setDueColor() {
-        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.due_profile_blue));
+        textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector));
+//        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.due_profile_blue));
     }
 
     @Override
     public void setOverDueColor() {
-        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.visit_status_over_due));
+        textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector_overdue));
+//        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.visit_status_over_due));
     }
 
 
