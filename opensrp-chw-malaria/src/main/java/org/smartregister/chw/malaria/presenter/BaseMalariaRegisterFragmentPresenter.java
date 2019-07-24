@@ -69,9 +69,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
     @Override
     public void initializeQueries(String mainCondition) {
         String tableName = Constants.TABLES.MALARIA_CONFIRMATION;
-
         mainCondition = trim(getMainCondition()).equals("") ? mainCondition : getMainCondition();
-
         String countSelect = model.countSelect(tableName, mainCondition);
         String mainSelect = model.mainSelect(tableName, mainCondition);
 
