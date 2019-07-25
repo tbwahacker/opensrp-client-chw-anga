@@ -46,7 +46,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
 
     @Override
     public String getDefaultSortQuery() {
-        return "";
+        return Constants.TABLES.MALARIA_CONFIRMATION + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
     }
 
     @Override
