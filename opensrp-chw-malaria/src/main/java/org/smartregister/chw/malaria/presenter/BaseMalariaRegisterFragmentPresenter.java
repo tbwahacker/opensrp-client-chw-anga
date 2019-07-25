@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static org.apache.commons.lang3.StringUtils.trim;
+
 public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFragmentContract.Presenter {
 
     protected WeakReference<MalariaRegisterFragmentContract.View> viewReference;
@@ -67,7 +69,7 @@ public class BaseMalariaRegisterFragmentPresenter implements MalariaRegisterFrag
     @Override
     public void initializeQueries(String mainCondition) {
         String tableName = Constants.TABLES.MALARIA_CONFIRMATION;
-
+        mainCondition = trim(getMainCondition()).equals("") ? mainCondition : getMainCondition();
         String countSelect = model.countSelect(tableName, mainCondition);
         String mainSelect = model.mainSelect(tableName, mainCondition);
 
