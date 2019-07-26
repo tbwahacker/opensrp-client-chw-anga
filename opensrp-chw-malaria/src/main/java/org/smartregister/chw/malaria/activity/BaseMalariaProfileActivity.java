@@ -1,11 +1,11 @@
 package org.smartregister.chw.malaria.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
@@ -85,10 +87,12 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void setProfileViewWithData() {
         int age = new Period(new DateTime(MEMBER_OBJECT.getAge()), new DateTime()).getYears();
-        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
+        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(),
+                MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
         textViewGender.setText(MEMBER_OBJECT.getGender());
         textViewLocation.setText(MEMBER_OBJECT.getAddress());
         textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
@@ -96,9 +100,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         if (MEMBER_OBJECT.getMalariaTestDate() != null) {
             try {
                 Date date =
-                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse((MEMBER_OBJECT.getMalariaTestDate()));
-                int malaria_test_date_processed = new Period(new DateTime(date), new DateTime()).getDays();
-                profilePresenter.recordMalariaButton(malaria_test_date_processed);
+                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
+                Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
+                profilePresenter.recordMalariaButton(days.getDays());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -113,12 +117,12 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void setDueColor() {
-        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.due_profile_blue));
+        textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector));
     }
 
     @Override
     public void setOverDueColor() {
-        textViewRecordMalaria.setBackgroundColor(ContextCompat.getColor(this, R.color.visit_status_over_due));
+        textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector_overdue));
     }
 
 

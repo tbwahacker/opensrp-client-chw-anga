@@ -18,11 +18,11 @@
 
     <color name="other_member_profile_bg">#FAFAFA</color>
     <color name="due_profile_blue">#218CC5</color>
+    <color name="visit_status_over_due">#D13F3F</color>
 
     <color name="customAppThemeBlue">#218CC5</color>
     <color name="black">#000000</color>
     <color name="light_gray">#FAFAFA</color>
     <color name="visit_status_ok">@android:color/holo_blue_light</color>
 
-    <color name="visit_status_over_due">#D13F3F</color>
 </resources>
