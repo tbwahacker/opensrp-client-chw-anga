@@ -21,7 +21,6 @@ public class MalariaRegisterProviderTest {
         Assert.assertNull(malariaRegisterProvider.updateClients(null, null, null, null));
     }
 
-
     @Test
     public void newFormLauncher() {
         Assert.assertNull(malariaRegisterProvider.newFormLauncher(null, null, null));
