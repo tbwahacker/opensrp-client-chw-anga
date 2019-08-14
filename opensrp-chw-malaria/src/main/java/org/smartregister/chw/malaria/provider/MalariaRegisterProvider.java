@@ -81,6 +81,11 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         viewHolder.patientColumn.setTag(pc);
         viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
 
+        if (age >= 10) {
+            viewHolder.dueButton.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.dueButton.setBackgroundColor(context.getResources().getColor(R.color.visit_status_over_due));
+        }
+
         viewHolder.dueButton.setOnClickListener(onClickListener);
         viewHolder.dueButton.setTag(pc);
         viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
@@ -165,7 +170,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     @Override
     public boolean isFooterViewHolder(RecyclerView.ViewHolder viewHolder) {
-        return FooterViewHolder.class.isInstance(viewHolder);
+        return viewHolder instanceof FooterViewHolder;
     }
 
     public class RegisterViewHolder extends RecyclerView.ViewHolder {
