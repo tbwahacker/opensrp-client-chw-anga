@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.fragment.BaseMalariaRegisterFragment;
 import org.smartregister.chw.malaria.util.DBConstants;
@@ -27,7 +29,12 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
+
+import timber.log.Timber;
 
 import static org.smartregister.util.Utils.getName;
 
@@ -64,42 +71,54 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
-        String fname = getName(
-                Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
-                Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
+        try {
+            String fname = getName(
+                    Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
+                    Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
 
-        String dobString = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false);
-        int age = new Period(new DateTime(dobString), new DateTime()).getYears();
+            String dobString = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false);
+            int age = new Period(new DateTime(dobString), new DateTime()).getYears();
 
-        String patientName = getName(fname, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
-        viewHolder.patientName.setText(patientName + ", " + age);
-        viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
-        viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
+            String patientName = getName(fname, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
+            viewHolder.patientName.setText(patientName + ", " + age);
+            viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
+            viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
 
 //        add onclick listener to patient column and tag it with the client object
-        viewHolder.patientColumn.setOnClickListener(onClickListener);
-        viewHolder.patientColumn.setTag(pc);
-        viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+            viewHolder.patientColumn.setOnClickListener(onClickListener);
+            viewHolder.patientColumn.setTag(pc);
+            viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
 
-        viewHolder.dueButton.setOnClickListener(onClickListener);
-        viewHolder.dueButton.setTag(pc);
-        viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
-        viewHolder.registerColumns.setOnClickListener(onClickListener);
-
-        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.patientColumn.performClick();
+            Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MALARIA_TEST_DATE, false));
+            Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
+            if (days.getDays() >= 10) {
+                viewHolder.dueButton.setTextColor(context.getResources().getColor(R.color.white));
+                viewHolder.dueButton.setBackgroundColor(context.getResources().getColor(R.color.visit_status_over_due));
             }
-        });
 
-        viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.dueButton.performClick();
-            }
-        });
+            viewHolder.dueButton.setOnClickListener(onClickListener);
+            viewHolder.dueButton.setTag(pc);
+            viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+            viewHolder.registerColumns.setOnClickListener(onClickListener);
 
+            viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.patientColumn.performClick();
+                }
+            });
+
+            viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.dueButton.performClick();
+                }
+            });
+
+
+        } catch (Exception e) {
+            Timber.e(e);
+        }
     }
 
 
@@ -165,7 +184,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     @Override
     public boolean isFooterViewHolder(RecyclerView.ViewHolder viewHolder) {
-        return FooterViewHolder.class.isInstance(viewHolder);
+        return viewHolder instanceof FooterViewHolder;
     }
 
     public class RegisterViewHolder extends RecyclerView.ViewHolder {
