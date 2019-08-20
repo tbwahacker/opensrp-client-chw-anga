@@ -72,17 +72,14 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewUniqueID = findViewById(R.id.textview_id);
         viewRecordMalaria = findViewById(R.id.record_visit_malaria);
 
-
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         textViewRecordMalaria.setOnClickListener(onClickListener);
-
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
         initializePresenter();
 
         profilePresenter.attachView(this);
-
         profilePresenter.fillProfileData(MEMBER_OBJECT);
 
     }
@@ -155,6 +152,5 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected void onDestroy() {
         profilePresenter.detachView();
         super.onDestroy();
-
     }
 }
