@@ -89,16 +89,10 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             viewHolder.patientColumn.setTag(pc);
             viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
 
-            Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MALARIA_TEST_DATE, false));
-            Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
-            if (days.getDays() >= 10) {
-                viewHolder.dueButton.setTextColor(context.getResources().getColor(R.color.white));
-                viewHolder.dueButton.setBackgroundColor(context.getResources().getColor(R.color.visit_status_over_due));
-            }
 
             viewHolder.dueButton.setOnClickListener(onClickListener);
             viewHolder.dueButton.setTag(pc);
-            viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
+            viewHolder.dueButton.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.FOLLOW_UP_VISIT);
             viewHolder.registerColumns.setOnClickListener(onClickListener);
 
             viewHolder.registerColumns.setOnClickListener(new View.OnClickListener() {

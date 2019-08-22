@@ -33,16 +33,17 @@ import java.util.List;
 import timber.log.Timber;
 
 public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements MalariaRegisterContract.View {
-    public static final String TAG = BaseMalariaRegisterActivity.class.getCanonicalName();
 
     protected String BASE_ENTITY_ID;
     protected String ACTION;
+    protected String FORM_NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BASE_ENTITY_ID = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
         ACTION = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.ACTION);
+        FORM_NAME = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.MALARIA_FORM_NAME);
         onStartActivityWithAction();
     }
 
@@ -50,18 +51,14 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
      * Process a payload when an activity is started with an action
      */
     protected void onStartActivityWithAction() {
-        if (ACTION != null && ACTION.equals(Constants.ACTIVITY_PAYLOAD_TYPE.REGISTRATION)) {
-            startFormActivity(getRegistrationForm(), BASE_ENTITY_ID, null);
+        if (FORM_NAME != null && ACTION != null) {
+            startFormActivity(FORM_NAME, BASE_ENTITY_ID, null);
         }
     }
 
     @Override
     public void startRegistration() {
-        startFormActivity(getRegistrationForm(), null, null);
-    }
-
-    public String getRegistrationForm() {
-        return Constants.FORMS.MALARIA_REGISTRATION;
+        startFormActivity(FORM_NAME, null, null);
     }
 
     @Override
