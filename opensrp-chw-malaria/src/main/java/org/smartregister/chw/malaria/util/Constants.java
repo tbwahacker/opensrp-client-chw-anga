@@ -24,6 +24,7 @@ public interface Constants {
 
     interface TABLES {
         String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
+        String MALARIA_FOLLOW_UP = "ec_malaria_follow_up_visit";
     }
 
     interface ACTIVITY_PAYLOAD {

@@ -98,26 +98,11 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
         return BaseMalariaRegisterActivity.class;
     }
 
-    public String getFormRegistrationEvent() {
-        return Constants.EVENT_TYPE.MALARIA_CONFIRMATION;
-    }
-
-    public String getFormEditRegistrationEvent() {
-        return Constants.EVENT_TYPE.MALARIA_CONFIRMATION;
-    }
 
     @Override
     protected void onActivityResultExtended(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
-            try {
-                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-                JSONObject form = new JSONObject(jsonString);
-                if (form.getString(Constants.ENCOUNTER_TYPE).equals(getRegisterEventType())) {
-                    presenter().saveForm(jsonString, false);
-                }
-            } catch (JSONException e) {
-                Timber.e(e);
-            }
+            presenter().saveForm(data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON));
         }
     }
 
@@ -126,9 +111,6 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
         return Arrays.asList(Constants.CONFIGURATION.MALARIA_CONFIRMATION);
     }
 
-    public String getRegisterEventType() {
-        return Constants.EVENT_TYPE.MALARIA_CONFIRMATION;
-    }
 
     /**
      * Override this to subscribe to bottom navigation
@@ -189,15 +171,9 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
 
             try {
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-
                 JSONObject form = new JSONObject(jsonString);
-                String encounter_type = form.getString(Constants.JSON_FORM_EXTRA.ENCOUNTER_TYPE);
 //                process malaria form
-                if (encounter_type.equalsIgnoreCase(getFormRegistrationEvent())) {
-                    presenter().saveForm(form.toString(), false);
-                } else if (encounter_type.equalsIgnoreCase(getFormEditRegistrationEvent())) {
-                    presenter().saveForm(form.toString(), true);
-                }
+                presenter().saveForm(form.toString());
             } catch (JSONException e) {
                 Timber.e(e);
                 displayToast(getString(R.string.error_unable_to_save_form));

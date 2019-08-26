@@ -43,7 +43,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     private final LayoutInflater inflater;
 
     private View.OnClickListener paginationClickListener;
-    private View.OnClickListener onClickListener;
+    protected View.OnClickListener onClickListener;
     private CommonRepository commonRepository;
     protected static CommonPersonObjectClient client;
     private Context context;

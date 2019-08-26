@@ -11,12 +11,6 @@ public class BaseMalariaRegisterActivityTest {
     private BaseMalariaRegisterActivity baseMalariaRegisterActivity = new BaseMalariaRegisterActivity();
 
     @Test
-    public void testGetRegistrationForm() {
-        Assert.assertEquals(Constants.FORMS.MALARIA_REGISTRATION,
-                baseMalariaRegisterActivity.getRegistrationForm());
-    }
-
-    @Test
     public void testGetLocationID() {
         Assert.assertEquals(BaseMalariaRegisterActivity.class,
                 baseMalariaRegisterActivity.getFamilyFormActivity());
@@ -26,12 +20,6 @@ public class BaseMalariaRegisterActivityTest {
     public void testGetFormRegistrationEvent() {
         Assert.assertEquals(Constants.EVENT_TYPE.MALARIA_CONFIRMATION,
                 baseMalariaRegisterActivity.getFormRegistrationEvent());
-    }
-
-    @Test
-    public void testGetFormEditRegistrationEvent() {
-        Assert.assertEquals(Constants.EVENT_TYPE.MALARIA_CONFIRMATION,
-                baseMalariaRegisterActivity.getFormEditRegistrationEvent());
     }
 
 }
