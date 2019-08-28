@@ -32,9 +32,10 @@ import java.util.Locale;
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View {
     protected MemberObject MEMBER_OBJECT;
     private BaseMalariaProfilePresenter profilePresenter;
-    private TextView textViewName, textViewGender, textViewLocation, textViewUniqueID, textViewRecordMalaria;
+    protected TextView textViewName, textViewGender, textViewLocation, textViewUniqueID;
+    protected TextView textViewRecordMalaria;
+
     private View viewRecordMalaria;
-    private View.OnClickListener onClickListener;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -73,7 +74,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         viewRecordMalaria = findViewById(R.id.record_visit_malaria);
 
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
-        textViewRecordMalaria.setOnClickListener(onClickListener);
+        textViewRecordMalaria.setOnClickListener(this);
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
@@ -96,8 +97,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         if (MEMBER_OBJECT.getMalariaTestDate() != null) {
             try {
-                Date date =
-                        new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
+                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
                 Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
                 profilePresenter.recordMalariaButton(days.getDays());
             } catch (ParseException e) {
@@ -141,8 +141,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         int id = view.getId();
         if (id == R.id.title_layout) {
             onBackPressed();
-        } else if (id == R.id.textview_record_malaria) {
-            profilePresenter.recordMalariaFollowUp(this);
         }
     }
 

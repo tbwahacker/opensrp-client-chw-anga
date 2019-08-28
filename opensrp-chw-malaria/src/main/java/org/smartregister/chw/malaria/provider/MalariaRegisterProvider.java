@@ -10,12 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.fragment.BaseMalariaRegisterFragment;
 import org.smartregister.chw.malaria.util.DBConstants;
-import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewProvider;
@@ -29,9 +26,6 @@ import org.smartregister.view.dialog.SortOption;
 import org.smartregister.view.viewholder.OnClickFormLauncher;
 
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -44,19 +38,16 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     private View.OnClickListener paginationClickListener;
     protected View.OnClickListener onClickListener;
-    private CommonRepository commonRepository;
     protected static CommonPersonObjectClient client;
     private Context context;
     private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener, Set visibleColumns, CommonRepository commonRepository) {
-
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.paginationClickListener = paginationClickListener;
         this.onClickListener = onClickListener;
         this.visibleColumns = visibleColumns;
         this.context = context;
-        this.commonRepository = commonRepository;
 
     }
 
@@ -65,9 +56,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         CommonPersonObjectClient pc = (CommonPersonObjectClient) smartRegisterClient;
         if (visibleColumns.isEmpty()) {
             populatePatientColumn(pc, registerViewHolder);
-            populateLastColumn(pc, registerViewHolder);
         }
-
     }
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
@@ -83,12 +72,9 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             viewHolder.patientName.setText(patientName + ", " + age);
             viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
             viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
-
-//        add onclick listener to patient column and tag it with the client object
             viewHolder.patientColumn.setOnClickListener(onClickListener);
             viewHolder.patientColumn.setTag(pc);
             viewHolder.patientColumn.setTag(R.id.VIEW_ID, BaseMalariaRegisterFragment.CLICK_VIEW_NORMAL);
-
 
             viewHolder.dueButton.setOnClickListener(onClickListener);
             viewHolder.dueButton.setTag(pc);
@@ -109,32 +95,15 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
                 }
             });
 
-
         } catch (Exception e) {
             Timber.e(e);
-        }
-    }
-
-
-    private void populateLastColumn(CommonPersonObjectClient pc, RegisterViewHolder viewHolder) {
-        if (commonRepository != null) {
-            CommonPersonObject commonPersonObject = commonRepository.findByBaseEntityId(pc.entityId());
-            if (commonPersonObject != null) {
-                viewHolder.dueButton.setVisibility(View.VISIBLE);
-                viewHolder.dueButton.setText(R.string.malaria_followup_visit);
-                viewHolder.dueButton.setAllCaps(true);
-            } else {
-                viewHolder.dueButton.setVisibility(View.GONE);
-            }
         }
     }
 
     @Override
     public void getFooterView(RecyclerView.ViewHolder viewHolder, int currentPageCount, int totalPageCount, boolean hasNext, boolean hasPrevious) {
         FooterViewHolder footerViewHolder = (FooterViewHolder) viewHolder;
-        footerViewHolder.pageInfoView.setText(
-                MessageFormat.format(context.getString(org.smartregister.R.string.str_page_info), currentPageCount,
-                        totalPageCount));
+        footerViewHolder.pageInfoView.setText(MessageFormat.format(context.getString(org.smartregister.R.string.str_page_info), currentPageCount, totalPageCount));
 
         footerViewHolder.nextPageView.setVisibility(hasNext ? View.VISIBLE : View.INVISIBLE);
         footerViewHolder.previousPageView.setVisibility(hasPrevious ? View.VISIBLE : View.INVISIBLE);
@@ -151,7 +120,6 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     @Override
     public void onServiceModeSelected(ServiceModeOption serviceModeOption) {
 //        implement
-
     }
 
     @Override
@@ -197,11 +165,8 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
             patientName = itemView.findViewById(R.id.patient_name_age);
             textViewVillage = itemView.findViewById(R.id.text_view_village);
             textViewGender = itemView.findViewById(R.id.text_view_gender);
-
             dueButton = itemView.findViewById(R.id.due_button);
-
             patientColumn = itemView.findViewById(R.id.patient_column);
-
             registerColumns = itemView.findViewById(R.id.register_columns);
             dueWrapper = itemView.findViewById(R.id.due_button_wrapper);
         }

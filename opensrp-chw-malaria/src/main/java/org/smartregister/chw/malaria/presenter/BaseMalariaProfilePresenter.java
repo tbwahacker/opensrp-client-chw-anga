@@ -35,7 +35,7 @@ public class BaseMalariaProfilePresenter {
     }
 
     public void recordMalariaButton(int days_from_malaria_test_date) {
-        if (days_from_malaria_test_date < 7) {
+        if (days_from_malaria_test_date < 7 || days_from_malaria_test_date > 14) {
             view.hideView();
         } else if (days_from_malaria_test_date < 10) {
             view.setDueColor();
