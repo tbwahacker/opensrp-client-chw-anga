@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.ei.drishti.dto.AlertStatus;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDateTime;
@@ -25,6 +24,7 @@ import org.smartregister.chw.malaria.interactor.BaseMalariaProfileInteractor;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.Util;
+import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
@@ -36,7 +36,7 @@ import java.util.Locale;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
     protected MemberObject MEMBER_OBJECT;
-    private MalariaProfileContract.Presenter profilePresenter;
+    protected MalariaProfileContract.Presenter profilePresenter;
     protected TextView textViewName, textViewGender, textViewLocation, textViewUniqueID;
     protected TextView textViewRecordMalaria;
     protected View view_last_visit_row, view_most_due_overdue_row, view_family_row;

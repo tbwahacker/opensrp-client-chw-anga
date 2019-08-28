@@ -2,10 +2,10 @@ package org.smartregister.chw.malaria.interactor;
 
 import android.support.annotation.VisibleForTesting;
 
-import org.ei.drishti.dto.AlertStatus;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.util.AppExecutors;
+import org.smartregister.domain.AlertStatus;
 
 import java.util.Date;
 
@@ -26,7 +26,7 @@ public class BaseMalariaProfileInteractor implements MalariaProfileContract.Inte
         Runnable runnable = () -> appExecutors.mainThread().execute(() -> {
             callback.refreshFamilyStatus(AlertStatus.normal);
             callback.refreshMedicalHistory(true);
-            callback.refreshUpComingServicesStatus("ANC Visit", AlertStatus.normal, new Date());
+            callback.refreshUpComingServicesStatus("Malaria Visit", AlertStatus.normal, new Date());
         });
         appExecutors.diskIO().execute(runnable);
     }

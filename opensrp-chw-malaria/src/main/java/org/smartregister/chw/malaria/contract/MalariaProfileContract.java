@@ -2,9 +2,9 @@ package org.smartregister.chw.malaria.contract;
 
 import android.content.Context;
 
-import org.ei.drishti.dto.AlertStatus;
 import org.jetbrains.annotations.Nullable;
 import org.smartregister.chw.malaria.domain.MemberObject;
+import org.smartregister.domain.AlertStatus;
 
 import java.util.Date;
 
