@@ -154,5 +154,7 @@
         <include android:id="@+id/record_visit_malaria"
                  layout="@layout/view_record_malaria"/>
 
+        <include layout="@layout/content_malaria_profile" />
+
     </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>
