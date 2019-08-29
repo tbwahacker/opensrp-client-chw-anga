@@ -45,7 +45,7 @@ public class MemberObject implements Serializable {
         relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
         primaryCareGiver = client.getColumnmaps().get(DBConstants.KEY.PRIMARY_CARE_GIVER);
         familyHead = client.getColumnmaps().get(DBConstants.KEY.FAMILY_HEAD);
-        familyBaseEntityId = client.getColumnmaps().get(DBConstants.KEY.FAMILY_BASE_ENTITY_ID);
+        familyBaseEntityId = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
         relationalid = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
         details = client.getColumnmaps().get(DBConstants.KEY.DETAILS);
         isClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.IS_CLOSED));
