@@ -37,9 +37,14 @@ import java.util.Locale;
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
     protected MemberObject MEMBER_OBJECT;
     protected MalariaProfileContract.Presenter profilePresenter;
-    protected TextView textViewName, textViewGender, textViewLocation, textViewUniqueID;
+    protected TextView textViewName;
+    protected TextView textViewGender;
+    protected TextView textViewLocation;
+    protected TextView textViewUniqueID;
     protected TextView textViewRecordMalaria;
-    protected View view_last_visit_row, view_most_due_overdue_row, view_family_row;
+    protected View view_last_visit_row;
+    protected View view_most_due_overdue_row;
+    protected View view_family_row;
     protected RelativeLayout rlLastVisit;
     protected RelativeLayout rlUpcomingServices;
     protected RelativeLayout rlFamilyServicesDue;
@@ -226,16 +231,16 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void openMedicalHistory() {
-
+        //implement
     }
 
     @Override
     public void openUpcomingService() {
-
+        //implement
     }
 
     @Override
     public void openFamilyDueServices() {
-
+        //implement
     }
 }
