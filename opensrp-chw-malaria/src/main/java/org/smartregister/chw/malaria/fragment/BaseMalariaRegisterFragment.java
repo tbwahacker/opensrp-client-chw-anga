@@ -16,14 +16,17 @@ import org.smartregister.malaria.R;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.customcontrols.FontVariant;
 import org.smartregister.view.fragment.BaseRegisterFragment;
+
 import java.util.HashMap;
 import java.util.Set;
 
 public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements MalariaRegisterFragmentContract.View {
     public static final String CLICK_VIEW_NORMAL = "click_view_normal";
+    public static final String FOLLOW_UP_VISIT = "follow_up_visit";
+
     @Override
     public void initializeAdapter(Set<View> visibleColumns) {
-        MalariaRegisterProvider malariaRegisterProvider = new MalariaRegisterProvider(getActivity(), paginationViewHandler,registerActionHandler, visibleColumns,commonRepository());
+        MalariaRegisterProvider malariaRegisterProvider = new MalariaRegisterProvider(getActivity(), paginationViewHandler, registerActionHandler, visibleColumns, commonRepository());
         clientAdapter = new RecyclerViewPaginatedAdapter(null, malariaRegisterProvider, context().commonrepository(this.tablename));
         clientAdapter.setCurrentlimit(20);
         clientsView.setAdapter(clientAdapter);
@@ -113,9 +116,10 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
         if (getActivity() == null) {
             return;
         }
-
         if (view.getTag() instanceof CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) == CLICK_VIEW_NORMAL) {
             openProfile((CommonPersonObjectClient) view.getTag());
+        } else if (view.getTag() instanceof CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) == FOLLOW_UP_VISIT) {
+            openFollowUpVisit((CommonPersonObjectClient) view.getTag());
         }
     }
 
@@ -123,8 +127,13 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
         BaseMalariaProfileActivity.startProfileActivity(getActivity(), new MemberObject(client));
     }
 
+    protected void openFollowUpVisit(CommonPersonObjectClient client) {
+//        implement
+    }
+
     @Override
     public void showNotFoundPopup(String s) {
 //        implement dialog
     }
+
 }
