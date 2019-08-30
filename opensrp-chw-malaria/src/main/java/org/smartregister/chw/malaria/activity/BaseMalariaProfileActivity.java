@@ -85,6 +85,10 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         profilePresenter.fillProfileData(MEMBER_OBJECT);
 
+        setupViews();
+
+
+
     }
 
     @SuppressLint("DefaultLocale")
@@ -125,6 +129,10 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewRecordMalaria.setBackground(getResources().getDrawable(R.drawable.record_btn_selector_overdue));
     }
 
+    @Override
+    protected void setupViews() {
+        super.setupViews();
+    }
 
     @Override
     protected void initializePresenter() {
