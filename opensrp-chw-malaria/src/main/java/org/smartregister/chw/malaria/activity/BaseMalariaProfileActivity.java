@@ -112,6 +112,13 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         profilePresenter.fillProfileData(MEMBER_OBJECT);
 
+        setupViews();
+
+    }
+
+    @Override
+    protected void setupViews() {
+        super.setupViews();
     }
 
     @Override
