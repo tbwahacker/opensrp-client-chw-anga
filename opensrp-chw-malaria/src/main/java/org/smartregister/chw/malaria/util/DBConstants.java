@@ -40,6 +40,7 @@ public class DBConstants {
         public static final String MALARIA = "malaria";
         public static final String FAMILY_NAME = "family_name";
         public static final String PHONE_NUMBER = "phone_number";
+        public static final String PHONE_NUMBER_MALARIA = "phoneNumberMalaria";
 
     }
 }

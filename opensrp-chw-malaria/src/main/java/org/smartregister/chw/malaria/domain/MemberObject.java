@@ -61,7 +61,7 @@ public class MemberObject implements Serializable {
         llinCondition = client.getColumnmaps().get(DBConstants.KEY.LLIN_CONDITION);
         malariaEduChw = client.getColumnmaps().get(DBConstants.KEY.MALARIA_EDU_CHW);
         familyName = client.getColumnmaps().get(DBConstants.KEY.FAMILY_NAME);
-        phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER);
+        phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
     }
 
     public String getFirstName() {
