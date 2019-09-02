@@ -9,16 +9,20 @@ import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
+import org.smartregister.chw.malaria.custom_views.BaseMalariaFloatingMenu;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.interactor.BaseMalariaProfileInteractor;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
@@ -52,6 +56,10 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private TextView tvFamilyStatus;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
+    protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
+    private String clientName;
+    private String familyHeadName;
+    private String familyHeadPhoneNumber;
 
     private View viewRecordMalaria;
 
@@ -113,12 +121,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         profilePresenter.fillProfileData(MEMBER_OBJECT);
 
         setupViews();
-
     }
 
     @Override
     protected void setupViews() {
-        super.setupViews();
+        initializeFloatingMenu();
     }
 
     @Override
@@ -141,6 +148,17 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         profilePresenter = new BaseMalariaProfilePresenter(this, new BaseMalariaProfileInteractor(), MEMBER_OBJECT);
         fetchProfileData();
         profilePresenter.refreshProfileBottom();
+    }
+
+    public void initializeFloatingMenu() {
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber()) || StringUtils.isNotBlank(familyHeadPhoneNumber)) {
+            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, clientName, MEMBER_OBJECT.getPhoneNumber(), familyHeadName, familyHeadPhoneNumber);
+            baseMalariaFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+            LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            addContentView(baseMalariaFloatingMenu, linearLayoutParams);
+        }
     }
 
     @SuppressLint("DefaultLocale")

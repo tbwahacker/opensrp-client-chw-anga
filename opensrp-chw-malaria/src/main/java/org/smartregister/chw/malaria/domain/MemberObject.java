@@ -31,7 +31,8 @@ public class MemberObject implements Serializable {
     private String primaryCareGiver;
     private String familyHead;
     private String familyBaseEntityId;
-    protected String familyName;
+    private String familyName;
+    private String phoneNumber;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
@@ -60,6 +61,7 @@ public class MemberObject implements Serializable {
         llinCondition = client.getColumnmaps().get(DBConstants.KEY.LLIN_CONDITION);
         malariaEduChw = client.getColumnmaps().get(DBConstants.KEY.MALARIA_EDU_CHW);
         familyName = client.getColumnmaps().get(DBConstants.KEY.FAMILY_NAME);
+        phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER);
     }
 
     public String getFirstName() {
@@ -268,6 +270,14 @@ public class MemberObject implements Serializable {
 
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
 
