@@ -10,7 +10,10 @@ import org.smartregister.chw.malaria.fragment.BaseMalariaCallDialogFragment;
 import org.smartregister.malaria.R;
 
 public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClickListener {
-    private String phoneNumber, familyHeadName, familyHeadPhone, clientName;
+    private String phoneNumber;
+    private String familyHeadName;
+    private String familyHeadPhone;
+    private String clientName;
 
     public BaseMalariaFloatingMenu(Context context, String malariaClientName, String malariaClientPhone, String clientFamilyHeadName, String clientFamilyHeadPhone) {
         super(context);

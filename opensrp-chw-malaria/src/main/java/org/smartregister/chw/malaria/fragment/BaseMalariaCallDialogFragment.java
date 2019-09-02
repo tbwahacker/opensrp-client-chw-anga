@@ -24,7 +24,10 @@ import static org.smartregister.util.Utils.getName;
 public class BaseMalariaCallDialogFragment extends DialogFragment implements BaseMalariaCallDialogContract.View {
 
     public static final String DIALOG_TAG = "BaseMalariaCallDialogFragment_DIALOG_TAG";
-    private static String malariaClientName, malariaClientPhoneNumber, malariaFamilyHeadName, malariaFamilyHeadPhone;
+    private static String malariaClientName;
+    private static String malariaClientPhoneNumber;
+    private static String malariaFamilyHeadName;
+    private static String malariaFamilyHeadPhone;
     private View.OnClickListener listener = null;
 
     public static BaseMalariaCallDialogFragment launchDialog(Activity activity, String clientName, String malariaClientPhone, String familyHeadName, String familyHeadPhone) {
