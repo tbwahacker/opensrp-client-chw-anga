@@ -2,6 +2,7 @@ package org.smartregister.chw.malaria.custom_views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,7 +37,9 @@ public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClic
 
     protected void initUi() {
         inflate(getContext(), R.layout.view_malaria_call_floating_menu, this);
-        findViewById(R.id.malaria_fab).setOnClickListener(this);
+        FloatingActionButton fab = findViewById(R.id.malaria_fab);
+        if (fab != null)
+            fab.setOnClickListener(this);
     }
 
     @Override
