@@ -116,10 +116,6 @@ dependencies {
     implementation 'com.google.guava:guava:20.0'
     implementation 'id.zelory:compressor:1.0.4'
 
-    // https://mvnrepository.com/artifact/org.powermock/powermock-mockito-release-full
-    testImplementation 'org.powermock:powermock-mockito-release-full:1.6.0'
-
-
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.0.0'
     testImplementation 'org.robolectric:robolectric:3.8'
