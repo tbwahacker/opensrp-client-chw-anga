@@ -14,9 +14,39 @@ public class MemberObjectTest {
     private MemberObject memberObject = new MemberObject(client);
 
     @Test
-    public void testSetFirstName() {
+    public void getFirstName() {
         memberObject.setFirstName("Denis");
         Assert.assertEquals("Denis", memberObject.getFirstName());
+    }
+
+    @Test
+    public void getMiddleName() {
+        memberObject.setMiddleName("Talemwa");
+        Assert.assertEquals("Talemwa", memberObject.getMiddleName());
+    }
+
+    @Test
+    public void getLastName() {
+        memberObject.setLastName("Rwelamila");
+        Assert.assertEquals("Rwelamila", memberObject.getLastName());
+    }
+
+    @Test
+    public void getAddress() {
+        memberObject.setAddress("123 Rd");
+        Assert.assertEquals("123 Rd", memberObject.getAddress());
+    }
+
+    @Test
+    public void getGender() {
+        memberObject.setGender("Male");
+        Assert.assertEquals("Male", memberObject.getGender());
+    }
+
+    @Test
+    public void getAge() {
+        memberObject.setAge("123");
+        Assert.assertEquals("123", memberObject.getAge());
     }
 
     @Test
