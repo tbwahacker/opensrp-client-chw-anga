@@ -46,6 +46,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected TextView textViewLocation;
     protected TextView textViewUniqueID;
     protected TextView textViewRecordMalaria;
+    protected TextView textViewRecordAnc;
+    protected TextView textViewAncVisitNotDone;
     protected View view_last_visit_row;
     protected View view_most_due_overdue_row;
     protected View view_family_row;
@@ -113,6 +115,12 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         textViewRecordMalaria.setOnClickListener(this);
+
+        textViewRecordAnc = findViewById(R.id.textview_record_anc);
+        textViewRecordAnc.setOnClickListener(this);
+
+        textViewAncVisitNotDone = findViewById(R.id.textview_anc_visit_not_done);
+        textViewAncVisitNotDone.setOnClickListener(this);
 
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 

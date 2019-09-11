@@ -32,5 +32,7 @@
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="copied_phone_number">PhoneNumber copied to clipboard</string>
     <string name="call">Call</string>
+    <string name="record_anc">Record ANC visit</string>
+    <string name="record_anc_visit_not_done">ANC visit not done</string>
 
 </resources>
