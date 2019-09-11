@@ -63,8 +63,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private String familyHeadName;
     private String familyHeadPhoneNumber;
 
-    private View viewRecordMalaria;
-
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
         intent.putExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT, memberObject);
@@ -95,7 +93,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
-        viewRecordMalaria = findViewById(R.id.record_visit_malaria);
         view_last_visit_row = findViewById(R.id.view_last_visit_row);
         view_most_due_overdue_row = findViewById(R.id.view_most_due_overdue_row);
         view_family_row = findViewById(R.id.view_family_row);
@@ -192,7 +189,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void hideView() {
-        viewRecordMalaria.setVisibility(View.GONE);
+        textViewRecordMalaria.setVisibility(View.GONE);
     }
 
     @Override
