@@ -180,6 +180,13 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
                 e.printStackTrace();
             }
         }
+
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getFamilyHead()) && MEMBER_OBJECT.getFamilyHead().equals(MEMBER_OBJECT.getBaseEntityId())) {
+            findViewById(R.id.family_malaria_head).setVisibility(View.VISIBLE);
+        }
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPrimaryCareGiver()) && MEMBER_OBJECT.getPrimaryCareGiver().equals(MEMBER_OBJECT.getBaseEntityId())) {
+            findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
