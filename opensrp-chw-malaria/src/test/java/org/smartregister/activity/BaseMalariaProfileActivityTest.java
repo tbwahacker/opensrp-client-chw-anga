@@ -31,7 +31,7 @@ public class BaseMalariaProfileActivityTest {
     public void assertNotNull() {
         Assert.assertNotNull(baseMalariaProfileActivity);
     }
-  
+
     @Test
     public void setProfileViewWithData() {
         baseMalariaProfileActivity.setProfileViewWithData();
