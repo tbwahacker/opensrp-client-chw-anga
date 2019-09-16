@@ -9,7 +9,9 @@ import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import org.joda.time.Days;
 import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
+import org.smartregister.chw.malaria.custom_views.BaseMalariaFloatingMenu;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.interactor.BaseMalariaProfileInteractor;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
@@ -43,6 +46,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected TextView textViewLocation;
     protected TextView textViewUniqueID;
     protected TextView textViewRecordMalaria;
+    protected TextView textViewRecordAnc;
+    protected TextView textViewAncVisitNotDone;
     protected View view_last_visit_row;
     protected View view_most_due_overdue_row;
     protected View view_family_row;
@@ -53,8 +58,10 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private TextView tvFamilyStatus;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
-
-    private View viewRecordMalaria;
+    protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
+    private String clientName;
+    private String familyHeadName;
+    private String familyHeadPhoneNumber;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -86,7 +93,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewGender = findViewById(R.id.textview_gender);
         textViewLocation = findViewById(R.id.textview_address);
         textViewUniqueID = findViewById(R.id.textview_id);
-        viewRecordMalaria = findViewById(R.id.record_visit_malaria);
         view_last_visit_row = findViewById(R.id.view_last_visit_row);
         view_most_due_overdue_row = findViewById(R.id.view_most_due_overdue_row);
         view_family_row = findViewById(R.id.view_family_row);
@@ -107,12 +113,24 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         textViewRecordMalaria.setOnClickListener(this);
 
+        textViewRecordAnc = findViewById(R.id.textview_record_anc);
+        textViewRecordAnc.setOnClickListener(this);
+
+        textViewAncVisitNotDone = findViewById(R.id.textview_anc_visit_not_done);
+        textViewAncVisitNotDone.setOnClickListener(this);
+
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
 
         initializePresenter();
 
         profilePresenter.fillProfileData(MEMBER_OBJECT);
 
+        setupViews();
+    }
+
+    @Override
+    protected void setupViews() {
+        initializeFloatingMenu();
     }
 
     @Override
@@ -135,6 +153,17 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         profilePresenter = new BaseMalariaProfilePresenter(this, new BaseMalariaProfileInteractor(), MEMBER_OBJECT);
         fetchProfileData();
         profilePresenter.refreshProfileBottom();
+    }
+
+    public void initializeFloatingMenu() {
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber()) || StringUtils.isNotBlank(familyHeadPhoneNumber)) {
+            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, clientName, MEMBER_OBJECT.getPhoneNumber(), familyHeadName, familyHeadPhoneNumber);
+            baseMalariaFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+            LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            addContentView(baseMalariaFloatingMenu, linearLayoutParams);
+        }
     }
 
     @SuppressLint("DefaultLocale")
@@ -167,7 +196,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     @Override
     public void hideView() {
-        viewRecordMalaria.setVisibility(View.GONE);
+        textViewRecordMalaria.setVisibility(View.GONE);
     }
 
     @Override

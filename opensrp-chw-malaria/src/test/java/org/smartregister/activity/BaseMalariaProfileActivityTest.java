@@ -32,21 +32,4 @@ public class BaseMalariaProfileActivityTest {
         Assert.assertNotNull(baseMalariaProfileActivity);
     }
 
-    @Test
-    public void setProfileViewWithData() {
-        baseMalariaProfileActivity.setProfileViewWithData();
-        Mockito.verify(view, Mockito.never()).setVisibility(View.VISIBLE);
-    }
-
-    @Test
-    public void setDueColor() {
-        baseMalariaProfileActivity.setDueColor();
-        Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.BLUE);
-    }
-
-    @Test
-    public void setOverDueColor() {
-        baseMalariaProfileActivity.setOverDueColor();
-        Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.RED);
-    }
 }
