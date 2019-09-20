@@ -19,6 +19,7 @@ public class MemberObjectTest {
         Assert.assertEquals("Denis", memberObject.getFirstName());
     }
 
+
     @Test
     public void getMiddleName() {
         memberObject.setMiddleName("Talemwa");
@@ -53,6 +54,24 @@ public class MemberObjectTest {
     public void testIsClosed() {
         memberObject.setIsClosed(false);
         Assert.assertFalse(memberObject.getIsClosed());
+    }
+
+    @Test
+    public void getUniqueId() {
+        memberObject.setUniqueId("#1223");
+        Assert.assertEquals("#1223", memberObject.getUniqueId());
+    }
+
+    @Test
+    public void getRelationalid() {
+        memberObject.setRelationalId("#1223");
+        Assert.assertEquals("#1223", memberObject.getRelationalid());
+    }
+
+    @Test
+    public void getDetails() {
+        memberObject.setDetails("#1223");
+        Assert.assertEquals("#1223", memberObject.getDetails());
     }
 }
 
