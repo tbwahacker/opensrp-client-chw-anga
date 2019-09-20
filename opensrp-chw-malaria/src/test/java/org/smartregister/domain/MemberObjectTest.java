@@ -64,7 +64,7 @@ public class MemberObjectTest {
 
     @Test
     public void getRelationalid() {
-        memberObject.setRelationalId("#1223");
+        memberObject.setRelationalid("#1223");
         Assert.assertEquals("#1223", memberObject.getRelationalid());
     }
 
