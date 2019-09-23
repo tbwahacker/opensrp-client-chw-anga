@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -31,12 +32,10 @@ import org.smartregister.chw.malaria.util.Util;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
     protected MemberObject MEMBER_OBJECT;
@@ -48,12 +47,15 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected TextView textViewRecordMalaria;
     protected TextView textViewRecordAnc;
     protected TextView textViewAncVisitNotDone;
+    protected TextView textview_positive_date;
     protected View view_last_visit_row;
     protected View view_most_due_overdue_row;
     protected View view_family_row;
+    protected View view_positive_date_row;
     protected RelativeLayout rlLastVisit;
     protected RelativeLayout rlUpcomingServices;
     protected RelativeLayout rlFamilyServicesDue;
+    protected RelativeLayout rlMalariaPositiveDate;
     private TextView tvUpComingServices;
     private TextView tvFamilyStatus;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
@@ -96,19 +98,23 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         view_last_visit_row = findViewById(R.id.view_last_visit_row);
         view_most_due_overdue_row = findViewById(R.id.view_most_due_overdue_row);
         view_family_row = findViewById(R.id.view_family_row);
+        view_positive_date_row = findViewById(R.id.view_positive_date_row);
 
         tvUpComingServices = findViewById(R.id.textview_name_due);
         tvFamilyStatus = findViewById(R.id.textview_family_has);
+        textview_positive_date = findViewById(R.id.textview_positive_date);
 
         rlLastVisit = findViewById(R.id.rlLastVisit);
         rlUpcomingServices = findViewById(R.id.rlUpcomingServices);
         rlFamilyServicesDue = findViewById(R.id.rlFamilyServicesDue);
+        rlMalariaPositiveDate = findViewById(R.id.rlMalariaPositiveDate);
 
         progressBar = findViewById(R.id.progress_bar);
 
         findViewById(R.id.rlLastVisit).setOnClickListener(this);
         findViewById(R.id.rlUpcomingServices).setOnClickListener(this);
         findViewById(R.id.rlFamilyServicesDue).setOnClickListener(this);
+        rlMalariaPositiveDate.setOnClickListener(this);
 
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
         textViewRecordMalaria.setOnClickListener(this);
@@ -144,6 +150,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
             this.openUpcomingService();
         } else if (id == R.id.rlFamilyServicesDue) {
             this.openFamilyDueServices();
+        }
+        else if (id == R.id.rlMalariaPositiveDate){
+            Toast.makeText(getApplicationContext(),"Open Form",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -191,6 +200,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         }
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getPrimaryCareGiver()) && MEMBER_OBJECT.getPrimaryCareGiver().equals(MEMBER_OBJECT.getBaseEntityId())) {
             findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
+        }
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getMalariaTestDate())) {
+           textview_positive_date.setText("Malaria positive "+MEMBER_OBJECT.getMalariaTestDate());
         }
     }
 

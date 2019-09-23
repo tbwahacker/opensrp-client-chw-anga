@@ -36,5 +36,6 @@
     <string name="call">Call</string>
     <string name="record_anc">Record ANC visit</string>
     <string name="record_anc_visit_not_done">ANC visit not done</string>
+    <string name="view_malaria_test_result">View malaria test results</string>
 
 </resources>
