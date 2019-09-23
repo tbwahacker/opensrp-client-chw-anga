@@ -73,5 +73,12 @@ public class MemberObjectTest {
         memberObject.setDetails("#1223");
         Assert.assertEquals("#1223", memberObject.getDetails());
     }
+
+    @Test
+    public void getDateChwMalariaTest() {
+        memberObject.setDateChwMalariaTest("#1223");
+        Assert.assertEquals("#1223", memberObject.getDateChwMalariaTest());
+    }
+
 }
 
