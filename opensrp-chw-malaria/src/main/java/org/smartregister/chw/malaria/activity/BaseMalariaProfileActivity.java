@@ -289,7 +289,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         //implement
     }
 
-    private CharSequence formatTime(String dateTime) {
+    public CharSequence formatTime(String dateTime) {
         CharSequence timePassedString = null;
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
