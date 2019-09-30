@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -61,6 +62,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
     protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
+    private CharSequence timePassedString;
     private String clientName;
     private String familyHeadName;
     private String familyHeadPhoneNumber;
@@ -151,9 +153,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         } else if (id == R.id.rlFamilyServicesDue) {
             this.openFamilyDueServices();
         }
-        else if (id == R.id.rlMalariaPositiveDate){
-            Toast.makeText(getApplicationContext(),"Open Form",Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -202,7 +201,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
             findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
         }
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getMalariaTestDate())) {
-           textview_positive_date.setText("Malaria positive "+MEMBER_OBJECT.getMalariaTestDate());
+           textview_positive_date.setText("Malaria positive "+formatTime(MEMBER_OBJECT.getMalariaTestDate()));
         }
     }
 
@@ -291,5 +290,17 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void openFamilyDueServices() {
         //implement
+    }
+
+    private CharSequence formatTime(String dateTime) {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date date = df.parse(dateTime);
+            long time = date.getTime();
+            timePassedString = DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timePassedString;
     }
 }
