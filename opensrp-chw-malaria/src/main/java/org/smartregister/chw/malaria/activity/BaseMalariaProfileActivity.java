@@ -60,7 +60,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
     protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
-    private CharSequence timePassedString;
     private String clientName;
     private String familyHeadName;
     private String familyHeadPhoneNumber;
@@ -291,6 +290,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     }
 
     private CharSequence formatTime(String dateTime) {
+        CharSequence timePassedString = null;
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
             Date date = df.parse(dateTime);
