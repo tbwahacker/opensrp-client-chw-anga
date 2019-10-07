@@ -50,6 +50,24 @@ public class MemberObjectTest {
     }
 
     @Test
+    public void getMalariaTestDate() {
+        memberObject.setMalariaTestDate("2019-10-05");
+        Assert.assertEquals("2019-10-05", memberObject.getMalariaTestDate());
+    }
+
+    @Test
+    public void getFamilyHead() {
+        memberObject.setFamilyHead("Lidya Erick");
+        Assert.assertEquals("Lidya Erick", memberObject.getFamilyHead());
+    }
+
+    @Test
+    public void getPrimaryCareGiver() {
+        memberObject.setPrimaryCareGiver("Denis Rwelamila");
+        Assert.assertEquals("Denis Rwelamila", memberObject.getPrimaryCareGiver());
+    }
+
+    @Test
     public void testIsClosed() {
         memberObject.setIsClosed(false);
         Assert.assertFalse(memberObject.getIsClosed());
