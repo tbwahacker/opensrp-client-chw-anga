@@ -50,4 +50,10 @@ public class BaseMalariaProfileActivityTest {
         Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.RED);
     }
 
+    @Test
+    public void checkFormattedTime() {
+        baseMalariaProfileActivity.formatTime("2019-10-07");
+        Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.RED);
+    }
+
 }
