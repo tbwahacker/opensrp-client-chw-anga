@@ -33,7 +33,7 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     }
 
     @Test
-    public void testGetMainCondition() {
+    public void getMainCondition() {
         Assert.assertEquals("", baseMalariaRegisterFragmentPresenter.getMainCondition());
     }
 
@@ -46,6 +46,12 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     public void getDefaultSortQuery() {
         Assert.assertEquals(Constants.TABLES.MALARIA_CONFIRMATION + "." + DBConstants.KEY.LAST_INTERACTED_WITH + " DESC ", baseMalariaRegisterFragmentPresenter.getDefaultSortQuery());
     }
+
+    @Test
+    public void getMainTable()  {
+        Assert.assertEquals(Constants.TABLES.MALARIA_CONFIRMATION, baseMalariaRegisterFragmentPresenter.getMainTable());
+    }
+
 
 
 }

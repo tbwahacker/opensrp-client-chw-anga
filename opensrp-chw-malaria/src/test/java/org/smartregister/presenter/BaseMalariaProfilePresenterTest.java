@@ -56,4 +56,10 @@ public class BaseMalariaProfilePresenterTest {
         profilePresenter.recordMalariaButton(14);
         verify(view).setOverDueColor();
     }
-}
+
+    @Test
+    public void refreshProfileBottom() {
+        profilePresenter.refreshProfileBottom();
+        verify(interactor).refreshProfileInfo(memberObject, profilePresenter.getView());
+    }
+ }
