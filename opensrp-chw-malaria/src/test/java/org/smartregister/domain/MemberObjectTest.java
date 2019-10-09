@@ -56,29 +56,5 @@ public class MemberObjectTest {
         Assert.assertFalse(memberObject.getIsClosed());
     }
 
-    @Test
-    public void getUniqueId() {
-        memberObject.setUniqueId("#1223");
-        Assert.assertEquals("#1223", memberObject.getUniqueId());
-    }
-
-    @Test
-    public void getRelationalid() {
-        memberObject.setRelationalid("#1223");
-        Assert.assertEquals("#1223", memberObject.getRelationalid());
-    }
-
-    @Test
-    public void getDetails() {
-        memberObject.setDetails("#1223");
-        Assert.assertEquals("#1223", memberObject.getDetails());
-    }
-
-    @Test
-    public void getDateChwMalariaTest() {
-        memberObject.setDateChwMalariaTest("#1223");
-        Assert.assertEquals("#1223", memberObject.getDateChwMalariaTest());
-    }
-
 }
 
