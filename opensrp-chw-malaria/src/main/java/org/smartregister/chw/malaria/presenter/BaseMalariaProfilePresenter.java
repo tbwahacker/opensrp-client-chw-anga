@@ -32,8 +32,9 @@ public class BaseMalariaProfilePresenter implements MalariaProfileContract.Prese
 
     @Override
     public void recordMalariaButton(int days_from_malaria_test_date) {
-        if (getView() == null)
+        if (getView() == null) {
             return;
+        }
 
         if (days_from_malaria_test_date < 7 || days_from_malaria_test_date > 14) {
             getView().hideView();

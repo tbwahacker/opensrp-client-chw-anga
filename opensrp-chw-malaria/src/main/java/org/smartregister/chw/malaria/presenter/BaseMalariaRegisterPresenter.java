@@ -16,7 +16,7 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
     public static final String TAG = BaseMalariaRegisterPresenter.class.getName();
 
     protected WeakReference<MalariaRegisterContract.View> viewReference;
-    protected MalariaRegisterContract.Interactor interactor;
+    private MalariaRegisterContract.Interactor interactor;
     protected MalariaRegisterContract.Model model;
 
     public BaseMalariaRegisterPresenter(MalariaRegisterContract.View view, MalariaRegisterContract.Model model, MalariaRegisterContract.Interactor interactor) {
