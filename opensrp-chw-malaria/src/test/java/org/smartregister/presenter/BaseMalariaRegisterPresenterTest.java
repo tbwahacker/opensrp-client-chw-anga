@@ -31,23 +31,12 @@ public class BaseMalariaRegisterPresenterTest {
         Mockito.verify(baseView, Mockito.never()).startFormActivity(null);
     }
 
-//    @Test
-//    public void startFormWhenEntityIdIsNotNull() throws Exception {
-//        baseMalariaRegisterPresenter.startForm("formName", "12131212", "121212121212", "231231231231");
-//        PowerMockito.verifyPrivate(baseMalariaRegisterPresenter).invoke("getView");
-//    }
-
     @Test
     public void startFormWithEntityId() throws Exception {
         baseMalariaRegisterPresenter.startForm("formName", "12121212", "121212121212", "231231231231");
         Mockito.verify(baseView, Mockito.never()).startFormActivity(new JSONObject());
     }
 
-//    @Test
-//    public void saveForm() {
-//        baseMalariaRegisterPresenter.saveForm("{}");
-//        Mockito.verify(baseView).showProgressDialog(1);
-//    }
 
     @Test
     public void getViewWhenViewIsNull() throws Exception {
