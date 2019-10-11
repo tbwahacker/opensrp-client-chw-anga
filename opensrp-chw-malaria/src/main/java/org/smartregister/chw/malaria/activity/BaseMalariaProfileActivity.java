@@ -28,7 +28,9 @@ import org.smartregister.chw.malaria.interactor.BaseMalariaProfileInteractor;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.Util;
+import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
+import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 import java.text.ParseException;
@@ -36,9 +38,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
     protected MemberObject MEMBER_OBJECT;
     protected MalariaProfileContract.Presenter profilePresenter;
+    protected CommonPersonObjectClient client;
+    protected CircleImageView imageView;
     protected TextView textViewName;
     protected TextView textViewGender;
     protected TextView textViewLocation;
@@ -54,6 +61,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected RelativeLayout rlLastVisit;
     protected RelativeLayout rlUpcomingServices;
     protected RelativeLayout rlFamilyServicesDue;
+    protected RelativeLayout visitStatus;
+    protected TextView textViewUndo;
     protected RelativeLayout rlMalariaPositiveDate;
     private TextView tvUpComingServices;
     private TextView tvFamilyStatus;
@@ -110,6 +119,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         progressBar = findViewById(R.id.progress_bar);
 
+        visitStatus = findViewById(R.id.record_visit_status_bar);
+
         findViewById(R.id.rlLastVisit).setOnClickListener(this);
         findViewById(R.id.rlUpcomingServices).setOnClickListener(this);
         findViewById(R.id.rlFamilyServicesDue).setOnClickListener(this);
@@ -124,7 +135,14 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         textViewAncVisitNotDone = findViewById(R.id.textview_anc_visit_not_done);
         textViewAncVisitNotDone.setOnClickListener(this);
 
+        textViewUndo = findViewById(R.id.textview_undo);
+        textViewUndo.setOnClickListener(this);
+
+        imageView = findViewById(R.id.imageview_profile);
+        imageRenderHelper = new ImageRenderHelper(this);
+
         MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
+        client = (CommonPersonObjectClient) getIntent().getSerializableExtra("CLIENT");
 
         initializePresenter();
 
