@@ -9,13 +9,13 @@ import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -33,6 +33,7 @@ import org.smartregister.domain.AlertStatus;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -309,12 +310,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
     public CharSequence formatTime(String dateTime) {
         CharSequence timePassedString = null;
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             Date date = df.parse(dateTime);
-            long time = date.getTime();
-            timePassedString = DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-        } catch (ParseException e) {
+            timePassedString = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(date);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return timePassedString;
