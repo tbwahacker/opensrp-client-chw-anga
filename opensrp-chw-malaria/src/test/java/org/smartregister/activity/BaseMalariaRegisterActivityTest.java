@@ -21,7 +21,12 @@ public class BaseMalariaRegisterActivityTest {
     }
 
     @Test
-    public void testMenuResources() {
-        Assert.assertNotNull(baseMalariaRegisterActivity.getMenuResource());
+    public void testFormConfig() {
+        Assert.assertNull(baseMalariaRegisterActivity.getFormConfig());
+    }
+
+    @Test
+    public void checkFamilyForm() {
+        Assert.assertNotNull(baseMalariaRegisterActivity.getFamilyFormActivity());
     }
 }
