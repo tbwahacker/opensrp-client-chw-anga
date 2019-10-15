@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 
 public class BaseMalariaProfileActivityTest {
@@ -49,7 +50,11 @@ public class BaseMalariaProfileActivityTest {
     @Test
     public void formatTime() {
         BaseMalariaProfileActivity activity = new BaseMalariaProfileActivity();
-        Assert.assertEquals("31 Oct 2019", activity.formatTime("2019-10-31"));
+        try {
+            Assert.assertEquals("31 Oct 2019", Whitebox.invokeMethod(activity, "formatTime","2019-10-31"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
