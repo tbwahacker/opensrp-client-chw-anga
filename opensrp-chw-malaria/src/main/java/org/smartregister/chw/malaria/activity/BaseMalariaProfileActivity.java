@@ -217,7 +217,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
             findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
         }
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getMalariaTestDate())) {
-           textview_positive_date.setText("Malaria positive "+formatTime(MEMBER_OBJECT.getMalariaTestDate()));
+           textview_positive_date.setText(getString(R.string.malaria_positive)+formatTime(MEMBER_OBJECT.getMalariaTestDate()));
         }
     }
 
@@ -308,7 +308,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         //implement
     }
 
-    public CharSequence formatTime(String dateTime) {
+    private CharSequence formatTime(String dateTime) {
         CharSequence timePassedString = null;
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

@@ -39,5 +39,6 @@
     <string name="not_visiting_this_month">Not visiting this month</string>
     <string name="undo">UNDO</string>
     <string name="view_malaria_test_result">View malaria test results</string>
+    <string name="malaria_positive">Malaria positive</string>
 
 </resources>
