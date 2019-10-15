@@ -14,4 +14,14 @@ public class BaseMalariaRegisterActivityTest {
         Assert.assertEquals(BaseMalariaRegisterActivity.class,
                 baseMalariaRegisterActivity.getFamilyFormActivity());
     }
+
+    @Test
+    public void assertNotNull() {
+        Assert.assertNotNull(baseMalariaRegisterActivity);
+    }
+
+    @Test
+    public void testMenuResources() {
+        Assert.assertNotNull(baseMalariaRegisterActivity.getMenuResource());
+    }
 }

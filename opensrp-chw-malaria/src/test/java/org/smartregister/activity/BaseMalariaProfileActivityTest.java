@@ -47,12 +47,6 @@ public class BaseMalariaProfileActivityTest {
     }
 
     @Test
-    public void checkFormattedTime() {
-        baseMalariaProfileActivity.formatTime("2019-10-07");
-        Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.RED);
-    }
-
-    @Test
     public void formatTime() {
         BaseMalariaProfileActivity activity = new BaseMalariaProfileActivity();
         Assert.assertEquals("31 Oct 2019", activity.formatTime("2019-10-31"));
