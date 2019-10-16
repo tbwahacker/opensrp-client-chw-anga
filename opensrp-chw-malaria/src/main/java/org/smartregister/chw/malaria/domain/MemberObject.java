@@ -33,6 +33,8 @@ public class MemberObject implements Serializable {
     private String familyBaseEntityId;
     private String familyName;
     private String phoneNumber;
+    private boolean ancIsClosed;
+    private boolean pncIsClosed;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
@@ -62,6 +64,8 @@ public class MemberObject implements Serializable {
         malariaEduChw = client.getColumnmaps().get(DBConstants.KEY.MALARIA_EDU_CHW);
         familyName = client.getColumnmaps().get(DBConstants.KEY.FAMILY_NAME);
         phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
+        ancIsClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.ANC_IS_CLOSED));
+        ancIsClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.PNC_IS_CLOSED));
     }
 
     public String getFirstName() {
@@ -278,6 +282,22 @@ public class MemberObject implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean getAncIsClosed() {
+        return ancIsClosed;
+    }
+
+    public void setAncIsClosed(boolean ancIsClosed) {
+        this.ancIsClosed = ancIsClosed;
+    }
+
+    public boolean getPncIsClosed() {
+        return pncIsClosed;
+    }
+
+    public void setPncIsClosed(boolean pncIsClosed) {
+        this.pncIsClosed = pncIsClosed;
     }
 
 

@@ -67,9 +67,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
     private ProgressBar progressBar;
     protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
-    private String clientName;
-    private String familyHeadName;
-    private String familyHeadPhoneNumber;
 
     public static void startProfileActivity(Activity activity, MemberObject memberObject) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
@@ -173,8 +170,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     }
 
     public void initializeFloatingMenu() {
-        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber()) || StringUtils.isNotBlank(familyHeadPhoneNumber)) {
-            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, clientName, MEMBER_OBJECT.getPhoneNumber(), familyHeadName, familyHeadPhoneNumber);
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
+            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, MEMBER_OBJECT);
             baseMalariaFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
             LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
