@@ -29,4 +29,10 @@ public class BaseMalariaRegisterActivityTest {
     public void checkFamilyForm() {
         Assert.assertNotNull(baseMalariaRegisterActivity.getFamilyFormActivity());
     }
+
+    @Test
+    public void checkIdentifier() {
+        Assert.assertNotNull(baseMalariaRegisterActivity.getViewIdentifiers());
+    }
+
 }
