@@ -51,7 +51,7 @@ public class BaseMalariaProfileActivityTest {
     public void formatTime() {
         BaseMalariaProfileActivity activity = new BaseMalariaProfileActivity();
         try {
-            Assert.assertEquals("31 Oct 2019", Whitebox.invokeMethod(activity, "formatTime","2019-10-31"));
+            Assert.assertEquals("25 Oct 2019", Whitebox.invokeMethod(activity, "formatTime","25-10-2019"));
         } catch (Exception e) {
             e.printStackTrace();
         }
