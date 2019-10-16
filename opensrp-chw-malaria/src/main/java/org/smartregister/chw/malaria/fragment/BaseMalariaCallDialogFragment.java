@@ -66,23 +66,23 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
         return dialogView;
     }
 
-    private void setCallTitle(ViewGroup rootView) {
-        TextView callTitle = rootView.findViewById(R.id.call_title);
+    private void setCallTitle(ViewGroup rootView, int viewId, String message) {
+        TextView callTitle = rootView.findViewById(viewId);
         if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
-            callTitle.setText(R.string.call_family_head);
+            callTitle.setText(String.format("%s %s", message, R.string.call_family_head));
         } else if (!MEMBER_OBJECT.getAncIsClosed()) {
-            callTitle.setText(R.string.call_anc_client);
+            callTitle.setText(String.format("%s %s", message, R.string.call_anc_client));
         } else if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getPrimaryCareGiver())) {
-            callTitle.setText(R.string.call_primary_caregiver);
+            callTitle.setText(String.format("%s %s", message, R.string.call_primary_caregiver));
         } else if (!MEMBER_OBJECT.getPncIsClosed()) {
-            callTitle.setText(R.string.call_pnc_client);
+            callTitle.setText(String.format("%s %s", message, R.string.call_pnc_client));
         } else {
-            callTitle.setText(R.string.call_malaria_client);
+            callTitle.setText(String.format("%s %s", message, R.string.call_malaria_client));
         }
     }
 
     private void initUI(ViewGroup rootView) {
-        setCallTitle(rootView);
+        setCallTitle(rootView, R.id.call_title, getString(R.string.call));
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
             if (MEMBER_OBJECT.getFamilyBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
                 TextView familyHeadName = rootView.findViewById(R.id.malaria_call_head_name);
@@ -99,6 +99,7 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
                 TextView malariaClientNameTextView = rootView.findViewById(R.id.call_malaria_client_name);
                 malariaClientNameTextView.setText(String.format("%s %s %s", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName()));
 
+                setCallTitle(rootView, R.id.call_malaria_client_title, null);
                 TextView callMalariaClientPhone = rootView.findViewById(R.id.call_malaria_client_phone);
                 callMalariaClientPhone.setTag(MEMBER_OBJECT.getPhoneNumber());
                 callMalariaClientPhone.setText(getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getPhoneNumber()));
