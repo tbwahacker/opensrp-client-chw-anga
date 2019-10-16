@@ -28,11 +28,11 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     private static MemberObject MEMBER_OBJECT;
     private View.OnClickListener listener = null;
 
-    public static BaseMalariaCallDialogFragment launchDialog(Activity activity, MemberObject MEMBER_OBJECT) {
+    public static BaseMalariaCallDialogFragment launchDialog(Activity activity, MemberObject MO) {
         BaseMalariaCallDialogFragment dialogFragment = BaseMalariaCallDialogFragment.newInstance();
         FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
         Fragment prev = activity.getFragmentManager().findFragmentByTag(DIALOG_TAG);
-        MEMBER_OBJECT = MEMBER_OBJECT;
+        MEMBER_OBJECT = MO;
         if (prev != null) {
             ft.remove(prev);
         }
