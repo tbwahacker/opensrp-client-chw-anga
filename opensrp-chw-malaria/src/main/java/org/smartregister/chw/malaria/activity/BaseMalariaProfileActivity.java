@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -217,7 +216,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
             findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
         }
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getMalariaTestDate())) {
-           textview_positive_date.setText(getString(R.string.malaria_positive)+formatTime(MEMBER_OBJECT.getMalariaTestDate()));
+            textview_positive_date.setText(getString(R.string.malaria_positive)+" "+formatTime(MEMBER_OBJECT.getMalariaTestDate()));
         }
     }
 
@@ -311,7 +310,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private CharSequence formatTime(String dateTime) {
         CharSequence timePassedString = null;
         try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
             Date date = df.parse(dateTime);
             timePassedString = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(date);
         } catch (Exception e) {
