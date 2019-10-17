@@ -84,19 +84,21 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     private void initUI(ViewGroup rootView) {
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
             setCallTitle(rootView, R.id.call_title, getResources().getString(R.string.call));
-
-            if (MEMBER_OBJECT.getFamilyBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
+            if (!MEMBER_OBJECT.getFamilyHead().isEmpty()) {
                 TextView familyHeadName = rootView.findViewById(R.id.malaria_call_head_name);
-                familyHeadName.setText(String.format("%s %s %s", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName()));
+                familyHeadName.setText(String.format("%s", MEMBER_OBJECT.getFamilyName()));
                 TextView clientCallHeadPhone = rootView.findViewById(R.id.malaria_call_head_phone);
                 clientCallHeadPhone.setTag(MEMBER_OBJECT.getPhoneNumber());
                 clientCallHeadPhone.setText(getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getPhoneNumber()));
                 clientCallHeadPhone.setOnClickListener(listener);
+
             } else {
                 rootView.findViewById(R.id.malaria_layout_family_head).setVisibility(GONE);
             }
 
-            if (!MEMBER_OBJECT.getFamilyBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
+
+            if (!MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
+                //just a member
                 TextView malariaClientNameTextView = rootView.findViewById(R.id.call_malaria_client_name);
                 malariaClientNameTextView.setText(String.format("%s %s %s", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName()));
 
