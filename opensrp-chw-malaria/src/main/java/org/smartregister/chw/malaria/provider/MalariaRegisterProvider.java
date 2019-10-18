@@ -30,6 +30,7 @@ import java.util.Set;
 
 import timber.log.Timber;
 
+import static org.smartregister.chw.malaria.util.DBConstants.KEY.CHILD;
 import static org.smartregister.util.Utils.getName;
 
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
@@ -61,14 +62,38 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
         try {
-            String fname = getName(
+//            viewHolder.parentName.setVisibility(View.VISIBLE);
+//            if (CHILD.equalsIgnoreCase(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, false))) {
+//
+////                viewHolder.parentName.setVisibility(View.VISIBLE);
+////                String parentFirstName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_FIRST_NAME, true);
+////                String parentLastName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_LAST_NAME, true);
+////                String parentMiddleName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_MIDDLE_NAME, true);
+////
+////                String parentName = context.getResources().getString(R.string.care_giver_initials) + ": " + org.smartregister.util.Utils.getName(parentFirstName, parentMiddleName + " " + parentLastName);
+////                String firstName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true);
+////                String middleName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true);
+////                String lastName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true);
+////                String childName = org.smartregister.util.Utils.getName(firstName, middleName + " " + lastName);
+////
+////                fillValue(viewHolder.textViewParentName, WordUtils.capitalize(parentName));
+////
+////                String dobString = Utils.getDuration(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false));
+////                //dobString = dobString.contains("y") ? dobString.substring(0, dobString.indexOf("y")) : dobString;
+////                fillValue(viewHolder.textViewChildName, WordUtils.capitalize(childName) + ", " + WordUtils.capitalize(Utils.getTranslatedDate(dobString, context)));
+////                setAddressAndGender(pc, viewHolder);
+////
+////                addButtonClickListeners(client, viewHolder);
+//
+//            }
+            String firstName = getName(
                     Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
                     Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
 
             String dobString = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false);
             int age = new Period(new DateTime(dobString), new DateTime()).getYears();
 
-            String patientName = getName(fname, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
+            String patientName = getName(firstName, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
             viewHolder.patientName.setText(patientName + ", " + age);
             viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
             viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
@@ -151,6 +176,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
     public class RegisterViewHolder extends RecyclerView.ViewHolder {
         public TextView patientName;
+        public TextView parentName;
         public TextView textViewVillage;
         public TextView textViewGender;
         public Button dueButton;
@@ -162,6 +188,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         public RegisterViewHolder(View itemView) {
             super(itemView);
 
+            parentName = itemView.findViewById(R.id.patient_parent_name);
             patientName = itemView.findViewById(R.id.patient_name_age);
             textViewVillage = itemView.findViewById(R.id.text_view_village);
             textViewGender = itemView.findViewById(R.id.text_view_gender);
