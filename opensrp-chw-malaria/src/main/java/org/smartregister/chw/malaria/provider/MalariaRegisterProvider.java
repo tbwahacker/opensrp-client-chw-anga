@@ -30,7 +30,6 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-import static org.smartregister.chw.malaria.util.DBConstants.KEY.CHILD;
 import static org.smartregister.util.Utils.getName;
 
 public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegisterProvider.RegisterViewHolder> {
@@ -60,32 +59,18 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         }
     }
 
+    private String UpdateMemberGender(CommonPersonObjectClient commonPersonObjectClient) {
+        if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_anc_closed", false))) {
+            return context.getResources().getString(R.string.anc_string);
+        } else if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_pnc_closed", false))) {
+            return context.getResources().getString(R.string.pnc_string);
+        } else
+            return Utils.getValue(commonPersonObjectClient.getColumnmaps(), DBConstants.KEY.GENDER, true);
+    }
+
     private void populatePatientColumn(CommonPersonObjectClient pc, final RegisterViewHolder viewHolder) {
         try {
-//            viewHolder.parentName.setVisibility(View.VISIBLE);
-//            if (CHILD.equalsIgnoreCase(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, false))) {
-//
-////                viewHolder.parentName.setVisibility(View.VISIBLE);
-////                String parentFirstName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_FIRST_NAME, true);
-////                String parentLastName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_LAST_NAME, true);
-////                String parentMiddleName = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.FAMILY_MIDDLE_NAME, true);
-////
-////                String parentName = context.getResources().getString(R.string.care_giver_initials) + ": " + org.smartregister.util.Utils.getName(parentFirstName, parentMiddleName + " " + parentLastName);
-////                String firstName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true);
-////                String middleName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true);
-////                String lastName = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true);
-////                String childName = org.smartregister.util.Utils.getName(firstName, middleName + " " + lastName);
-////
-////                fillValue(viewHolder.textViewParentName, WordUtils.capitalize(parentName));
-////
-////                String dobString = Utils.getDuration(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false));
-////                //dobString = dobString.contains("y") ? dobString.substring(0, dobString.indexOf("y")) : dobString;
-////                fillValue(viewHolder.textViewChildName, WordUtils.capitalize(childName) + ", " + WordUtils.capitalize(Utils.getTranslatedDate(dobString, context)));
-////                setAddressAndGender(pc, viewHolder);
-////
-////                addButtonClickListeners(client, viewHolder);
-//
-//            }
+
             String firstName = getName(
                     Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true),
                     Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
@@ -95,7 +80,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
             String patientName = getName(firstName, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
             viewHolder.patientName.setText(patientName + ", " + age);
-            viewHolder.textViewGender.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.GENDER, true));
+            viewHolder.textViewGender.setText(UpdateMemberGender(pc));
             viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
             viewHolder.patientColumn.setOnClickListener(onClickListener);
             viewHolder.patientColumn.setTag(pc);
