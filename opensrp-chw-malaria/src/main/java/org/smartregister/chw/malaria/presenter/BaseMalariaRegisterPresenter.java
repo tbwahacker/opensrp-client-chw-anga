@@ -25,11 +25,6 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
     }
 
     @Override
-    public void saveLanguage(String language) {
-//        implement
-    }
-
-    @Override
     public void startForm(String formName, String entityId, String metadata, String currentLocationId) throws Exception {
         if (StringUtils.isBlank(entityId)) {
             return;
@@ -48,12 +43,6 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
             Log.e(TAG, Log.getStackTraceString(e));
         }
     }
-
-    @Override
-    public void closeFamilyRecord(String jsonString) {
-//        implement
-    }
-
 
     @Override
     public void onRegistrationSaved() {
