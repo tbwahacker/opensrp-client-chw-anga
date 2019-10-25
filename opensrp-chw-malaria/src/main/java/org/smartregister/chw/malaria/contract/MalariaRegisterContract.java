@@ -2,7 +2,6 @@ package org.smartregister.chw.malaria.contract;
 
 import com.vijay.jsonwizard.domain.Form;
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
 import org.smartregister.view.contract.BaseRegisterContract;
 
@@ -47,21 +46,11 @@ public interface MalariaRegisterContract {
 
     interface Interactor {
 
-        void onDestroy(boolean isChangingConfiguration);
-
-        void getNextUniqueId(Triple<String, String, String> triple, InteractorCallBack callBack);
-
         void saveRegistration(String jsonString, final InteractorCallBack callBack);
-
-        void removeFamilyFromRegister(String closeFormJsonString, String providerId);
 
     }
 
     interface InteractorCallBack {
-
-        void onUniqueIdFetched(Triple<String, String, String> triple, String entityId);
-
-        void onNoUniqueId();
 
         void onRegistrationSaved();
 

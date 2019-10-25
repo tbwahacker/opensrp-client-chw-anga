@@ -3,7 +3,6 @@ package org.smartregister.chw.malaria.presenter;
 import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
 import org.smartregister.malaria.R;
@@ -55,15 +54,6 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
 //        implement
     }
 
-    @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
-//        implement
-    }
-
-    @Override
-    public void onNoUniqueId() {
-//        implement
-    }
 
     @Override
     public void onRegistrationSaved() {
