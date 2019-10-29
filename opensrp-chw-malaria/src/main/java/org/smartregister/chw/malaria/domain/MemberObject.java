@@ -35,6 +35,8 @@ public class MemberObject implements Serializable {
     private String phoneNumber;
     private boolean ancIsClosed;
     private boolean pncIsClosed;
+    private String gestAge;
+    private String deliveryDate;
 
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
@@ -66,6 +68,8 @@ public class MemberObject implements Serializable {
         phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
         ancIsClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.ANC_IS_CLOSED));
         ancIsClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.PNC_IS_CLOSED));
+        gestAge = client.getColumnmaps().get(DBConstants.KEY.GEST_AGE);
+        deliveryDate = client.getColumnmaps().get(DBConstants.KEY.DELIVERY_DATE);
     }
 
     public String getFirstName() {
@@ -301,4 +305,19 @@ public class MemberObject implements Serializable {
     }
 
 
+    public String getGestAge() {
+        return gestAge;
+    }
+
+    public void setGestAge(String gestAge) {
+        this.gestAge = gestAge;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 }
