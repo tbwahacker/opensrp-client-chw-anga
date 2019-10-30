@@ -59,7 +59,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
         }
     }
 
-    private String UpdateMemberGender(CommonPersonObjectClient commonPersonObjectClient) {
+    private String updateMemberGender(CommonPersonObjectClient commonPersonObjectClient) {
         if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_anc_closed", false))) {
             return context.getResources().getString(R.string.anc_string);
         } else if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_pnc_closed", false))) {
@@ -80,7 +80,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
 
             String patientName = getName(firstName, Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
             viewHolder.patientName.setText(patientName + ", " + age);
-            viewHolder.textViewGender.setText(UpdateMemberGender(pc));
+            viewHolder.textViewGender.setText(updateMemberGender(pc));
             viewHolder.textViewVillage.setText(Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.VILLAGE_TOWN, true));
             viewHolder.patientColumn.setOnClickListener(onClickListener);
             viewHolder.patientColumn.setTag(pc);
