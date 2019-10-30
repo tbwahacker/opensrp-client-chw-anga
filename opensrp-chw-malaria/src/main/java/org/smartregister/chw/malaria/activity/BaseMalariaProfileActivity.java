@@ -52,7 +52,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected TextView textViewUniqueID;
     protected TextView textViewRecordMalaria;
     protected TextView textViewRecordAnc;
-    protected TextView textViewAncVisitNotDone;
     protected TextView textview_positive_date;
     protected View view_last_visit_row;
     protected View view_most_due_overdue_row;
@@ -131,9 +130,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
 
         textViewRecordAnc = findViewById(R.id.textview_record_anc);
         textViewRecordAnc.setOnClickListener(this);
-
-        textViewAncVisitNotDone = findViewById(R.id.textview_anc_visit_not_done);
-        textViewAncVisitNotDone.setOnClickListener(this);
 
         textViewUndo = findViewById(R.id.textview_undo);
         textViewUndo.setOnClickListener(this);
