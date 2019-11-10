@@ -69,33 +69,41 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     private void setCallTitle(ViewGroup rootView, int viewId, final String message) {
         TextView callTitle = rootView.findViewById(viewId);
         if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
-            callTitle.setText(String.format("%s %s", message, getResources().getString(R.string.call_family_head)));
-        } else if (!MEMBER_OBJECT.getAncIsClosed() && MEMBER_OBJECT.getGestAge() != null && MEMBER_OBJECT.getGestAge().equals("")) {
-            callTitle.setText(String.format("%s %s", message, getResources().getString(R.string.call_anc_client)));
+            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_family_head)));
+        } else if (parseBoolean(MEMBER_OBJECT.getAncMember())) {
+            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_anc_client)));
         } else if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getPrimaryCareGiver())) {
-            callTitle.setText(String.format("%s %s", message, getResources().getString(R.string.call_primary_caregiver)));
-        } else if (!MEMBER_OBJECT.getPncIsClosed() && MEMBER_OBJECT.getDeliveryDate() != null) {
-            callTitle.setText(String.format("%s %s", message, getResources().getString(R.string.call_pnc_client)));
+            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_primary_caregiver)));
+        } else if (parseBoolean(MEMBER_OBJECT.getPncMember())) {
+            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_pnc_client)));
         } else {
-            callTitle.setText(String.format("%s %s", message, getResources().getString(R.string.call_malaria_client)));
+            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_malaria_client)));
         }
+    }
+
+    private boolean parseBoolean(String string) {
+        return ((string != null) && string.equalsIgnoreCase("0"));
+    }
+
+    private String setCallTitle(String message, String title) {
+        return String.format("%s %s", message, title);
     }
 
     private void initUI(ViewGroup rootView) {
         if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
             setCallTitle(rootView, R.id.call_title, getResources().getString(R.string.call));
-            if (!MEMBER_OBJECT.getFamilyHead().isEmpty()) {
+            if (StringUtils.isNotBlank(MEMBER_OBJECT.getFamilyHead())) {
                 TextView familyHeadName = rootView.findViewById(R.id.malaria_call_head_name);
-                familyHeadName.setText(String.format("%s", MEMBER_OBJECT.getFamilyName()));
+                familyHeadName.setText(MEMBER_OBJECT.getFamilyHeadName());
                 TextView clientCallHeadPhone = rootView.findViewById(R.id.malaria_call_head_phone);
                 clientCallHeadPhone.setTag(MEMBER_OBJECT.getPhoneNumber());
-                clientCallHeadPhone.setText(getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getPhoneNumber()));
+                clientCallHeadPhone.setText(
+                        getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getFamilyHeadPhoneNumber()));
                 clientCallHeadPhone.setOnClickListener(listener);
 
             } else {
                 rootView.findViewById(R.id.malaria_layout_family_head).setVisibility(GONE);
             }
-
 
             if (!MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
                 //just a member
