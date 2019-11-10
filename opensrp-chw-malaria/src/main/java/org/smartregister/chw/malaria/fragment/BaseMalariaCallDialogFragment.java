@@ -139,11 +139,6 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     }
 
     @Override
-    public BaseMalariaCallDialogContract.Dialer getPendingCallRequest() {
-        return null;
-    }
-
-    @Override
     public void setPendingCallRequest(BaseMalariaCallDialogContract.Dialer dialer) {
 //        Implement pending call request
 //        BaseAncWomanCallDialogContract.Dialer mDialer = dialer;
