@@ -113,7 +113,6 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
         }
 
         rootView.findViewById(R.id.malaria_call_close).setOnClickListener(listener);
-
     }
 
     private void setUpPosition() {

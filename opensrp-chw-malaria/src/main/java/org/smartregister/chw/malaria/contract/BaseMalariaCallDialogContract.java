@@ -5,9 +5,7 @@ import android.content.Context;
 public interface BaseMalariaCallDialogContract {
 
     interface View {
-
         void setPendingCallRequest(Dialer dialer);
-
         Context getCurrentContext();
     }
 

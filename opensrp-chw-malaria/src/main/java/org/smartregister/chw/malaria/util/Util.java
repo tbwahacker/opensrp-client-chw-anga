@@ -66,7 +66,6 @@ public class Util {
         }
     }
 
-
     public static boolean launchDialer(final Activity activity, final BaseMalariaCallDialogContract.View callView, final String phoneNumber) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
 

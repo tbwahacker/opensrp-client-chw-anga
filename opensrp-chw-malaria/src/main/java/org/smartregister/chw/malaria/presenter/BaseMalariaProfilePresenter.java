@@ -2,11 +2,9 @@ package org.smartregister.chw.malaria.presenter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
-import org.smartregister.malaria.R;
 
 import java.lang.ref.WeakReference;
 
@@ -42,11 +40,6 @@ public class BaseMalariaProfilePresenter implements MalariaProfileContract.Prese
             getView().setDueColor();
         } else
             getView().setOverDueColor();
-    }
-
-    @Override
-    public void recordMalariaFollowUp(Context context) {
-        Toast.makeText(context, R.string.record_malaria, Toast.LENGTH_SHORT).show();
     }
 
     @Override

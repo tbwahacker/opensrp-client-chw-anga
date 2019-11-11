@@ -259,7 +259,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         showProgressBar(false);
         if (status == AlertStatus.complete)
             return;
-
         view_most_due_overdue_row.setVisibility(View.VISIBLE);
         rlUpcomingServices.setVisibility(View.VISIBLE);
 
