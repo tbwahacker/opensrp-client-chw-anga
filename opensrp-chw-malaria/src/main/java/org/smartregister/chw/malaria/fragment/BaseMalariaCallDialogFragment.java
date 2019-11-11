@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.malaria.contract.BaseMalariaCallDialogContract;
+import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.listener.BaseMalariaCallWidgetDialogListener;
 import org.smartregister.malaria.R;
 
@@ -24,20 +25,14 @@ import static org.smartregister.util.Utils.getName;
 public class BaseMalariaCallDialogFragment extends DialogFragment implements BaseMalariaCallDialogContract.View {
 
     public static final String DIALOG_TAG = "BaseMalariaCallDialogFragment_DIALOG_TAG";
-    private static String malariaClientName;
-    private static String malariaClientPhoneNumber;
-    private static String malariaFamilyHeadName;
-    private static String malariaFamilyHeadPhone;
+    private static MemberObject MEMBER_OBJECT;
     private View.OnClickListener listener = null;
 
-    public static BaseMalariaCallDialogFragment launchDialog(Activity activity, String clientName, String malariaClientPhone, String familyHeadName, String familyHeadPhone) {
+    public static BaseMalariaCallDialogFragment launchDialog(Activity activity, MemberObject MO) {
         BaseMalariaCallDialogFragment dialogFragment = BaseMalariaCallDialogFragment.newInstance();
         FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
         Fragment prev = activity.getFragmentManager().findFragmentByTag(DIALOG_TAG);
-        malariaClientPhoneNumber = malariaClientPhone;
-        malariaClientName = clientName;
-        malariaFamilyHeadName = familyHeadName;
-        malariaFamilyHeadPhone = familyHeadPhone;
+        MEMBER_OBJECT = MO;
         if (prev != null) {
             ft.remove(prev);
         }
@@ -71,37 +66,53 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
         return dialogView;
     }
 
-    private void initUI(ViewGroup rootView) {
-
-        if (StringUtils.isNotBlank(malariaClientPhoneNumber)) {
-            TextView malariaClientNameTextView = rootView.findViewById(R.id.call_malaria_client_name);
-            malariaClientNameTextView.setText(malariaClientName);
-
-            TextView callMalariaClientPhone = rootView.findViewById(R.id.call_malaria_client_phone);
-            callMalariaClientPhone.setTag(malariaClientPhoneNumber);
-            callMalariaClientPhone.setText(getName(getCurrentContext().getString(R.string.call), malariaClientPhoneNumber));
-            callMalariaClientPhone.setOnClickListener(listener);
+    private void setCallTitle(ViewGroup rootView, int viewId, final String message) {
+        TextView callTitle = rootView.findViewById(viewId);
+        if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_family_head)));
+        } else if ("0".equals(MEMBER_OBJECT.getAncMember())) {
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_anc_client)));
+        } else if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getPrimaryCareGiver())) {
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_primary_caregiver)));
+        } else if ("0".equals(MEMBER_OBJECT.getPncMember())) {
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_pnc_client)));
         } else {
-
-            rootView.findViewById(R.id.layout_malaria_client).setVisibility(GONE);
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_malaria_client)));
         }
+    }
 
-        if (StringUtils.isNotBlank(malariaFamilyHeadPhone)) {
-            TextView familyHeadName = rootView.findViewById(R.id.malaria_call_head_name);
-            familyHeadName.setText(malariaFamilyHeadName);
+    private void initUI(ViewGroup rootView) {
+        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
+            setCallTitle(rootView, R.id.call_title, getResources().getString(R.string.call));
+            if (StringUtils.isNotBlank(MEMBER_OBJECT.getFamilyHead())) {
+                TextView familyHeadName = rootView.findViewById(R.id.malaria_call_head_name);
+                familyHeadName.setText(MEMBER_OBJECT.getFamilyHeadName());
+                TextView clientCallHeadPhone = rootView.findViewById(R.id.malaria_call_head_phone);
+                clientCallHeadPhone.setTag(MEMBER_OBJECT.getPhoneNumber());
+                clientCallHeadPhone.setText(
+                        getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getFamilyHeadPhoneNumber()));
+                clientCallHeadPhone.setOnClickListener(listener);
 
-            TextView clientCallHeadPhone = rootView.findViewById(R.id.malaria_call_head_phone);
-            clientCallHeadPhone.setTag(malariaFamilyHeadPhone);
-            clientCallHeadPhone.setText(getName(getCurrentContext().getString(R.string.call), malariaFamilyHeadPhone));
-            clientCallHeadPhone.setOnClickListener(listener);
+            } else {
+                rootView.findViewById(R.id.malaria_layout_family_head).setVisibility(GONE);
+            }
 
-        } else {
+            if (!MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
+                //just a member
+                TextView malariaClientNameTextView = rootView.findViewById(R.id.call_malaria_client_name);
+                malariaClientNameTextView.setText(String.format("%s %s %s", MEMBER_OBJECT.getFirstName(), MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName()));
 
-            rootView.findViewById(R.id.malaria_layout_family_head).setVisibility(GONE);
+                setCallTitle(rootView, R.id.call_malaria_client_title, "");
+                TextView callMalariaClientPhone = rootView.findViewById(R.id.call_malaria_client_phone);
+                callMalariaClientPhone.setTag(MEMBER_OBJECT.getPhoneNumber());
+                callMalariaClientPhone.setText(getName(getCurrentContext().getString(R.string.call), MEMBER_OBJECT.getPhoneNumber()));
+                callMalariaClientPhone.setOnClickListener(listener);
+            } else {
+                rootView.findViewById(R.id.layout_malaria_client).setVisibility(GONE);
+            }
         }
 
         rootView.findViewById(R.id.malaria_call_close).setOnClickListener(listener);
-
     }
 
     private void setUpPosition() {
@@ -116,11 +127,6 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     @Override
     public Context getCurrentContext() {
         return getActivity();
-    }
-
-    @Override
-    public BaseMalariaCallDialogContract.Dialer getPendingCallRequest() {
-        return null;
     }
 
     @Override

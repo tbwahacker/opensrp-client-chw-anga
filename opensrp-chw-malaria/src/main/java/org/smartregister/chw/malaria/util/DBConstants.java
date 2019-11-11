@@ -1,8 +1,5 @@
 package org.smartregister.chw.malaria.util;
 
-/**
- * Created by keyman on 13/11/2018.
- */
 public class DBConstants {
 
     public final class KEY {
@@ -21,6 +18,8 @@ public class DBConstants {
         public static final String RELATIONALID = "relationalid";
         public static final String DETAILS = "details";
         public static final String IS_CLOSED = "is_closed";
+        public static final String IS_ANC_CLOSED = "is_anc_closed";
+        public static final String IS_PNC_CLOSED = "is_pnc_closed";
         public static final String DATE_CHW_MALARIA_TEST = "date_chw_malaria_test";
         public static final String FEVER_MALARIA_CHW = "fever_malaria_chw";
         public static final String FEVER_DURATION = "fever_duration";
@@ -41,6 +40,8 @@ public class DBConstants {
         public static final String FAMILY_NAME = "family_name";
         public static final String PHONE_NUMBER = "phone_number";
         public static final String PHONE_NUMBER_MALARIA = "phoneNumberMalaria";
+        public static final String GEST_AGE = "gest_age";
+        public static final String DELIVERY_DATE = "delivery_date";
         public static final String CHILD = "ec_child";
 
     }

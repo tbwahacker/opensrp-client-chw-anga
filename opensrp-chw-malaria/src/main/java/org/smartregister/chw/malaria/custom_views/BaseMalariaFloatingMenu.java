@@ -3,36 +3,20 @@ package org.smartregister.chw.malaria.custom_views;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.fragment.BaseMalariaCallDialogFragment;
 import org.smartregister.malaria.R;
 
 public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClickListener {
-    private String phoneNumber;
-    private String familyHeadName;
-    private String familyHeadPhone;
-    private String clientName;
+    private MemberObject MEMBER_OBJECT;
 
-    public BaseMalariaFloatingMenu(Context context, String malariaClientName, String malariaClientPhone, String clientFamilyHeadName, String clientFamilyHeadPhone) {
+    public BaseMalariaFloatingMenu(Context context, MemberObject MEMBER_OBJECT) {
         super(context);
         initUi();
-        clientName = malariaClientName;
-        phoneNumber = malariaClientPhone;
-        familyHeadName = clientFamilyHeadName;
-        familyHeadPhone = clientFamilyHeadPhone;
-    }
-
-    public BaseMalariaFloatingMenu(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initUi();
-    }
-
-    public BaseMalariaFloatingMenu(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initUi();
+        this.MEMBER_OBJECT = MEMBER_OBJECT;
     }
 
     protected void initUi() {
@@ -46,23 +30,7 @@ public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClic
     public void onClick(View view) {
         if (view.getId() == R.id.malaria_fab) {
             Activity activity = (Activity) getContext();
-            BaseMalariaCallDialogFragment.launchDialog(activity, clientName, phoneNumber, familyHeadName, familyHeadPhone);
+            BaseMalariaCallDialogFragment.launchDialog(activity, MEMBER_OBJECT);
         }
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getFamilyHeadName() {
-        return familyHeadName;
-    }
-
-    public String getFamilyHeadPhone() {
-        return familyHeadPhone;
-    }
-
-    public String getClientName() {
-        return clientName;
     }
 }

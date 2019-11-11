@@ -6,6 +6,9 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import java.io.Serializable;
 
 public class MemberObject implements Serializable {
+
+    private String familyHeadName;
+    private String familyHeadPhoneNumber;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -15,7 +18,6 @@ public class MemberObject implements Serializable {
     private String age;
     private String relationalid;
     private String details;
-    private boolean isClosed;
     private String dateChwMalariaTest;
     private String feverMalariaChw;
     private String feverDuration;
@@ -29,11 +31,20 @@ public class MemberObject implements Serializable {
     private String baseEntityId;
     private String relationalId;
     private String primaryCareGiver;
+    private String primaryCareGiverName;
+    private String primaryCareGiverPhone;
     private String familyHead;
     private String familyBaseEntityId;
     private String familyName;
     private String phoneNumber;
+    private String gestAge;
+    private String deliveryDate;
+    private String ancMember;
+    private String pncMember;
 
+    public MemberObject() {
+    }
+    
     public MemberObject(CommonPersonObjectClient client) {
         firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
         middleName = client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) : "";
@@ -49,7 +60,6 @@ public class MemberObject implements Serializable {
         familyBaseEntityId = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
         relationalid = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
         details = client.getColumnmaps().get(DBConstants.KEY.DETAILS);
-        isClosed = Boolean.parseBoolean(client.getColumnmaps().get(DBConstants.KEY.IS_CLOSED));
         dateChwMalariaTest = client.getColumnmaps().get(DBConstants.KEY.DATE_CHW_MALARIA_TEST);
         feverMalariaChw = client.getColumnmaps().get(DBConstants.KEY.FEVER_MALARIA_CHW);
         feverDuration = client.getColumnmaps().get(DBConstants.KEY.FEVER_DURATION);
@@ -62,6 +72,8 @@ public class MemberObject implements Serializable {
         malariaEduChw = client.getColumnmaps().get(DBConstants.KEY.MALARIA_EDU_CHW);
         familyName = client.getColumnmaps().get(DBConstants.KEY.FAMILY_NAME);
         phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
+        gestAge = client.getColumnmaps().get(DBConstants.KEY.GEST_AGE);
+        deliveryDate = client.getColumnmaps().get(DBConstants.KEY.DELIVERY_DATE);
     }
 
     public String getFirstName() {
@@ -134,14 +146,6 @@ public class MemberObject implements Serializable {
 
     public void setDetails(String details) {
         this.details = details;
-    }
-
-    public boolean getIsClosed() {
-        return isClosed;
-    }
-
-    public void setIsClosed(boolean isClosed) {
-        this.isClosed = isClosed;
     }
 
     public String getDateChwMalariaTest() {
@@ -280,5 +284,68 @@ public class MemberObject implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getGestAge() {
+        return gestAge;
+    }
 
+    public void setGestAge(String gestAge) {
+        this.gestAge = gestAge;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+
+    public String getFamilyHeadName() {
+        return familyHeadName;
+    }
+
+    public void setFamilyHeadName(String familyHeadName) {
+        this.familyHeadName = familyHeadName;
+    }
+
+    public String getFamilyHeadPhoneNumber() {
+        return familyHeadPhoneNumber;
+    }
+
+    public void setFamilyHeadPhoneNumber(String familyHeadPhoneNumber) {
+        this.familyHeadPhoneNumber = familyHeadPhoneNumber;
+    }
+
+    public String getPrimaryCareGiverName() {
+        return primaryCareGiverName;
+    }
+
+    public void setPrimaryCareGiverName(String primaryCareGiverName) {
+        this.primaryCareGiverName = primaryCareGiverName;
+    }
+
+    public String getPrimaryCareGiverPhone() {
+        return primaryCareGiverPhone;
+    }
+
+    public void setPrimaryCareGiverPhone(String primaryCareGiverPhone) {
+        this.primaryCareGiverPhone = primaryCareGiverPhone;
+    }
+
+    public String getAncMember() {
+        return ancMember;
+    }
+
+    public void setAncMember(String ancMember) {
+        this.ancMember = ancMember;
+    }
+
+    public String getPncMember() {
+        return pncMember;
+    }
+
+    public void setPncMember(String pncMember) {
+        this.pncMember = pncMember;
+    }
 }
