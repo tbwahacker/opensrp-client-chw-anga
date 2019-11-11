@@ -70,19 +70,15 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
         TextView callTitle = rootView.findViewById(viewId);
         if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
             callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_family_head)));
-        } else if (parseBoolean(MEMBER_OBJECT.getAncMember())) {
+        } else if ("0".equals(MEMBER_OBJECT.getAncMember())) {
             callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_anc_client)));
         } else if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getPrimaryCareGiver())) {
             callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_primary_caregiver)));
-        } else if (parseBoolean(MEMBER_OBJECT.getPncMember())) {
+        } else if ("0".equals(MEMBER_OBJECT.getPncMember())) {
             callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_pnc_client)));
         } else {
             callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_malaria_client)));
         }
-    }
-
-    private boolean parseBoolean(String string) {
-        return ((string != null) && string.equalsIgnoreCase("0"));
     }
 
     private String setCallTitle(String message, String title) {
