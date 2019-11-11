@@ -69,20 +69,16 @@ public class BaseMalariaCallDialogFragment extends DialogFragment implements Bas
     private void setCallTitle(ViewGroup rootView, int viewId, final String message) {
         TextView callTitle = rootView.findViewById(viewId);
         if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getFamilyHead())) {
-            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_family_head)));
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_family_head)));
         } else if ("0".equals(MEMBER_OBJECT.getAncMember())) {
-            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_anc_client)));
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_anc_client)));
         } else if (MEMBER_OBJECT.getBaseEntityId().equals(MEMBER_OBJECT.getPrimaryCareGiver())) {
-            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_primary_caregiver)));
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_primary_caregiver)));
         } else if ("0".equals(MEMBER_OBJECT.getPncMember())) {
-            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_pnc_client)));
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_pnc_client)));
         } else {
-            callTitle.setText(setCallTitle(message, getResources().getString(R.string.call_malaria_client)));
+            callTitle.setText(String.format(message, getResources().getString(R.string.call_malaria_client)));
         }
-    }
-
-    private String setCallTitle(String message, String title) {
-        return String.format("%s %s", message, title);
     }
 
     private void initUI(ViewGroup rootView) {
