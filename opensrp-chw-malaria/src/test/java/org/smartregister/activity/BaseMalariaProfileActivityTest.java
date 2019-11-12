@@ -19,6 +19,7 @@ public class BaseMalariaProfileActivityTest {
     @Mock
     protected View view;
 
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -55,6 +56,24 @@ public class BaseMalariaProfileActivityTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void checkHideView() {
+        baseMalariaProfileActivity.hideView();
+        Mockito.verify(view, Mockito.never()).setVisibility(View.GONE);
+    }
+
+    @Test
+    public void checkProgressBar() {
+        baseMalariaProfileActivity.showProgressBar(true);
+        Mockito.verify(view, Mockito.never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void medicalHistoryRefresh() {
+        baseMalariaProfileActivity.refreshMedicalHistory(true);
+        Mockito.verify(view, Mockito.never()).setVisibility(View.VISIBLE);
     }
 
 }
