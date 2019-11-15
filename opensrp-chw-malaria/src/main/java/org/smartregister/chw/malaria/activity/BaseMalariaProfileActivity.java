@@ -310,4 +310,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         }
         return timePassedString;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
+            profilePresenter.saveForm(data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON));
+        }
+    }
 }
