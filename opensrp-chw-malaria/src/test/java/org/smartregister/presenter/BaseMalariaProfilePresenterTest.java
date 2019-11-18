@@ -58,6 +58,12 @@ public class BaseMalariaProfilePresenterTest {
     }
 
     @Test
+    public void malariaTestDatePeriodIsMoreThanFourteen() {
+        profilePresenter.recordMalariaButton(15);
+        verify(view).hideView();
+    }
+
+    @Test
     public void refreshProfileBottom() {
         profilePresenter.refreshProfileBottom();
         verify(interactor).refreshProfileInfo(memberObject, profilePresenter.getView());
