@@ -36,7 +36,7 @@ public class BaseMalariaProfilePresenter implements MalariaProfileContract.Prese
             return;
         }
 
-        if (days_from_malaria_test_date < 7 || days_from_malaria_test_date > 14) {
+        if (days_from_malaria_test_date < 7 || days_from_malaria_test_date >= 14) {
             getView().hideView();
         } else if (days_from_malaria_test_date <= 10) {
             getView().setDueColor();
