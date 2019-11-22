@@ -30,6 +30,8 @@ public interface MalariaProfileContract {
 
         void fillProfileData(@Nullable MemberObject memberObject);
 
+        void saveForm(String jsonString);
+
         @Nullable
         View getView();
 
@@ -42,7 +44,9 @@ public interface MalariaProfileContract {
 
         void refreshProfileInfo(MemberObject memberObject, InteractorCallBack callback);
 
+        void saveRegistration(String jsonString, final MalariaProfileContract.InteractorCallBack callBack);
     }
+
 
     interface InteractorCallBack {
 
@@ -51,5 +55,6 @@ public interface MalariaProfileContract {
         void refreshUpComingServicesStatus(String service, AlertStatus status, Date date);
 
         void refreshFamilyStatus(AlertStatus status);
+
     }
 }
