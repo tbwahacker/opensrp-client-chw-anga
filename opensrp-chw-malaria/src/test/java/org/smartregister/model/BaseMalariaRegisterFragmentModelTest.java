@@ -50,7 +50,7 @@ public class BaseMalariaRegisterFragmentModelTest {
     @Test
     public void checkGetSortText() {
         Assert.assertNull(baseMalariaRegisterFragmentModel.getSortText(null));
-    }
+}
 
     @Test
     public void checkJsonArray() {
