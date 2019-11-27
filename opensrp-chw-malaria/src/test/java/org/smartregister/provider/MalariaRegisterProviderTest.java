@@ -1,17 +1,25 @@
-package org.smartregister.chw.malaria.provider;
+package org.smartregister.provider;
 
 import android.app.Activity;
 import android.view.View;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.stubbing.answers.DoesNothing;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
+import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.mockito.Mockito.validateMockitoUsage;
 
 public class MalariaRegisterProviderTest {
     @Mock
@@ -21,11 +29,19 @@ public class MalariaRegisterProviderTest {
     public CommonPersonObjectClient commonPersonObjectClient;
 
     @Mock
-    View.OnClickListener listener;
+    public View.OnClickListener listener;
+
+    @Mock
+    public MalariaRegisterProvider.RegisterViewHolder viewHolder;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @After
+    public void validate() {
+        validateMockitoUsage();
     }
 
     @Test
@@ -59,23 +75,42 @@ public class MalariaRegisterProviderTest {
     }
 
     @Test
-    public void is_anc_closed() throws Exception{
+    public void is_anc_closed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
         MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
-        Map<String, String > map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("is_anc_closed", "0");
         Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
         Assert.assertEquals("ANC", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
     @Test
-    public void is_pnc_closed() throws Exception{
+    public void is_pnc_closed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
         MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
-        Map<String, String > map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("is_pnc_closed", "0");
         Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
         Assert.assertEquals("PNC", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
+    }
+
+    @Test
+    public void updateMemberGender() throws Exception {
+        Activity activity = Mockito.mock(Activity.class);
+        MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
+        Map<String, String> map = new HashMap<>();
+        map.put(DBConstants.KEY.GENDER, "Male");
+
+        Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
+        Assert.assertEquals("Male", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
+    }
+
+
+    @Test(expected = Exception.class)
+    public void getView() throws Exception {
+        malariaRegisterProvider.getView(null, null, viewHolder);
+        PowerMockito.when(malariaRegisterProvider, "populatePatientColumn", commonPersonObjectClient, viewHolder).then(DoesNothing.doesNothing());
+        PowerMockito.verifyPrivate(malariaRegisterProvider).invoke("populatePatientColumn", commonPersonObjectClient, viewHolder);
     }
 
 }

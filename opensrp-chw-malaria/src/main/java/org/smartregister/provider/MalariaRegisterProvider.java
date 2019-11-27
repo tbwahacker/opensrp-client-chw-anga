@@ -1,4 +1,4 @@
-package org.smartregister.chw.malaria.provider;
+package org.smartregister.provider;
 
 import android.content.Context;
 import android.database.Cursor;
