@@ -68,4 +68,10 @@ public class BaseMalariaProfilePresenterTest {
         profilePresenter.refreshProfileBottom();
         verify(interactor).refreshProfileInfo(memberObject, profilePresenter.getView());
     }
+
+    @Test
+    public void saveForm() {
+        profilePresenter.saveForm(null);
+        Mockito.verify(interactor).saveRegistration(null, view);
+    }
  }
