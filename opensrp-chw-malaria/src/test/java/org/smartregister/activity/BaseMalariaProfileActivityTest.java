@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,8 @@ import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
+
+import static org.mockito.Mockito.validateMockitoUsage;
 
 public class BaseMalariaProfileActivityTest {
     @Mock
@@ -38,6 +41,11 @@ public class BaseMalariaProfileActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @After
+    public void validate() {
+        validateMockitoUsage();
     }
 
     @Test
@@ -143,20 +151,23 @@ public class BaseMalariaProfileActivityTest {
 
     @Test(expected = Exception.class)
     public void refreshFamilyStatusComplete() throws Exception {
+        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
         TextView textView = view.findViewById(R.id.textview_family_has);
         Whitebox.setInternalState(baseMalariaProfileActivity, "tvFamilyStatus", textView);
+        Mockito.doNothing().when(baseMalariaProfileActivity).showProgressBar(false);
         baseMalariaProfileActivity.refreshFamilyStatus(AlertStatus.complete);
-        Mockito.doNothing().when(Whitebox.invokeMethod(baseMalariaProfileActivity, "setFamilyStatus", "Family has nothing due"));
         Mockito.verify(baseMalariaProfileActivity).showProgressBar(false);
         PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("setFamilyStatus", "Family has nothing due");
     }
 
     @Test(expected = Exception.class)
     public void refreshFamilyStatusNormal() throws Exception {
+        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
         TextView textView = view.findViewById(R.id.textview_family_has);
         Whitebox.setInternalState(baseMalariaProfileActivity, "tvFamilyStatus", textView);
+        Mockito.doNothing().when(baseMalariaProfileActivity).showProgressBar(false);
         baseMalariaProfileActivity.refreshFamilyStatus(AlertStatus.complete);
-        Mockito.doNothing().when(Whitebox.invokeMethod(baseMalariaProfileActivity, "setFamilyStatus", "Family has services due"));
+        Mockito.verify(baseMalariaProfileActivity).showProgressBar(false);
         PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("setFamilyStatus", "Family has services due");
     }
 
