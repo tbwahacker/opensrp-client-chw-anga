@@ -72,6 +72,6 @@ public class BaseMalariaProfilePresenterTest {
     @Test
     public void saveForm() {
         profilePresenter.saveForm(null);
-        Mockito.verify(interactor).saveRegistration(null, view);
+        verify(interactor).saveRegistration(null, view);
     }
  }
