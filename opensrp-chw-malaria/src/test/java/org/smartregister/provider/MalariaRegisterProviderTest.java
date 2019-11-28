@@ -77,7 +77,7 @@ public class MalariaRegisterProviderTest {
         Assert.assertNull(malariaRegisterProvider.createViewHolder(null));
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void isAncClosed() throws Exception {
         Resources resources = Mockito.mock(Resources.class);
         Activity activity = Mockito.mock(Activity.class);
@@ -89,7 +89,7 @@ public class MalariaRegisterProviderTest {
         Assert.assertEquals(resources.getString(R.string.anc_string), Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void isPncClosed() throws Exception {
         Resources resources = Mockito.mock(Resources.class);
         Activity activity = Mockito.mock(Activity.class);
