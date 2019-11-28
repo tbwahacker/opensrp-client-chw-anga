@@ -1,6 +1,7 @@
 package org.smartregister.provider;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.view.View;
 
 import org.junit.After;
@@ -15,6 +16,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.util.DBConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.malaria.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,7 @@ public class MalariaRegisterProviderTest {
 
     @Mock
     public MalariaRegisterProvider.RegisterViewHolder viewHolder;
+
 
     @Before
     public void setUp() {
@@ -76,22 +79,26 @@ public class MalariaRegisterProviderTest {
 
     @Test
     public void isAncClosed() throws Exception {
+        Resources resources = Mockito.mock(Resources.class);
         Activity activity = Mockito.mock(Activity.class);
-        MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
+        MalariaRegisterProvider provider = Mockito.spy(new MalariaRegisterProvider(activity, listener, listener, null));
         Map<String, String> map = new HashMap<>();
         map.put("is_anc_closed", "0");
+        Mockito.when(activity.getResources()).thenReturn(resources);
         Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
-        Assert.assertEquals("ANC", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
+        Assert.assertEquals(resources.getString(R.string.anc_string), Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
     @Test
     public void isPncClosed() throws Exception {
+        Resources resources = Mockito.mock(Resources.class);
         Activity activity = Mockito.mock(Activity.class);
-        MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
+        MalariaRegisterProvider provider = Mockito.spy(new MalariaRegisterProvider(activity, listener, listener, null));
         Map<String, String> map = new HashMap<>();
         map.put("is_pnc_closed", "0");
+        Mockito.when(activity.getResources()).thenReturn(resources);
         Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
-        Assert.assertEquals("PNC", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
+        Assert.assertEquals(resources.getString(R.string.pnc_string), Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
     @Test
