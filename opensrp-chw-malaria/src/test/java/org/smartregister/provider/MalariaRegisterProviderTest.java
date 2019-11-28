@@ -74,7 +74,7 @@ public class MalariaRegisterProviderTest {
         Assert.assertNull(malariaRegisterProvider.createViewHolder(null));
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void isAncClosed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
         MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
@@ -84,10 +84,10 @@ public class MalariaRegisterProviderTest {
         Assert.assertEquals("ANC", Whitebox.invokeMethod(provider, "updateMemberGender", commonPersonObjectClient));
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void isPncClosed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
-        MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
+        MalariaRegisterProvider provider = Mockito.spy(new MalariaRegisterProvider(activity, listener, listener, null));
         Map<String, String> map = new HashMap<>();
         map.put("is_pnc_closed", "0");
         Mockito.when(commonPersonObjectClient.getColumnmaps()).thenReturn(map);
