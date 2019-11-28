@@ -3,6 +3,7 @@ package org.smartregister.activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
+import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
 
 public class BaseMalariaProfileActivityTest {
@@ -137,6 +139,25 @@ public class BaseMalariaProfileActivityTest {
         Mockito.when(memberObject.getMalariaTestDate()).thenReturn("01-01-2019");
         baseMalariaProfileActivity.setProfileViewWithData();
         Mockito.verify(profilePresenter).recordMalariaButton(10);
+    }
+
+    @Test(expected = Exception.class)
+    public void refreshFamilyStatusComplete() throws Exception {
+        TextView textView = view.findViewById(R.id.textview_family_has);
+        Whitebox.setInternalState(baseMalariaProfileActivity, "tvFamilyStatus", textView);
+        baseMalariaProfileActivity.refreshFamilyStatus(AlertStatus.complete);
+        Mockito.doNothing().when(Whitebox.invokeMethod(baseMalariaProfileActivity, "setFamilyStatus", "Family has nothing due"));
+        Mockito.verify(baseMalariaProfileActivity).showProgressBar(false);
+        PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("setFamilyStatus", "Family has nothing due");
+    }
+
+    @Test(expected = Exception.class)
+    public void refreshFamilyStatusNormal() throws Exception {
+        TextView textView = view.findViewById(R.id.textview_family_has);
+        Whitebox.setInternalState(baseMalariaProfileActivity, "tvFamilyStatus", textView);
+        baseMalariaProfileActivity.refreshFamilyStatus(AlertStatus.complete);
+        Mockito.doNothing().when(Whitebox.invokeMethod(baseMalariaProfileActivity, "setFamilyStatus", "Family has services due"));
+        PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("setFamilyStatus", "Family has services due");
     }
 
 }
