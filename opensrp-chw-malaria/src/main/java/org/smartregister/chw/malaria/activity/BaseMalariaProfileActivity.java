@@ -274,9 +274,6 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     public void refreshFamilyStatus(AlertStatus status) {
         showProgressBar(false);
-        view_family_row.setVisibility(View.VISIBLE);
-        rlFamilyServicesDue.setVisibility(View.VISIBLE);
-
         if (status == AlertStatus.complete) {
             setFamilyStatus(getString(R.string.family_has_nothing_due));
         } else if (status == AlertStatus.normal) {
@@ -287,6 +284,8 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     }
 
     private void setFamilyStatus(String familyStatus) {
+        view_family_row.setVisibility(View.VISIBLE);
+        rlFamilyServicesDue.setVisibility(View.VISIBLE);
         tvFamilyStatus.setText(familyStatus);
     }
 
