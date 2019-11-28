@@ -75,7 +75,7 @@ public class MalariaRegisterProviderTest {
     }
 
     @Test
-    public void is_anc_closed() throws Exception {
+    public void isAncClosed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
         MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
         Map<String, String> map = new HashMap<>();
@@ -85,7 +85,7 @@ public class MalariaRegisterProviderTest {
     }
 
     @Test
-    public void is_pnc_closed() throws Exception {
+    public void isPncClosed() throws Exception {
         Activity activity = Mockito.mock(Activity.class);
         MalariaRegisterProvider provider = new MalariaRegisterProvider(activity, listener, listener, null);
         Map<String, String> map = new HashMap<>();

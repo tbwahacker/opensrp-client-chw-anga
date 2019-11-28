@@ -57,7 +57,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     }
 
     private String updateMemberGender(CommonPersonObjectClient commonPersonObjectClient) {
-        if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_anc_closed", false))) { String ANC = "ANC";
+        if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_anc_closed", false))) { 
             return "ANC";//context.getResources().getString(R.string.anc_string);
         } else if ("0".equals(Utils.getValue(commonPersonObjectClient.getColumnmaps(), "is_pnc_closed", false))) {
             return "PNC";//context.getResources().getString(R.string.pnc_string);
