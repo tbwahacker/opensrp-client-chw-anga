@@ -47,6 +47,7 @@ public class BaseMalariaRegisterPresenter implements MalariaRegisterContract.Pre
     @Override
     public void onRegistrationSaved() {
         getView().hideProgressDialog();
+
     }
 
     @Override
