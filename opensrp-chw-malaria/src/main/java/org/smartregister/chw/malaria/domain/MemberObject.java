@@ -41,6 +41,7 @@ public class MemberObject implements Serializable {
     private String deliveryDate;
     private String ancMember;
     private String pncMember;
+    private String malariaFollowUpDate;
 
     public MemberObject() {
     }
@@ -74,6 +75,7 @@ public class MemberObject implements Serializable {
         phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
         gestAge = client.getColumnmaps().get(DBConstants.KEY.GEST_AGE);
         deliveryDate = client.getColumnmaps().get(DBConstants.KEY.DELIVERY_DATE);
+        malariaFollowUpDate = client.getColumnmaps().get(DBConstants.KEY.MALARIA_FOLLOW_UP_DATE);
     }
 
     public String getFirstName() {
@@ -347,5 +349,13 @@ public class MemberObject implements Serializable {
 
     public void setPncMember(String pncMember) {
         this.pncMember = pncMember;
+    }
+
+    public String getMalariaFollowUpDate() {
+        return malariaFollowUpDate;
+    }
+
+    public void setMalariaFollowUpDate(String malariaFollowUpDate) {
+        this.malariaFollowUpDate = malariaFollowUpDate;
     }
 }
