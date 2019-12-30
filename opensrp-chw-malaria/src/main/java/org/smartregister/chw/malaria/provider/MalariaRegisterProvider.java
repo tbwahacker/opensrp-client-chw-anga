@@ -41,6 +41,7 @@ public class MalariaRegisterProvider implements RecyclerViewProvider<MalariaRegi
     private Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     public MalariaRegisterProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener, Set visibleColumns) {
+
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.paginationClickListener = paginationClickListener;
         this.onClickListener = onClickListener;
