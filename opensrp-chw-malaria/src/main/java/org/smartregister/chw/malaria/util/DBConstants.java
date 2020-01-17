@@ -42,6 +42,7 @@ public class DBConstants {
         public static final String PHONE_NUMBER_MALARIA = "phoneNumberMalaria";
         public static final String GEST_AGE = "gest_age";
         public static final String DELIVERY_DATE = "delivery_date";
+        public static final String MALARIA_FOLLOW_UP_DATE = "date_chw_mfollowup";
         public static final String CHILD = "ec_child";
 
     }
