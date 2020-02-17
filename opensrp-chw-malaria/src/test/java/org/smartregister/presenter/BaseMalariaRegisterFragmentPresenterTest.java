@@ -4,11 +4,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.DBConstants;
+import org.smartregister.configurableviews.model.View;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 public class BaseMalariaRegisterFragmentPresenterTest {
     @Mock
@@ -50,6 +55,17 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     @Test
     public void getMainTable()  {
         Assert.assertEquals(Constants.TABLES.MALARIA_CONFIRMATION, baseMalariaRegisterFragmentPresenter.getMainTable());
+    }
+
+    @Test
+    public void initializeQueries() {
+        Set<View> visibleColumns = new TreeSet<>();
+        baseMalariaRegisterFragmentPresenter.initializeQueries(null);
+        Mockito.doNothing().when(view).initializeQueryParams("ec_malaria_confirmation", null, null);
+        Mockito.verify(view).initializeQueryParams("ec_malaria_confirmation", null, null);
+        Mockito.verify(view).initializeAdapter(visibleColumns);
+        Mockito.verify(view).countExecute();
+        Mockito.verify(view).filterandSortInInitializeQueries();
     }
 
 }
