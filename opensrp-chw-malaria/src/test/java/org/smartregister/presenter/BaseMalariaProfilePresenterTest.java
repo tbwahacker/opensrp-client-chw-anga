@@ -53,7 +53,7 @@ public class BaseMalariaProfilePresenterTest {
 
     @Test
     public void malariaTestDatePeriodGreaterThanTen() {
-        profilePresenter.recordMalariaButton(14);
+        profilePresenter.recordMalariaButton(13);
         verify(view).setOverDueColor();
     }
 
