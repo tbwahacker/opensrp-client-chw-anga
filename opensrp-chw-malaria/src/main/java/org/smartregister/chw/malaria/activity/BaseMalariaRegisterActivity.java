@@ -24,13 +24,19 @@ import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.malaria.R;
+import org.smartregister.repository.BaseRepository;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import timber.log.Timber;
+
+import static org.smartregister.chw.malaria.util.Util.getClientProcessorForJava;
+import static org.smartregister.chw.malaria.util.Util.getSyncHelper;
+import static org.smartregister.util.Utils.getAllSharedPreferences;
 
 public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements MalariaRegisterContract.View {
 
@@ -162,6 +168,19 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
                 Timber.e(e);
                 displayToast(getString(R.string.error_unable_to_save_form));
             }
+            startClientProcessing();
         }
+    }
+
+    public void startClientProcessing() {
+        try {
+            long lastSyncTimeStamp = getAllSharedPreferences().fetchLastUpdatedAtDate(0);
+            Date lastSyncDate = new Date(lastSyncTimeStamp);
+            getClientProcessorForJava().processClient(getSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unprocessed));
+            getAllSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+        } catch (Exception e) {
+            Timber.d(e);
+        }
+
     }
 }

@@ -53,7 +53,7 @@ public class BaseMalariaProfilePresenterTest {
 
     @Test
     public void malariaTestDatePeriodGreaterThanTen() {
-        profilePresenter.recordMalariaButton(14);
+        profilePresenter.recordMalariaButton(13);
         verify(view).setOverDueColor();
     }
 
@@ -64,8 +64,20 @@ public class BaseMalariaProfilePresenterTest {
     }
 
     @Test
+    public void malariaTestDatePeriodIsEqualToSeven() {
+        profilePresenter.recordMalariaButton(7);
+        verify(view).setDueColor();
+    }
+
+    @Test
     public void refreshProfileBottom() {
         profilePresenter.refreshProfileBottom();
         verify(interactor).refreshProfileInfo(memberObject, profilePresenter.getView());
+    }
+
+    @Test
+    public void saveForm() {
+        profilePresenter.saveForm(null);
+        verify(interactor).saveRegistration(null, view);
     }
  }
