@@ -64,6 +64,12 @@ public class BaseMalariaProfilePresenterTest {
     }
 
     @Test
+    public void malariaTestDatePeriodIsEqualToSeven() {
+        profilePresenter.recordMalariaButton(7);
+        verify(view).setDueColor();
+    }
+
+    @Test
     public void refreshProfileBottom() {
         profilePresenter.refreshProfileBottom();
         verify(interactor).refreshProfileInfo(memberObject, profilePresenter.getView());
