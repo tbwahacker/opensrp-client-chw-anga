@@ -24,7 +24,6 @@ public class SampleApplication extends DrishtiApplication {
     private static final String TAG = SampleApplication.class.getCanonicalName();
 
     private static CommonFtsObject commonFtsObject;
-    private UniqueIdRepository uniqueIdRepository;
 
     @Override
     public void onCreate() {
@@ -47,9 +46,6 @@ public class SampleApplication extends DrishtiApplication {
         context.session().start(context.session().lengthInMilliseconds());
         context.configuration().getDrishtiApplication().setPassword(password);
         context.session().setPassword(password);
-
-
-        sampleUniqueIds();
 
     }
 
@@ -109,29 +105,4 @@ public class SampleApplication extends DrishtiApplication {
         }
         return null;
     }
-
-    public UniqueIdRepository getUniqueIdRepository() {
-        if (uniqueIdRepository == null) {
-            uniqueIdRepository = new UniqueIdRepository(getRepository());
-        }
-        return uniqueIdRepository;
-    }
-
-    private void sampleUniqueIds() {
-        List<String> ids = generateIds(20);
-        getUniqueIdRepository().bulkInserOpenmrsIds(ids);
-    }
-
-    private List<String> generateIds(int size) {
-        List<String> ids = new ArrayList<>();
-        Random r = new Random();
-
-        for (int i = 0; i < size; i++) {
-            Integer randomInt = r.nextInt(1000) + 1;
-            ids.add(randomInt.toString());
-        }
-
-        return ids;
-    }
-
 }
