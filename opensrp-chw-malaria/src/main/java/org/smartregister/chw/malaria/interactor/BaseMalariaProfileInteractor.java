@@ -5,7 +5,7 @@ import android.support.annotation.VisibleForTesting;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.util.AppExecutors;
-import org.smartregister.chw.malaria.util.Util;
+import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.domain.AlertStatus;
 
 import java.util.Date;
@@ -37,7 +37,7 @@ public class BaseMalariaProfileInteractor implements MalariaProfileContract.Inte
 
         Runnable runnable = () -> {
             try {
-                Util.saveFormEvent(jsonString);
+                MalariaUtil.saveFormEvent(jsonString);
             } catch (Exception e) {
                 e.printStackTrace();
             }
