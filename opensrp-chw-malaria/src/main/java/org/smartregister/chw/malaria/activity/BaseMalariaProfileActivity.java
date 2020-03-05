@@ -18,23 +18,22 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
+import org.smartregister.chw.malaria.MalariaLibrary;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.custom_views.BaseMalariaFloatingMenu;
+import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.interactor.BaseMalariaProfileInteractor;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
 import org.smartregister.chw.malaria.util.Constants;
-import org.smartregister.chw.malaria.util.Util;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
-import java.text.ParseException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -44,9 +43,9 @@ import timber.log.Timber;
 
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
-    protected MemberObject MEMBER_OBJECT;
+    protected MemberObject memberObject;
+    private String baseEntityId;
     protected MalariaProfileContract.Presenter profilePresenter;
-    protected CommonPersonObjectClient client;
     protected CircleImageView imageView;
     protected TextView textViewName;
     protected TextView textViewGender;
@@ -71,9 +70,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private ProgressBar progressBar;
     protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
 
-    public static void startProfileActivity(Activity activity, MemberObject memberObject) {
+    public static void startProfileActivity(Activity activity, String baseEntityId) {
         Intent intent = new Intent(activity, BaseMalariaProfileActivity.class);
-        intent.putExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT, memberObject);
+        intent.putExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID, baseEntityId);
         activity.startActivity(intent);
     }
 
@@ -82,6 +81,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         setContentView(R.layout.activity_malaria_profile);
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
+        baseEntityId = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -136,12 +136,11 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         imageView = findViewById(R.id.imageview_profile);
         imageRenderHelper = new ImageRenderHelper(this);
 
-        MEMBER_OBJECT = (MemberObject) getIntent().getSerializableExtra(Constants.MALARIA_MEMBER_OBJECT.MEMBER_OBJECT);
-        client = (CommonPersonObjectClient) getIntent().getSerializableExtra("CLIENT");
+        memberObject = MalariaDao.getMember(baseEntityId);
 
         initializePresenter();
 
-        profilePresenter.fillProfileData(MEMBER_OBJECT);
+        profilePresenter.fillProfileData(memberObject);
 
         setupViews();
     }
@@ -168,14 +167,14 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     @Override
     protected void initializePresenter() {
         showProgressBar(true);
-        profilePresenter = new BaseMalariaProfilePresenter(this, new BaseMalariaProfileInteractor(), MEMBER_OBJECT);
+        profilePresenter = new BaseMalariaProfilePresenter(this, new BaseMalariaProfileInteractor(), memberObject);
         fetchProfileData();
         profilePresenter.refreshProfileBottom();
     }
 
     public void initializeFloatingMenu() {
-        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPhoneNumber())) {
-            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, MEMBER_OBJECT);
+        if (StringUtils.isNotBlank(memberObject.getPhoneNumber())) {
+            baseMalariaFloatingMenu = new BaseMalariaFloatingMenu(this, memberObject);
             baseMalariaFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
             LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -184,40 +183,30 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         }
     }
 
-    @SuppressLint("DefaultLocale")
-    @Override
-    public void setProfileViewWithData() {
-        int age = new Period(new DateTime(MEMBER_OBJECT.getAge()), new DateTime()).getYears();
-        textViewName.setText(String.format("%s %s %s, %d", MEMBER_OBJECT.getFirstName(),
-                MEMBER_OBJECT.getMiddleName(), MEMBER_OBJECT.getLastName(), age));
-        textViewGender.setText(MEMBER_OBJECT.getGender());
-        textViewLocation.setText(MEMBER_OBJECT.getAddress());
-        textViewUniqueID.setText(MEMBER_OBJECT.getUniqueId());
-
-        if (MEMBER_OBJECT.getMalariaTestDate() != null) {
-            try {
-                Date date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(MEMBER_OBJECT.getMalariaTestDate());
-                Days days = Days.daysBetween(new LocalDateTime(date), LocalDateTime.now());
-                profilePresenter.recordMalariaButton(days.getDays());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (StringUtils.isNotBlank(MEMBER_OBJECT.getFamilyHead()) && MEMBER_OBJECT.getFamilyHead().equals(MEMBER_OBJECT.getBaseEntityId())) {
-            findViewById(R.id.family_malaria_head).setVisibility(View.VISIBLE);
-        }
-        if (StringUtils.isNotBlank(MEMBER_OBJECT.getPrimaryCareGiver()) && MEMBER_OBJECT.getPrimaryCareGiver().equals(MEMBER_OBJECT.getBaseEntityId())) {
-            findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
-        }
-        if (StringUtils.isNotBlank(MEMBER_OBJECT.getMalariaTestDate())) {
-            textview_positive_date.setText(getString(R.string.malaria_positive) + " " + formatTime(MEMBER_OBJECT.getMalariaTestDate()));
-        }
-    }
-
     @Override
     public void hideView() {
         textViewRecordMalaria.setVisibility(View.GONE);
+    }
+
+    @SuppressLint("DefaultLocale")
+    @Override
+    public void setProfileViewWithData() {
+        int age = new Period(new DateTime(memberObject.getAge()), new DateTime()).getYears();
+        textViewName.setText(String.format("%s %s %s, %d", memberObject.getFirstName(),
+                memberObject.getMiddleName(), memberObject.getLastName(), age));
+        textViewGender.setText(memberObject.getGender());
+        textViewLocation.setText(memberObject.getAddress());
+        textViewUniqueID.setText(memberObject.getUniqueId());
+
+        if (StringUtils.isNotBlank(memberObject.getFamilyHead()) && memberObject.getFamilyHead().equals(memberObject.getBaseEntityId())) {
+            findViewById(R.id.family_malaria_head).setVisibility(View.VISIBLE);
+        }
+        if (StringUtils.isNotBlank(memberObject.getPrimaryCareGiver()) && memberObject.getPrimaryCareGiver().equals(memberObject.getBaseEntityId())) {
+            findViewById(R.id.primary_malaria_caregiver).setVisibility(View.VISIBLE);
+        }
+        if (memberObject.getMalariaTestDate() != null) {
+            textview_positive_date.setText(getString(R.string.malaria_positive) + " " + formatTime(memberObject.getMalariaTestDate()));
+        }
     }
 
     @Override
@@ -265,9 +254,9 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         rlUpcomingServices.setVisibility(View.VISIBLE);
 
         if (status == AlertStatus.upcoming) {
-            tvUpComingServices.setText(Util.fromHtml(getString(R.string.vaccine_service_upcoming, service, dateFormat.format(date))));
+            tvUpComingServices.setText(MalariaUtil.fromHtml(getString(R.string.vaccine_service_upcoming, service, dateFormat.format(date))));
         } else {
-            tvUpComingServices.setText(Util.fromHtml(getString(R.string.vaccine_service_due, service, dateFormat.format(date))));
+            tvUpComingServices.setText(MalariaUtil.fromHtml(getString(R.string.vaccine_service_due, service, dateFormat.format(date))));
         }
     }
 
@@ -279,7 +268,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         } else if (status == AlertStatus.normal) {
             setFamilyStatus(getString(R.string.family_has_services_due));
         } else if (status == AlertStatus.urgent) {
-            tvFamilyStatus.setText(Util.fromHtml(getString(R.string.family_has_service_overdue)));
+            tvFamilyStatus.setText(MalariaUtil.fromHtml(getString(R.string.family_has_service_overdue)));
         }
     }
 
@@ -304,22 +293,21 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         //implement
     }
 
-    private CharSequence formatTime(String dateTime) {
-        CharSequence timePassedString = null;
+    private String formatTime(Date dateTime) {
         try {
-            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-            Date date = df.parse(dateTime);
-            timePassedString = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(date);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+            return formatter.format(dateTime);
         } catch (Exception e) {
             Timber.d(e);
         }
-        return timePassedString;
+        return null;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
             profilePresenter.saveForm(data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON));
+            finish();
         }
     }
 }
