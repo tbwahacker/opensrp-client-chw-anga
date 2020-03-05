@@ -4,7 +4,7 @@ package org.smartregister.chw.malaria.listener;
 import android.view.View;
 
 import org.smartregister.chw.malaria.fragment.BaseMalariaCallDialogFragment;
-import org.smartregister.chw.malaria.util.Util;
+import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.malaria.R;
 
 import timber.log.Timber;
@@ -25,7 +25,7 @@ public class BaseMalariaCallWidgetDialogListener implements View.OnClickListener
         } else if (i == R.id.malaria_call_head_phone) {
             try {
                 String phoneNumber = (String) v.getTag();
-                Util.launchDialer(callDialogFragment.getActivity(), callDialogFragment, phoneNumber);
+                MalariaUtil.launchDialer(callDialogFragment.getActivity(), callDialogFragment, phoneNumber);
                 callDialogFragment.dismiss();
             } catch (Exception e) {
                 Timber.e(e);
@@ -33,7 +33,7 @@ public class BaseMalariaCallWidgetDialogListener implements View.OnClickListener
         } else if (i == R.id.call_malaria_client_phone) {
             try {
                 String phoneNumber = (String) v.getTag();
-                Util.launchDialer(callDialogFragment.getActivity(), callDialogFragment, phoneNumber);
+                MalariaUtil.launchDialer(callDialogFragment.getActivity(), callDialogFragment, phoneNumber);
                 callDialogFragment.dismiss();
             } catch (Exception e) {
                 Timber.e(e);
