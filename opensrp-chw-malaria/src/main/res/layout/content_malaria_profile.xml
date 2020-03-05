@@ -47,8 +47,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/tick_image"
                     android:text="@string/view_medical_history"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/light_grey_text" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </RelativeLayout>
 
