@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.chw.malaria.contract.MalariaRegisterFragmentContract;
-import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterFragmentPresenter;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -85,9 +84,9 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
     }
 
     @Override
-    public void setUniqueID(String s) {
+    public void setUniqueID(String uniqueID) {
         if (getSearchView() != null) {
-            getSearchView().setText(s);
+            getSearchView().setText(uniqueID);
         }
     }
 
@@ -113,21 +112,23 @@ public class BaseMalariaRegisterFragment extends BaseRegisterFragment implements
 
     @Override
     protected void onViewClicked(android.view.View view) {
-        if (getActivity() == null) {
+        if (getActivity() == null || !(view.getTag() instanceof CommonPersonObjectClient)) {
             return;
         }
-        if (view.getTag() instanceof CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) == CLICK_VIEW_NORMAL) {
-            openProfile((CommonPersonObjectClient) view.getTag());
-        } else if (view.getTag() instanceof CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) == FOLLOW_UP_VISIT) {
-            openFollowUpVisit((CommonPersonObjectClient) view.getTag());
+
+        CommonPersonObjectClient client = (CommonPersonObjectClient) view.getTag();
+        if (view.getTag(R.id.VIEW_ID) == CLICK_VIEW_NORMAL) {
+            openProfile(client.getCaseId());
+        } else if (view.getTag(R.id.VIEW_ID) == FOLLOW_UP_VISIT) {
+            openFollowUpVisit(client.getCaseId());
         }
     }
 
-    protected void openProfile(CommonPersonObjectClient client) {
-        BaseMalariaProfileActivity.startProfileActivity(getActivity(), new MemberObject(client));
+    protected void openProfile(String baseEntityId) {
+        BaseMalariaProfileActivity.startProfileActivity(getActivity(), baseEntityId);
     }
 
-    protected void openFollowUpVisit(CommonPersonObjectClient client) {
+    protected void openFollowUpVisit(String baseEntityId) {
 //        implement
     }
 
