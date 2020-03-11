@@ -20,7 +20,7 @@ public class BaseMalariaRegisterModelTest {
     @Test
     public void checkJSon() {
         try {
-            Assert.assertNull(baseMalariaRegisterModel.getFormAsJson(null,null,null));
+            Assert.assertNull(baseMalariaRegisterModel.getFormAsJson(null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
         }

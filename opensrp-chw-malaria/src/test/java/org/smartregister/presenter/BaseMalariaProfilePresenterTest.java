@@ -80,4 +80,4 @@ public class BaseMalariaProfilePresenterTest {
         profilePresenter.saveForm(null);
         verify(interactor).saveRegistration(null, view);
     }
- }
+}

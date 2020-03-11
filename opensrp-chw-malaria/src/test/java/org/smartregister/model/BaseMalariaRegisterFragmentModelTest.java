@@ -34,23 +34,23 @@ public class BaseMalariaRegisterFragmentModelTest {
 
     @Test
     public void checkCountSelect() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.countSelect(null,null));
+        Assert.assertNull(baseMalariaRegisterFragmentModel.countSelect(null, null));
     }
 
     @Test
     public void checkMainSelect() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.mainSelect(null,null));
+        Assert.assertNull(baseMalariaRegisterFragmentModel.mainSelect(null, null));
     }
 
     @Test
     public void checkGetFilterText() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getFilterText(null,null));
+        Assert.assertNull(baseMalariaRegisterFragmentModel.getFilterText(null, null));
     }
 
     @Test
     public void checkGetSortText() {
         Assert.assertNull(baseMalariaRegisterFragmentModel.getSortText(null));
-}
+    }
 
     @Test
     public void checkJsonArray() {

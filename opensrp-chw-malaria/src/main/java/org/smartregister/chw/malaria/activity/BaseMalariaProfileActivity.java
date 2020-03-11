@@ -43,7 +43,6 @@ import timber.log.Timber;
 
 public class BaseMalariaProfileActivity extends BaseProfileActivity implements MalariaProfileContract.View, MalariaProfileContract.InteractorCallBack {
     protected MemberObject memberObject;
-    private String baseEntityId;
     protected MalariaProfileContract.Presenter profilePresenter;
     protected CircleImageView imageView;
     protected TextView textViewName;
@@ -81,7 +80,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         setContentView(R.layout.activity_malaria_profile);
         Toolbar toolbar = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
-        baseEntityId = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
+        String baseEntityId = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

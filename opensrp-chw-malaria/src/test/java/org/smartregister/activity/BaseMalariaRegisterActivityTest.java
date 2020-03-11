@@ -11,10 +11,9 @@ import org.smartregister.chw.malaria.activity.BaseMalariaRegisterActivity;
 
 public class BaseMalariaRegisterActivityTest {
     @Mock
-    private BaseMalariaRegisterActivity baseMalariaRegisterActivity = new BaseMalariaRegisterActivity();
-
-    @Mock
     public Intent data;
+    @Mock
+    private BaseMalariaRegisterActivity baseMalariaRegisterActivity = new BaseMalariaRegisterActivity();
 
     @Test
     public void assertNotNull() {
