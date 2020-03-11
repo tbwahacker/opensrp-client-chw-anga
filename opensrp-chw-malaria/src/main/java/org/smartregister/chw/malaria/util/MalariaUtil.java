@@ -119,6 +119,10 @@ public class MalariaUtil {
         MalariaUtil.processEvent(allSharedPreferences, baseEvent);
     }
 
+    public static int getMemberProfileImageResourceIdentifier(String entityType) {
+        return R.mipmap.ic_member;
+    }
+
     public static class CloseMalariaMemberFromRegister extends AsyncTask<Void, Void, Void> {
         private final String baseEntityId;
 

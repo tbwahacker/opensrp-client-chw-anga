@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -62,6 +63,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     protected RelativeLayout rlUpcomingServices;
     protected RelativeLayout rlFamilyServicesDue;
     protected RelativeLayout visitStatus;
+    protected ImageView imageViewCross;
     protected TextView textViewUndo;
     protected RelativeLayout rlMalariaPositiveDate;
     private TextView tvUpComingServices;
@@ -105,6 +107,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         view_most_due_overdue_row = findViewById(R.id.view_most_due_overdue_row);
         view_family_row = findViewById(R.id.view_family_row);
         view_positive_date_row = findViewById(R.id.view_positive_date_row);
+        imageViewCross = findViewById(R.id.tick_image);
 
         tvUpComingServices = findViewById(R.id.textview_name_due);
         tvFamilyStatus = findViewById(R.id.textview_family_has);
