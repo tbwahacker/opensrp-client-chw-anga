@@ -20,7 +20,6 @@ import android.widget.TextView;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.smartregister.chw.malaria.MalariaLibrary;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.custom_views.BaseMalariaFloatingMenu;
 import org.smartregister.chw.malaria.dao.MalariaDao;
@@ -34,7 +33,6 @@ import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.malaria.R;
 import org.smartregister.view.activity.BaseProfileActivity;
 
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
