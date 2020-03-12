@@ -40,30 +40,9 @@ public class MalariaDaoTest extends MalariaDao {
     @Test
     public void testIsRegisteredForMalaria() {
         Mockito.doReturn(database).when(repository).getReadableDatabase();
-
-        MatrixCursor matrixCursor = new MatrixCursor(new String[]{"count"});
-        matrixCursor.addRow(new Object[]{"2"});
-
-        Mockito.doReturn(matrixCursor).when(database).rawQuery(Mockito.any(), Mockito.any());
-
         boolean registered = MalariaDao.isRegisteredForMalaria("12345");
-
         Mockito.verify(database).rawQuery(Mockito.anyString(), Mockito.any());
-        Assert.assertTrue(registered);
-    }
-
-    @Test
-    public void testGetMember() {
-
-        Mockito.doReturn(database).when(repository).getReadableDatabase();
-
-        MatrixCursor matrixCursor = new MatrixCursor(new String[]{"base_entity_id"});
-        matrixCursor.addRow(new Object[]{"12345"});
-        Mockito.doReturn(matrixCursor).when(database).rawQuery(Mockito.any(), Mockito.any());
-
-        MemberObject memberObject = MalariaDao.getMember("123456");
-        Mockito.verify(database).rawQuery(Mockito.anyString(), Mockito.any());
-        Assert.assertEquals(memberObject.getBaseEntityId(), "12345");
+        Assert.assertFalse(registered);
     }
 }
 

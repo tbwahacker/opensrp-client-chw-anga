@@ -129,26 +129,6 @@ public class BaseMalariaProfileActivityTest {
         Mockito.verify(baseMalariaProfileActivity).openFamilyDueServices();
     }
 
-    @Test
-    public void initializePresenter() throws Exception {
-        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
-        Mockito.doNothing().when(baseMalariaProfileActivity).showProgressBar(true);
-
-        Whitebox.invokeMethod(baseMalariaProfileActivity, "initializePresenter");
-        Mockito.verify(baseMalariaProfileActivity).showProgressBar(true);
-        PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("fetchProfileData");
-    }
-
-    @Test(expected = Exception.class)
-    public void setProfileViewWithData() throws Exception {
-        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
-        Whitebox.invokeMethod(baseMalariaProfileActivity, "startProfileActivity", activity, memberObject);
-        Mockito.when(memberObject.getAge()).thenReturn("01-01-1990");
-        Mockito.when(memberObject.getMalariaTestDate()).thenReturn("01-01-2019");
-        baseMalariaProfileActivity.setProfileViewWithData();
-        Mockito.verify(profilePresenter).recordMalariaButton(10);
-    }
-
     @Test(expected = Exception.class)
     public void refreshFamilyStatusComplete() throws Exception {
         baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());

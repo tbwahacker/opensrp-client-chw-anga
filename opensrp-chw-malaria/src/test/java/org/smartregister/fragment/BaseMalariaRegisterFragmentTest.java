@@ -32,6 +32,4 @@ public class BaseMalariaRegisterFragmentTest {
         PowerMockito.verifyStatic(times(1));
 
     }
-
-
 }

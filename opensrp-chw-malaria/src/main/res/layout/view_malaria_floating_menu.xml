@@ -101,8 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 app:backgroundTint="@color/white"
-                app:fabSize="mini"
-                app:srcCompat="@mipmap/ic_refer" />
+                app:fabSize="mini" />
 
         </RelativeLayout>
 
