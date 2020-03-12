@@ -1,6 +1,5 @@
 package org.smartregister.dao;
 
-import net.sqlcipher.MatrixCursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.junit.Assert;
@@ -12,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.smartregister.chw.malaria.dao.MalariaDao;
-import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.repository.Repository;
 
 @RunWith(MockitoJUnitRunner.class)
