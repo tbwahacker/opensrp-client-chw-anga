@@ -23,6 +23,10 @@ public interface MalariaProfileContract {
 
         void showProgressBar(boolean status);
 
+        void recordAnc(MemberObject memberObject);
+
+        void recordPnc(MemberObject memberObject);
+
         void hideView();
     }
 

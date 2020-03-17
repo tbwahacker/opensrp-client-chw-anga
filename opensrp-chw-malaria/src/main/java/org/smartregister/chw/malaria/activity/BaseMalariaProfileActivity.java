@@ -66,6 +66,12 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
     private TextView tvUpComingServices;
     private TextView tvFamilyStatus;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
+    protected TextView textViewVisitDone;
+    protected RelativeLayout visitDone;
+    protected LinearLayout recordVisits;
+    protected TextView textViewVisitDoneEdit;
+    protected TextView textViewRecordAncNotDone;
+
     private ProgressBar progressBar;
     protected BaseMalariaFloatingMenu baseMalariaFloatingMenu;
 
@@ -105,49 +111,57 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         view_family_row = findViewById(R.id.view_family_row);
         view_positive_date_row = findViewById(R.id.view_positive_date_row);
         imageViewCross = findViewById(R.id.tick_image);
-
         tvUpComingServices = findViewById(R.id.textview_name_due);
         tvFamilyStatus = findViewById(R.id.textview_family_has);
         textview_positive_date = findViewById(R.id.textview_positive_date);
-
         rlLastVisit = findViewById(R.id.rlLastVisit);
         rlUpcomingServices = findViewById(R.id.rlUpcomingServices);
         rlFamilyServicesDue = findViewById(R.id.rlFamilyServicesDue);
         rlMalariaPositiveDate = findViewById(R.id.rlMalariaPositiveDate);
-
+        textViewVisitDone = findViewById(R.id.textview_visit_done);
+        visitStatus = findViewById(R.id.record_visit_not_done_bar);
+        visitDone = findViewById(R.id.visit_done_bar);
+        recordVisits = findViewById(R.id.record_visits);
         progressBar = findViewById(R.id.progress_bar);
-
-        visitStatus = findViewById(R.id.record_visit_status_bar);
-
-        findViewById(R.id.rlLastVisit).setOnClickListener(this);
-        findViewById(R.id.rlUpcomingServices).setOnClickListener(this);
-        findViewById(R.id.rlFamilyServicesDue).setOnClickListener(this);
-        rlMalariaPositiveDate.setOnClickListener(this);
-
+        textViewRecordAncNotDone = findViewById(R.id.textview_record_anc_not_done);
+        textViewVisitDoneEdit = findViewById(R.id.textview_edit);
         textViewRecordMalaria = findViewById(R.id.textview_record_malaria);
-        textViewRecordMalaria.setOnClickListener(this);
-
         textViewRecordAnc = findViewById(R.id.textview_record_anc);
-        textViewRecordAnc.setOnClickListener(this);
-
         textViewUndo = findViewById(R.id.textview_undo);
+        imageView = findViewById(R.id.imageview_profile);
+
+        textViewRecordAncNotDone.setOnClickListener(this);
+        textViewVisitDoneEdit.setOnClickListener(this);
+        rlLastVisit.setOnClickListener(this);
+        rlUpcomingServices.setOnClickListener(this);
+        rlFamilyServicesDue.setOnClickListener(this);
+        rlMalariaPositiveDate.setOnClickListener(this);
+        textViewRecordMalaria.setOnClickListener(this);
+        textViewRecordAnc.setOnClickListener(this);
         textViewUndo.setOnClickListener(this);
 
-        imageView = findViewById(R.id.imageview_profile);
         imageRenderHelper = new ImageRenderHelper(this);
-
         memberObject = MalariaDao.getMember(baseEntityId);
-
         initializePresenter();
-
         profilePresenter.fillProfileData(memberObject);
-
         setupViews();
     }
 
     @Override
     protected void setupViews() {
         initializeFloatingMenu();
+        recordAnc(memberObject);
+        recordPnc(memberObject);
+    }
+
+    @Override
+    public void recordAnc(MemberObject memberObject) {
+        //implement
+    }
+
+    @Override
+    public void recordPnc(MemberObject memberObject) {
+        //implement
     }
 
     @Override
