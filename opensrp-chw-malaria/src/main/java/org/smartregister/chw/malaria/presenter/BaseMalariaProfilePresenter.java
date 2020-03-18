@@ -35,10 +35,11 @@ public class BaseMalariaProfilePresenter implements MalariaProfileContract.Prese
         if (getView() == null) {
             return;
         }
-        if (("OVERDUE").equals(visitState)) {
-            getView().setOverDueColor();
-        } else if (("DUE").equals(visitState)) {
-            getView().setDueColor();
+
+        if (("OVERDUE").equals(visitState) || ("DUE").equals(visitState)) {
+            if (("OVERDUE").equals(visitState)) {
+                getView().setOverDueColor();
+            }
         } else {
             getView().hideView();
         }

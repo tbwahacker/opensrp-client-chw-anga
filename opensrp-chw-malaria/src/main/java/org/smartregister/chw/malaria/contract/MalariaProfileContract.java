@@ -11,8 +11,6 @@ public interface MalariaProfileContract {
 
         void setProfileViewWithData();
 
-        void setDueColor();
-
         void setOverDueColor();
 
         void openMedicalHistory();
