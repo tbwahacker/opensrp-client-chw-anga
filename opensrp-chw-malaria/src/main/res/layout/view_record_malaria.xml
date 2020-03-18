@@ -121,7 +121,7 @@
                 android:layout_toEndOf="@+id/tick_image"
                 android:padding="10dp"
                 android:text="@string/visit_done"
-                android:textColor="@color/black" />
+                android:textColor="@color/alert_complete_green" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/textview_edit"
