@@ -6,14 +6,11 @@ import org.mockito.Mockito;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
 import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.chw.malaria.presenter.BaseMalariaProfilePresenter;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class BaseMalariaProfilePresenterTest {
-    @Mock
-    private CommonPersonObjectClient commonPersonObjectClient = Mockito.mock(CommonPersonObjectClient.class);
 
     @Mock
     private MalariaProfileContract.View view = Mockito.mock(MalariaProfileContract.View.class);

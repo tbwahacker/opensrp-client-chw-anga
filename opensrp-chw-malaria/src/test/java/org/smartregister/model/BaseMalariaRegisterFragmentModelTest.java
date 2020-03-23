@@ -42,18 +42,4 @@ public class BaseMalariaRegisterFragmentModelTest {
         Assert.assertNull(baseMalariaRegisterFragmentModel.mainSelect(null, null));
     }
 
-    @Test
-    public void checkGetFilterText() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getFilterText(null, null));
-    }
-
-    @Test
-    public void checkGetSortText() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getSortText(null));
-    }
-
-    @Test
-    public void checkJsonArray() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getJsonArray(null));
-    }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -302,6 +303,7 @@ public class BaseMalariaProfileActivity extends BaseProfileActivity implements M
         //implement
     }
 
+    @Nullable
     private String formatTime(Date dateTime) {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");

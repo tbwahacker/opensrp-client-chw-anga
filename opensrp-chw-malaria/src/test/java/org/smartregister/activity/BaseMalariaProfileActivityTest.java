@@ -1,6 +1,5 @@
 package org.smartregister.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
-import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
 
@@ -31,12 +29,6 @@ public class BaseMalariaProfileActivityTest {
 
     @Mock
     public View view;
-
-    @Mock
-    public Activity activity;
-
-    @Mock
-    public MemberObject memberObject;
 
     @Before
     public void setUp() {

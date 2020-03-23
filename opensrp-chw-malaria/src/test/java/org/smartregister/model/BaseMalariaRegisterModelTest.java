@@ -13,7 +13,7 @@ public class BaseMalariaRegisterModelTest {
     private BaseMalariaRegisterModel baseMalariaRegisterModel;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 

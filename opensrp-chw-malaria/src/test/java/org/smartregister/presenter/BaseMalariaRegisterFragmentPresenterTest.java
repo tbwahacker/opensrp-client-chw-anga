@@ -19,7 +19,6 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     @Mock
     protected MalariaRegisterFragmentContract.View view;
 
-
     @Mock
     protected MalariaRegisterFragmentContract.Model model;
 
