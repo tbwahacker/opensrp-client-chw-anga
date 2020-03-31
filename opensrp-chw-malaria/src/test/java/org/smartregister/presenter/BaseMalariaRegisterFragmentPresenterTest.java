@@ -56,4 +56,15 @@ public class BaseMalariaRegisterFragmentPresenterTest {
         Assert.assertEquals(Constants.TABLES.MALARIA_CONFIRMATION, baseMalariaRegisterFragmentPresenter.getMainTable());
     }
 
+    @Test
+    public void initializeQueries() {
+        Set<View> visibleColumns = new TreeSet<>();
+        baseMalariaRegisterFragmentPresenter.initializeQueries(null);
+        Mockito.doNothing().when(view).initializeQueryParams("ec_malaria_confirmation", null, null);
+        Mockito.verify(view).initializeQueryParams("ec_malaria_confirmation", null, null);
+        Mockito.verify(view).initializeAdapter(visibleColumns);
+        Mockito.verify(view).countExecute();
+        Mockito.verify(view).filterandSortInInitializeQueries();
+    }
+
 }
