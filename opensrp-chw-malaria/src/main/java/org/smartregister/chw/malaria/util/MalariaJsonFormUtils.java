@@ -17,7 +17,7 @@ import static org.smartregister.chw.malaria.util.Constants.ENCOUNTER_TYPE;
 import static org.smartregister.chw.malaria.util.Constants.STEP_ONE;
 import static org.smartregister.chw.malaria.util.Constants.STEP_TWO;
 
-public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
+public class MalariaJsonFormUtils extends org.smartregister.util.JsonFormUtils {
     public static final String METADATA = "metadata";
 
     public static Triple<Boolean, JSONObject, JSONArray> validateParameters(String jsonString) {
@@ -81,11 +81,8 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
         } else if (Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT.equals(encounter_type)) {
             encounter_type = Constants.TABLES.MALARIA_FOLLOW_UP;
         }
-
-
         return org.smartregister.util.JsonFormUtils.createEvent(fields, getJSONObject(jsonForm, METADATA), formTag(allSharedPreferences), entityId, getString(jsonForm, ENCOUNTER_TYPE), encounter_type);
     }
-
 
     protected static FormTag formTag(AllSharedPreferences allSharedPreferences) {
         FormTag formTag = new FormTag();
@@ -94,7 +91,6 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
         formTag.databaseVersion = MalariaLibrary.getInstance().getDatabaseVersion();
         return formTag;
     }
-
 
     public static void tagEvent(AllSharedPreferences allSharedPreferences, Event event) {
         String providerId = allSharedPreferences.fetchRegisteredANM();
@@ -122,6 +118,7 @@ public class JsonFormUtils extends org.smartregister.util.JsonFormUtils {
             currentLocationId) throws JSONException {
         jsonObject.getJSONObject(METADATA).put(ENCOUNTER_LOCATION, currentLocationId);
         jsonObject.put(org.smartregister.util.JsonFormUtils.ENTITY_ID, entityId);
+        jsonObject.put(DBConstants.KEY.RELATIONAL_ID, entityId);
     }
 
     public static JSONObject getFormAsJson(String formName) throws Exception {

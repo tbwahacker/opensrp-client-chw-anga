@@ -4,7 +4,7 @@ import android.support.annotation.VisibleForTesting;
 
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
 import org.smartregister.chw.malaria.util.AppExecutors;
-import org.smartregister.chw.malaria.util.Util;
+import org.smartregister.chw.malaria.util.MalariaUtil;
 
 public class BaseMalariaRegisterInteractor implements MalariaRegisterContract.Interactor {
 
@@ -24,7 +24,7 @@ public class BaseMalariaRegisterInteractor implements MalariaRegisterContract.In
 
         Runnable runnable = () -> {
             try {
-                Util.saveFormEvent(jsonString);
+                MalariaUtil.saveFormEvent(jsonString);
             } catch (Exception e) {
                 e.printStackTrace();
             }

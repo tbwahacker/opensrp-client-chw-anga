@@ -11,10 +11,6 @@ public interface MalariaProfileContract {
 
         void setProfileViewWithData();
 
-        void hideView();
-
-        void setDueColor();
-
         void setOverDueColor();
 
         void openMedicalHistory();
@@ -24,6 +20,12 @@ public interface MalariaProfileContract {
         void openFamilyDueServices();
 
         void showProgressBar(boolean status);
+
+        void recordAnc(MemberObject memberObject);
+
+        void recordPnc(MemberObject memberObject);
+
+        void hideView();
     }
 
     interface Presenter {
@@ -37,7 +39,7 @@ public interface MalariaProfileContract {
 
         void refreshProfileBottom();
 
-        void recordMalariaButton(int days);
+        void recordMalariaButton(String visitState);
     }
 
     interface Interactor {

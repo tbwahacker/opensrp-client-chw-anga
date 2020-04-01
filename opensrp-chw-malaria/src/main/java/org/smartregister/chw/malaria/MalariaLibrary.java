@@ -3,7 +3,6 @@ package org.smartregister.chw.malaria;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.repository.Repository;
-import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 

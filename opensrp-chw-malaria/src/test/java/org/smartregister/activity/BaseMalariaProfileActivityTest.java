@@ -1,6 +1,5 @@
 package org.smartregister.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.chw.malaria.contract.MalariaProfileContract;
-import org.smartregister.chw.malaria.domain.MemberObject;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.malaria.R;
 
@@ -31,12 +29,6 @@ public class BaseMalariaProfileActivityTest {
 
     @Mock
     public View view;
-
-    @Mock
-    public Activity activity;
-
-    @Mock
-    public MemberObject memberObject;
 
     @Before
     public void setUp() {
@@ -54,12 +46,6 @@ public class BaseMalariaProfileActivityTest {
     }
 
     @Test
-    public void setDueColor() {
-        baseMalariaProfileActivity.setDueColor();
-        Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.BLUE);
-    }
-
-    @Test
     public void setOverDueColor() {
         baseMalariaProfileActivity.setOverDueColor();
         Mockito.verify(view, Mockito.never()).setBackgroundColor(Color.RED);
@@ -69,7 +55,7 @@ public class BaseMalariaProfileActivityTest {
     public void formatTime() {
         BaseMalariaProfileActivity activity = new BaseMalariaProfileActivity();
         try {
-            Assert.assertEquals("25 Oct 2019", Whitebox.invokeMethod(activity, "formatTime","25-10-2019"));
+            Assert.assertEquals("25 Oct 2019", Whitebox.invokeMethod(activity, "formatTime", "25-10-2019"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,26 +113,6 @@ public class BaseMalariaProfileActivityTest {
         Mockito.doNothing().when(baseMalariaProfileActivity).openFamilyDueServices();
         baseMalariaProfileActivity.onClick(view);
         Mockito.verify(baseMalariaProfileActivity).openFamilyDueServices();
-    }
-
-    @Test
-    public void initializePresenter() throws Exception {
-        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
-        Mockito.doNothing().when(baseMalariaProfileActivity).showProgressBar(true);
-
-        Whitebox.invokeMethod(baseMalariaProfileActivity, "initializePresenter");
-        Mockito.verify(baseMalariaProfileActivity).showProgressBar(true);
-        PowerMockito.verifyPrivate(baseMalariaProfileActivity).invoke("fetchProfileData");
-    }
-
-    @Test(expected = Exception.class)
-    public void setProfileViewWithData() throws Exception {
-        baseMalariaProfileActivity = Mockito.spy(new BaseMalariaProfileActivity());
-        Whitebox.invokeMethod(baseMalariaProfileActivity, "startProfileActivity", activity, memberObject);
-        Mockito.when(memberObject.getAge()).thenReturn("01-01-1990");
-        Mockito.when(memberObject.getMalariaTestDate()).thenReturn("01-01-2019");
-        baseMalariaProfileActivity.setProfileViewWithData();
-        Mockito.verify(profilePresenter).recordMalariaButton(10);
     }
 
     @Test(expected = Exception.class)

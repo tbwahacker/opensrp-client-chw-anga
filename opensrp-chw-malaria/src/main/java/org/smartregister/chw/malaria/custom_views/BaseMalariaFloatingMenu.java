@@ -20,7 +20,7 @@ public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClic
     }
 
     protected void initUi() {
-        inflate(getContext(), R.layout.view_malaria_call_floating_menu, this);
+        inflate(getContext(), R.layout.view_malaria_floating_menu, this);
         FloatingActionButton fab = findViewById(R.id.malaria_fab);
         if (fab != null)
             fab.setOnClickListener(this);
@@ -29,6 +29,9 @@ public class BaseMalariaFloatingMenu extends LinearLayout implements View.OnClic
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.malaria_fab) {
+            Activity activity = (Activity) getContext();
+            BaseMalariaCallDialogFragment.launchDialog(activity, MEMBER_OBJECT);
+        }  else if (view.getId() == R.id.refer_to_facility_layout) {
             Activity activity = (Activity) getContext();
             BaseMalariaCallDialogFragment.launchDialog(activity, MEMBER_OBJECT);
         }

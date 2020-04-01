@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
@@ -21,10 +22,14 @@ import org.smartregister.chw.malaria.listener.MalariaBottomNavigationListener;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterModel;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterPresenter;
 import org.smartregister.chw.malaria.util.Constants;
+import org.smartregister.chw.malaria.util.DBConstants;
+import org.smartregister.chw.malaria.util.MalariaJsonFormUtils;
+import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.helper.BottomNavigationHelper;
 import org.smartregister.listener.BottomNavigationListener;
 import org.smartregister.malaria.R;
 import org.smartregister.repository.BaseRepository;
+import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -34,13 +39,10 @@ import java.util.List;
 
 import timber.log.Timber;
 
-import static org.smartregister.chw.malaria.util.Util.getClientProcessorForJava;
-import static org.smartregister.chw.malaria.util.Util.getSyncHelper;
-import static org.smartregister.util.Utils.getAllSharedPreferences;
-
 public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements MalariaRegisterContract.View {
 
     protected String BASE_ENTITY_ID;
+    protected String FAMILY_BASE_ENTITY_ID;
     protected String ACTION;
     protected String FORM_NAME;
 
@@ -48,6 +50,7 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BASE_ENTITY_ID = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID);
+        FAMILY_BASE_ENTITY_ID = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.FAMILY_BASE_ENTITY_ID);
         ACTION = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.ACTION);
         FORM_NAME = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.MALARIA_FORM_NAME);
         onStartActivityWithAction();
@@ -88,7 +91,6 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
         if (getFormConfig() != null) {
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, getFormConfig());
         }
-
         startActivityForResult(intent, Constants.REQUEST_CODE_GET_JSON);
     }
 
@@ -101,6 +103,7 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
     protected void onActivityResultExtended(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
             presenter().saveForm(data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON));
+            finish();
         }
     }
 
@@ -162,6 +165,8 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
             try {
                 String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
                 JSONObject form = new JSONObject(jsonString);
+                JSONArray fieldsOne = MalariaJsonFormUtils.fields(form, Constants.STEP_ONE);
+                updateFormField(fieldsOne, DBConstants.KEY.RELATIONAL_ID, FAMILY_BASE_ENTITY_ID);
 //                process malaria form
                 presenter().saveForm(form.toString());
             } catch (JSONException e) {
@@ -172,12 +177,26 @@ public class BaseMalariaRegisterActivity extends BaseRegisterActivity implements
         }
     }
 
+    private void updateFormField(JSONArray formFieldArrays, String formFieldKey, String updateValue) {
+        if (updateValue != null) {
+            JSONObject formObject = org.smartregister.util.JsonFormUtils.getFieldJSONObject(formFieldArrays, formFieldKey);
+            if (formObject != null) {
+                try {
+                    formObject.remove(org.smartregister.util.JsonFormUtils.VALUE);
+                    formObject.put(org.smartregister.util.JsonFormUtils.VALUE, updateValue);
+                } catch (JSONException e) {
+                    Timber.e(e);
+                }
+            }
+        }
+    }
+
     public void startClientProcessing() {
         try {
-            long lastSyncTimeStamp = getAllSharedPreferences().fetchLastUpdatedAtDate(0);
+            long lastSyncTimeStamp = Utils.getAllSharedPreferences().fetchLastUpdatedAtDate(0);
             Date lastSyncDate = new Date(lastSyncTimeStamp);
-            getClientProcessorForJava().processClient(getSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unprocessed));
-            getAllSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+            MalariaUtil.getClientProcessorForJava().processClient(MalariaUtil.getSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unprocessed));
+            Utils.getAllSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
         } catch (Exception e) {
             Timber.d(e);
         }

@@ -1,9 +1,7 @@
 package org.smartregister.chw.malaria.domain;
 
-import org.smartregister.chw.malaria.util.DBConstants;
-import org.smartregister.commonregistry.CommonPersonObjectClient;
-
 import java.io.Serializable;
+import java.util.Date;
 
 public class MemberObject implements Serializable {
 
@@ -22,7 +20,7 @@ public class MemberObject implements Serializable {
     private String feverMalariaChw;
     private String feverDuration;
     private String dateHfMalariaTest;
-    private String malariaTestDate;
+    private Date malariaTestDate;
     private String malariaTreat;
     private String famLlin;
     private String llin2Days;
@@ -45,39 +43,6 @@ public class MemberObject implements Serializable {
 
     public MemberObject() {
     }
-    
-    public MemberObject(CommonPersonObjectClient client) {
-        firstName = client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.FIRST_NAME) : "";
-        middleName = client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.MIDDLE_NAME) : "";
-        lastName = client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) != null ? client.getColumnmaps().get(DBConstants.KEY.LAST_NAME) : "";
-        address = client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) != null ? client.getColumnmaps().get(DBConstants.KEY.VILLAGE_TOWN) : "";
-        gender = client.getColumnmaps().get(DBConstants.KEY.GENDER) != null ? client.getColumnmaps().get(DBConstants.KEY.GENDER) : "";
-        age = client.getColumnmaps().get(DBConstants.KEY.DOB) != null ? client.getColumnmaps().get(DBConstants.KEY.DOB) : "";
-        uniqueId = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
-        baseEntityId = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID);
-        relationalId = client.getColumnmaps().get(DBConstants.KEY.RELATIONAL_ID);
-        primaryCareGiver = client.getColumnmaps().get(DBConstants.KEY.PRIMARY_CARE_GIVER);
-        familyHead = client.getColumnmaps().get(DBConstants.KEY.FAMILY_HEAD);
-        familyBaseEntityId = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
-        relationalid = client.getColumnmaps().get(DBConstants.KEY.RELATIONALID);
-        details = client.getColumnmaps().get(DBConstants.KEY.DETAILS);
-        dateChwMalariaTest = client.getColumnmaps().get(DBConstants.KEY.DATE_CHW_MALARIA_TEST);
-        feverMalariaChw = client.getColumnmaps().get(DBConstants.KEY.FEVER_MALARIA_CHW);
-        feverDuration = client.getColumnmaps().get(DBConstants.KEY.FEVER_DURATION);
-        dateHfMalariaTest = client.getColumnmaps().get(DBConstants.KEY.DATE_HF_MALARIA_TEST);
-        malariaTestDate = client.getColumnmaps().get(DBConstants.KEY.MALARIA_TEST_DATE);
-        malariaTreat = client.getColumnmaps().get(DBConstants.KEY.MALARIA_TREAT);
-        famLlin = client.getColumnmaps().get(DBConstants.KEY.FAM_LLIN);
-        llin2Days = client.getColumnmaps().get(DBConstants.KEY.LLIN_2DAYS);
-        llinCondition = client.getColumnmaps().get(DBConstants.KEY.LLIN_CONDITION);
-        malariaEduChw = client.getColumnmaps().get(DBConstants.KEY.MALARIA_EDU_CHW);
-        familyName = client.getColumnmaps().get(DBConstants.KEY.FAMILY_NAME);
-        phoneNumber = client.getColumnmaps().get(DBConstants.KEY.PHONE_NUMBER_MALARIA);
-        gestAge = client.getColumnmaps().get(DBConstants.KEY.GEST_AGE);
-        deliveryDate = client.getColumnmaps().get(DBConstants.KEY.DELIVERY_DATE);
-        malariaFollowUpDate = client.getColumnmaps().get(DBConstants.KEY.MALARIA_FOLLOW_UP_DATE);
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -182,11 +147,11 @@ public class MemberObject implements Serializable {
         this.dateHfMalariaTest = dateHfMalariaTest;
     }
 
-    public String getMalariaTestDate() {
+    public Date getMalariaTestDate() {
         return malariaTestDate;
     }
 
-    public void setMalariaTestDate(String malariaTestDate) {
+    public void setMalariaTestDate(Date malariaTestDate) {
         this.malariaTestDate = malariaTestDate;
     }
 

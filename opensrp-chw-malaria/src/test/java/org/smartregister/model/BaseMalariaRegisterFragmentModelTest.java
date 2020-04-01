@@ -4,8 +4,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.smartregister.chw.malaria.model.BaseMalariaRegisterFragmentModel;
+import org.smartregister.configurableviews.model.RegisterConfiguration;
+import org.smartregister.configurableviews.model.View;
+import org.smartregister.configurableviews.model.ViewConfiguration;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class BaseMalariaRegisterFragmentModelTest {
 
@@ -13,47 +20,48 @@ public class BaseMalariaRegisterFragmentModelTest {
     private BaseMalariaRegisterFragmentModel baseMalariaRegisterFragmentModel;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void checkDefaultConfig() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.defaultRegisterConfiguration());
+    public void testDefaultRegisterConfiguration() {
+        RegisterConfiguration configuration = new RegisterConfiguration();
+        Mockito.when(baseMalariaRegisterFragmentModel.defaultRegisterConfiguration())
+                .thenReturn(configuration);
+        Assert.assertEquals(configuration, baseMalariaRegisterFragmentModel.defaultRegisterConfiguration());
     }
 
     @Test
-    public void checkViewConfig() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getViewConfiguration(null));
+    public void testGetViewConfiguration() {
+        ViewConfiguration viewConfiguration = new ViewConfiguration();
+        Mockito.when(baseMalariaRegisterFragmentModel.getViewConfiguration(Mockito.anyString()))
+                .thenReturn(viewConfiguration);
+        Assert.assertEquals(viewConfiguration, baseMalariaRegisterFragmentModel.getViewConfiguration(Mockito.anyString()));
     }
 
     @Test
-    public void checkRegisterActiveColumnsReturnNotNull() {
-        Assert.assertNotNull(baseMalariaRegisterFragmentModel.getRegisterActiveColumns(null));
+    public void testGetRegisterActiveColumns() {
+        Set<View> views = new HashSet<View>();
+        Mockito.when(baseMalariaRegisterFragmentModel.getRegisterActiveColumns(Mockito.anyString()))
+                .thenReturn(views);
+        Assert.assertEquals(views, baseMalariaRegisterFragmentModel.getRegisterActiveColumns(Mockito.anyString()));
     }
 
     @Test
-    public void checkCountSelect() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.countSelect(null,null));
+    public void testCountSelect() {
+        String countString = "0";
+        Mockito.when(baseMalariaRegisterFragmentModel.countSelect(Mockito.anyString(), Mockito.anyString()))
+                .thenReturn(countString);
+        Assert.assertEquals(countString, baseMalariaRegisterFragmentModel.countSelect(Mockito.anyString(), Mockito.anyString()));
     }
 
     @Test
-    public void checkMainSelect() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.mainSelect(null,null));
+    public void testMainSelect() {
+        String countString = "mainSelect";
+        Mockito.when(baseMalariaRegisterFragmentModel.mainSelect(Mockito.anyString(), Mockito.anyString()))
+                .thenReturn(countString);
+        Assert.assertEquals(countString, baseMalariaRegisterFragmentModel.mainSelect(Mockito.anyString(), Mockito.anyString()));
     }
 
-    @Test
-    public void checkGetFilterText() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getFilterText(null,null));
-    }
-
-    @Test
-    public void checkGetSortText() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getSortText(null));
-}
-
-    @Test
-    public void checkJsonArray() {
-        Assert.assertNull(baseMalariaRegisterFragmentModel.getJsonArray(null));
-    }
 }

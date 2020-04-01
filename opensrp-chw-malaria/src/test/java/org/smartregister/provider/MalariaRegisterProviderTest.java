@@ -25,17 +25,13 @@ import static org.mockito.Mockito.validateMockitoUsage;
 
 public class MalariaRegisterProviderTest {
     @Mock
-    private MalariaRegisterProvider malariaRegisterProvider;
-
-    @Mock
     public CommonPersonObjectClient commonPersonObjectClient;
-
     @Mock
     public View.OnClickListener listener;
-
     @Mock
     public MalariaRegisterProvider.RegisterViewHolder viewHolder;
-
+    @Mock
+    private MalariaRegisterProvider malariaRegisterProvider;
 
     @Before
     public void setUp() {

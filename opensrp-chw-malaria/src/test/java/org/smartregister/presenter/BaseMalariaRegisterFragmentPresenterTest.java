@@ -19,7 +19,6 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     @Mock
     protected MalariaRegisterFragmentContract.View view;
 
-
     @Mock
     protected MalariaRegisterFragmentContract.Model model;
 
@@ -53,7 +52,7 @@ public class BaseMalariaRegisterFragmentPresenterTest {
     }
 
     @Test
-    public void getMainTable()  {
+    public void getMainTable() {
         Assert.assertEquals(Constants.TABLES.MALARIA_CONFIRMATION, baseMalariaRegisterFragmentPresenter.getMainTable());
     }
 

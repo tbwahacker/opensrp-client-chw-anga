@@ -31,17 +31,18 @@ public class BaseMalariaProfilePresenter implements MalariaProfileContract.Prese
     }
 
     @Override
-    public void recordMalariaButton(int days_from_malaria_test_date) {
+    public void recordMalariaButton(@Nullable String visitState) {
         if (getView() == null) {
             return;
         }
 
-        if (days_from_malaria_test_date < 7 || days_from_malaria_test_date >= 14) {
+        if (("OVERDUE").equals(visitState) || ("DUE").equals(visitState)) {
+            if (("OVERDUE").equals(visitState)) {
+                getView().setOverDueColor();
+            }
+        } else {
             getView().hideView();
-        } else if (days_from_malaria_test_date < 10) {
-            getView().setDueColor();
-        } else
-            getView().setOverDueColor();
+        }
     }
 
     @Override

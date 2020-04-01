@@ -29,6 +29,7 @@ public interface Constants {
 
     interface ACTIVITY_PAYLOAD {
         String BASE_ENTITY_ID = "BASE_ENTITY_ID";
+        String FAMILY_BASE_ENTITY_ID = "FAMILY_BASE_ENTITY_ID";
         String ACTION = "ACTION";
         String MALARIA_FORM_NAME = "MALARIA_FORM_NAME";
 

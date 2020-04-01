@@ -12,7 +12,6 @@ import org.powermock.reflect.Whitebox;
 import org.smartregister.chw.malaria.contract.MalariaRegisterContract;
 import org.smartregister.chw.malaria.presenter.BaseMalariaRegisterPresenter;
 
-
 @PrepareForTest(BaseMalariaRegisterPresenter.class)
 public class BaseMalariaRegisterPresenterTest {
     @Mock

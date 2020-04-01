@@ -12,8 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
-
-
             <RelativeLayout
                 android:id="@+id/rlLastVisit"
                 android:layout_width="match_parent"
@@ -49,7 +47,6 @@
                     android:text="@string/view_medical_history"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/light_grey_text" />
-
             </RelativeLayout>
 
             <View
@@ -97,7 +94,6 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@android:color/black" />
 
-
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/ivViewUpcomingServicesArrow"
                     style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
@@ -109,7 +105,6 @@
                     android:text="@string/view_upcoming_services"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/darker_gray" />
-
             </RelativeLayout>
 
             <View
@@ -157,7 +152,6 @@
                     android:gravity="left|center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@android:color/black" />
-
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/ivViewPostiveDateArrow"

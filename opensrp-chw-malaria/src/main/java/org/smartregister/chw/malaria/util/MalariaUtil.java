@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 import org.smartregister.chw.malaria.MalariaLibrary;
 import org.smartregister.chw.malaria.contract.BaseMalariaCallDialogContract;
+import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.malaria.R;
 import org.smartregister.repository.AllSharedPreferences;
@@ -35,18 +37,26 @@ import timber.log.Timber;
 
 import static org.smartregister.util.Utils.getAllSharedPreferences;
 
-public class Util {
+public class MalariaUtil {
 
     public static void processEvent(AllSharedPreferences allSharedPreferences, Event baseEvent) throws Exception {
         if (baseEvent != null) {
-            JsonFormUtils.tagEvent(allSharedPreferences, baseEvent);
-            JSONObject eventJson = new JSONObject(JsonFormUtils.gson.toJson(baseEvent));
-            getSyncHelper().addEvent(baseEvent.getBaseEntityId(), eventJson);
+            MalariaJsonFormUtils.tagEvent(allSharedPreferences, baseEvent);
+            JSONObject eventJson = new JSONObject(MalariaJsonFormUtils.gson.toJson(baseEvent));
 
+            getSyncHelper().addEvent(baseEvent.getBaseEntityId(), eventJson, BaseRepository.TYPE_Unprocessed);
+            startClientProcessing();
+        }
+    }
+
+    public static void startClientProcessing() {
+        try {
             long lastSyncTimeStamp = getAllSharedPreferences().fetchLastUpdatedAtDate(0);
             Date lastSyncDate = new Date(lastSyncTimeStamp);
-            getClientProcessorForJava().processClient(getSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+            getClientProcessorForJava().processClient(getSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unprocessed));
             getAllSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+        } catch (Exception e) {
+            Timber.d(e);
         }
     }
 
@@ -71,7 +81,7 @@ public class Util {
 
             // set a pending call execution request
             if (callView != null) {
-                callView.setPendingCallRequest(() -> Util.launchDialer(activity, callView, phoneNumber));
+                callView.setPendingCallRequest(() -> MalariaUtil.launchDialer(activity, callView, phoneNumber));
             }
 
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE}, PermissionUtils.PHONE_STATE_PERMISSION_REQUEST_CODE);
@@ -105,7 +115,26 @@ public class Util {
 
     public static void saveFormEvent(final String jsonString) throws Exception {
         AllSharedPreferences allSharedPreferences = MalariaLibrary.getInstance().context().allSharedPreferences();
-        Event baseEvent = JsonFormUtils.processJsonForm(allSharedPreferences, jsonString);
-        Util.processEvent(allSharedPreferences, baseEvent);
+        Event baseEvent = MalariaJsonFormUtils.processJsonForm(allSharedPreferences, jsonString);
+        MalariaUtil.processEvent(allSharedPreferences, baseEvent);
+    }
+
+    public static int getMemberProfileImageResourceIdentifier(String entityType) {
+        return R.mipmap.ic_member;
+    }
+
+    public static class CloseMalariaMemberFromRegister extends AsyncTask<Void, Void, Void> {
+        private final String baseEntityId;
+
+        public CloseMalariaMemberFromRegister(String baseEntityId) {
+            this.baseEntityId = baseEntityId;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MalariaDao.closeMalariaMemberFromRegister(baseEntityId);
+            return null;
+        }
+
     }
 }
