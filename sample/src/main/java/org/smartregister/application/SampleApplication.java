@@ -36,7 +36,7 @@ public class SampleApplication extends DrishtiApplication {
 
         //Initialize Modules
         CoreLibrary.init(context);
-        ConfigurableViewsLibrary.init(context, getRepository());
+        ConfigurableViewsLibrary.init(context);
         MalariaLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         SyncStatusBroadcastReceiver.init(this);
