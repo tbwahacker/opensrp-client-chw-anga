@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">malaria</string>
+    <string name="app_name" translatable="false">malaria</string>
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
     <string name="malaria">Malaria</string>
