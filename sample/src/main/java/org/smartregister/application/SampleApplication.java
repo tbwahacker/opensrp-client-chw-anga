@@ -6,19 +6,14 @@ import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
-import org.smartregister.malaria.BuildConfig;
-import org.smartregister.chw.malaria.MalariaLibrary;
+import org.smartregister.anga.BuildConfig;
+import org.smartregister.chw.anga.AngaLibrary;
 import org.smartregister.repository.SampleRepository;
-import org.smartregister.chw.malaria.util.DBConstants;
+import org.smartregister.chw.anga.util.DBConstants;
 import org.smartregister.utils.SampleConstants;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.Repository;
-import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.view.activity.DrishtiApplication;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class SampleApplication extends DrishtiApplication {
     private static final String TAG = SampleApplication.class.getCanonicalName();
@@ -37,7 +32,7 @@ public class SampleApplication extends DrishtiApplication {
         //Initialize Modules
         CoreLibrary.init(context);
         ConfigurableViewsLibrary.init(context);
-        MalariaLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+        AngaLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         SyncStatusBroadcastReceiver.init(this);
 

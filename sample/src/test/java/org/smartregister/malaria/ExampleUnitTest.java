@@ -1,4 +1,4 @@
-package org.smartregister.malaria;
+package org.smartregister.anga;
 
 import org.junit.Test;
 
